@@ -1,0 +1,648 @@
+#补充CO  O2电子碰撞反应，删除了电子碰撞反应之外的所有振动台反应
+ELEMENTS
+E C O
+END
+###############
+SPECIES
+
+E
+##把CO2(V1)的名字换成CO2(Va) CO2(V2)的名字换成CO2(Vb) CO2(V3)的名字换成CO2(V1)
+## CO2(V4)的名字换成CO2(Vd)
+#  CO2(Va) = (010)
+#  CO2(Vb) = (100), (020)
+#  CO2(V1) = (001)
+#  CO2(Vd) = (n00), (0n0)
+#  CO2(E1) = (1Πg)
+#  CO2(E2) = (1Δu)
+CO2
+CO2(Va) CO2(Vb) CO2(V1) CO2(Vd)
+CO2(E1) CO2(E2)
+
+# CO(V1) =sum of vibrations
+# CO(E1) =CO(A3Π)
+# CO(E2) =CO(A1Π)
+# CO(E3) =CO(A3Σ),CO(D3Δ), CO(E3Σ), CO(B3Σ)
+# CO(E4) =CO(C1Σ),CO(E1Π), CO(B1Σ), CO(I1Σ),CO(D1Δ)
+CO
+CO(V1)
+CO(E1) CO(E2) CO(E3) CO(E4)
+
+# O2e1 O2(a1Δ) and O2(b1Σ)
+# O2e2 O2(B3Σ) and higher triplets
+O2
+O2(V1) O2(V2) O2(V3) O2(E1) O2(E2)
+
+##其他的粒子
+C2O C C2 O3 O 
+CO2^+ CO4^+ CO^+ C2O2^+
+C2O3^+ C2O4^+ C^+ C2^+
+CO3^- CO4^-
+O2^+ O^+ O4^+
+O^- O2^- O3^- O4^-
+END
+###############
+BOLSIG
+SET DBFILE CO2SPLIT2C_BOLSIGDBee.DAT
+CO2 CO2(Va) CO2(Vb) CO2(Vd)
+CO2(V1)
+CO2(E1) CO2(E2)
+CO CO(V1)
+CO(E1) CO(E2) CO(E3) CO(E4)
+O2 O2(V1) O2(V2) O2(V3) 
+O2(E1) O2(E2)
+O3 O C C2
+END
+
+
+REACTIONS
+#TABLE5
+###################CO2
+E + CO2 => E + E + CO2^+     ! BOLSIG+ CO2 -> CO2^+
+E + CO2 => E+E+CO^+ + O       ! BOLSIG+ CO2-> CO^+
+E + CO2 => E+E+C^+ +O2    ! BOLSIG+ CO2 -> C^+
+E + CO2 => E+E+O^+ + CO     ! BOLSIG+ CO2 -> O^+
+E + CO2 => O2^++C+E+E     !0.05*0.65*1.4*1.0e-11*Te**(0.5)*(1+1.3*1.0e-5*Te)*exp(-1.5*1.0e5/Te)
+E + CO2 => O^- +CO     ! BOLSIG+ CO2 -> CO+O^-
+E + CO2 => E+CO+O     ! BOLSIG+ CO2 -> CO+O          
+E + CO2 => E+CO2(Va)     ! BOLSIG+ CO2 -> CO2(Va)
+E + CO2 => E+CO2(Vb)     ! BOLSIG+ CO2 -> CO2(Vb)
+E + CO2 => E+CO2(V1)     ! BOLSIG+ CO2 -> CO2(V1)
+E + CO2 => E+CO2(Vd)     ! BOLSIG+ CO2 -> CO2(Vd)
+E + CO2 => E+CO2(E1)     ! BOLSIG+ CO2 -> CO2(E1)
+E + CO2 => E+CO2(E2)     ! BOLSIG+ CO2 -> CO2(E2)
+E + CO2(E1) => E + CO2 ! BOLSIG+ CO2(E1) -> CO2
+E + CO2(E2) => E + CO2 ! BOLSIG+ CO2(E2) -> CO2
+###################
+E + @A => E + CO + O  ! BOLSIG+ @A -> CO + O
+  @A =CO2(Va) CO2(Vb) CO2(Vd) CO2(V1)
+
+E + @A => E + E + CO2^+      ! BOLSIG+ @A -> CO2^+
+  @A = CO2(Va) CO2(Vb) CO2(Vd) CO2(V1)
+
+E + @A => E + E + O + CO^+   ! BOLSIG+ @A -> CO^+
+  @A = CO2(Va) CO2(Vb)  CO2(Vd) CO2(V1) 
+
+E + @A => E + E + C^+ + O2   ! BOLSIG+ @A -> C^+
+  @A = CO2(Va) CO2(Vb)  CO2(Vd) CO2(V1)
+
+E + @A => E + E + CO + O^+   ! BOLSIG+ @A -> O^+
+  @A = CO2(Va) CO2(Vb)  CO2(Vd) CO2(V1)
+
+E + @A => CO + O^-           ! BOLSIG+ @A -> CO+O^-
+  @A = CO2(Va) CO2(Vb)  CO2(Vd) CO2(V1)
+
+E + @A => E + CO2(E1) ! BOLSIG+ @A -> CO2(E1)
+  @A = CO2(Va) CO2(Vb) CO2(Vd) CO2(V1)
+
+E + @A => E + CO2(E2) ! BOLSIG+ @A -> CO2(E2)
+  @A = CO2(Va) CO2(Vb) CO2(Vd) CO2(V1)
+
+E + @A => O2^++C+E+E     !0.05*0.65*1.4*1.0e-11*Te**(0.5)*(1+1.3*1.0e-5*Te)*exp(-1.5*1.0e5/Te)
+@A = CO2(Va) CO2(Vb) CO2(Vd) CO2(V1)
+###################
+E + @A => E + CO + O         ! BOLSIG+ @A -> CO + O
+  @A = CO2(e1) CO2(e2) 
+E + @A => E + E + CO2^+      ! BOLSIG+ @A -> CO2^+
+  @A = CO2(e1) CO2(e2) 
+E + @A => E + E + O + CO^+   ! BOLSIG+ @A -> CO^+
+  @A = CO2(e1) CO2(e2)
+E + @A => E + E + C^+ + O2   ! BOLSIG+ @A -> C^+
+  @A = CO2(e1) CO2(e2)
+E + @A => E + E + CO + O^+   ! BOLSIG+ @A -> O^+
+  @A = CO2(e1) CO2(e2)
+
+E + @A => O2^++C+E+E     !0.05*0.65*1.4*1.0e-11*Te**(0.5)*(1+1.3*1.0e-5*Te)*exp(-1.5*1.0e5/Te)
+@A = CO2(e1) CO2(e2)
+###################CO
+E +CO => E+E+CO^+     ! BOLSIG+ CO -> CO^+
+E +CO => E+E+C^+ + O     ! BOLSIG+ CO -> C^+
+E +CO => E+E+C+ O^+     ! BOLSIG+ CO -> O^+
+E +CO => O^- +C     ! BOLSIG+ CO -> O^-
+E +CO => E+C+O     ! BOLSIG+ CO -> C+O
+E +CO => E+CO(V1)     ! BOLSIG+ CO -> CO(V1)
+E +CO => E+CO(E1)     ! BOLSIG+ CO -> CO(E1)
+E +CO => E+CO(E2)     ! BOLSIG+ CO -> CO(E2)
+E +CO => E+CO(E3)     ! BOLSIG+ CO -> CO(E3)
+E +CO => E+CO(E4)     ! BOLSIG+ CO -> CO(E4)
+E + @A => CO + E    ! BOLSIG+ @A -> CO  
+@A= CO(E1) CO(E2) CO(E3) CO(E4)
+###################
+E + @A => E + C + O     ! BOLSIG+ @A -> C+O
+  @A = CO(V1)
+
+E + @A => E + E + CO^+        ! BOLSIG+ @A -> CO^+
+  @A = CO(V1) 
+
+E + @A => E + E + C^+ + O     ! BOLSIG+ @A -> C^+
+  @A = CO(V1)
+
+E + @A => E + E + C + O^+     ! BOLSIG+ @A -> O^+
+  @A = CO(V1)
+
+E + CO(V1) => O^- +C     ! BOLSIG+ CO(V1) -> O^-
+
+E + @A => CO(E1) + E    ! BOLSIG+ @A -> CO(E1)  
+  @A = CO(V1)
+E + @A => CO(E2) + E    ! BOLSIG+ @A -> CO(E2)  
+  @A = CO(V1)
+E + @A => CO(E3) + E    ! BOLSIG+ @A -> CO(E3)  
+  @A = CO(V1)
+E + @A => CO(E4) + E    ! BOLSIG+ @A -> CO(E4)  
+  @A = CO(V1)
+
+###################
+
+E + @A => E + C + O     ! BOLSIG+ @A -> C+O
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+E + @A => E + E + CO^+        ! BOLSIG+ @A -> CO^+
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+E + @A => E + E + C^+ + O     ! BOLSIG+ @A -> C^+
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+E + @A => E + E + C + O^+     ! BOLSIG+ @A -> O^+
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+
+
+
+
+###################
+
+
+
+E +C=> E+E+C^+     ! BOLSIG+ C -> C^+
+E +C2=> E+C+C     ! BOLSIG+ C2  -> C+C                  
+E +C2=> E+E+C2^+     ! BOLSIG+ C2 -> C2^+
+###################O2
+E +O2=> E+O+O     ! BOLSIG+ O2 -> O+O
+E +O2=> E+E+O2^+     ! BOLSIG+ O2 -> O2^+
+E +O2=> E+E+O+O^+     ! BOLSIG+ O2 -> O^+
+E +O2=> O^- + O     ! BOLSIG+ O2 -> O^-
+E +O2=> E+O2(V1)     ! BOLSIG+ O2 -> O2(V1)
+E +O2=> E+O2(V2)     ! BOLSIG+ O2 -> O2(V2)
+E +O2=> E+O2(V3)     ! BOLSIG+ O2 -> O2(V3)
+E +O2=> E+O2(E1)     ! BOLSIG+ O2 -> O2(E1)
+E +O2=> E+O2(E2)     ! BOLSIG+ O2 -> O2(E2)
+E + O2(E1) => E + O2    ! BOLSIG+ O2(E1) -> O2
+E + O2(E2) => E + O2    ! BOLSIG+ O2(E2) -> O2
+O2(E1) => O2     ! 2.6e-4
+O2(E2) => O2     ! 1.1e1
+###################
+E + @A => E + O2(E1)    ! BOLSIG+ O2 -> O2(E1)
+  @A = O2(V1) O2(V2) O2(V3) 
+
+E + @A => E + O2(E2)    ! BOLSIG+ O2 -> O2(E2) 
+  @A = O2(V1) O2(V2) O2(V3)
+
+E + @A => O2^+ + E + E        ! BOLSIG+ O2 -> O2^+
+  @A = O2(V1) O2(V2) O2(V3) 
+
+E + @A => O + O^+ + E + E     ! BOLSIG+ O2 -> O^+
+  @A = O2(V1) O2(V2) O2(V3)
+
+E +@A => E+O+O     ! BOLSIG+ O2 -> O+O
+@A = O2(V1) O2(V2) O2(V3)
+
+E +@A => O^- + O     ! BOLSIG+ O2 -> O^-
+@A = O2(V1) O2(V2) O2(V3)
+###################
+E +@A => E+O+O     ! BOLSIG+ @A -> O+O
+@A = O2(E1) O2(E2) 
+
+E +@A => E+E+O2^+     ! BOLSIG+ @A -> O2^+
+@A = O2(E1) O2(E2)
+
+E +@A => E+E+O+O^+     ! BOLSIG+ @A -> O^+
+@A = O2(E1) O2(E2)
+
+###################
+
+E +O3=> E+O2+O     ! BOLSIG+ O3 -> O2+O
+E +O3=> E+E+O2^+ + O     ! BOLSIG+ O3 -> O2^+
+E +O3=> E+O^+ + O^- +O     ! BOLSIG+ O3 -> O^+
+E +O3=> O^- +O2     ! BOLSIG+ O3 -> O^-
+E +O3=> O+O2^-     ! BOLSIG+ O3 -> O2^-
+E +O => E+E+O^+     ! BOLSIG+ O -> O^+
+#TABLE6
+###################
+###################
+E + CO2^+ => CO + O         ! 2.0E-05*(Te/11605)**(-0.50)/Tgas
+E + CO2^+ => C + O2         ! 3.939E-07*(Te/11605)**(-0.40)
+E + CO4^+ => CO2 + O2       ! 1.608E-07*(Te/11605)**(-0.50)  
+E + CO^+ => C + O           ! 3.683E-08*(Te/11605)**(-0.55)
+#下面这个方程影响很大
+#E + C2O2^+ => CO + CO        ! 4.0E-07*(Te/11605)**(-0.34) :电子密度大
+#E + C2O2^+ => CO + CO        ! 9.64E-06*(Te/11605)**(-0.34)：电子温度大
+E + C2O2^+ => CO + CO        ! 4.0E-07*(Te/11605)**(-0.34)
+
+E + C2O3^+ => CO2 + CO      ! 5.4E-08*(Te/11605)**(-0.70)
+E + C2O4^+ => CO2 + CO2     ! 2.0E-05*(Te/11605)**(-0.50)/Tgas
+E + C2^+ => C + C           ! 1.79E-08*(Te/11605)**(-0.50)
+E + O2+ ANY_NEUTRAL => O2^- + ANY_NEUTRAL       ! 3E-30
+E + O3 + ANY_NEUTRAL =>O3^- + ANY_NEUTRAL       ! 5E-31*(Te/11605)**(-0.50)
+E+O+ ANY_NEUTRAL =>O^- + ANY_NEUTRAL       ! 1.00E-31
+E+O2^+ + ANY_NEUTRAL =>O2+ ANY_NEUTRAL       ! 1.00E-26
+E+O2^+ =>O + O       ! 6E-07*(Te/11605)**(-0.50)*Tgas**(-0.50)
+E+O^+ + ANY_NEUTRAL =>O+ ANY_NEUTRAL       ! 1.00E-26
+E+O4^+ =>O2+O2       ! 2.251E-07*(Te/11605)**(-0.5)
+#TABLE7中性粒子
+###################
+###################CO2
+O+CO2=>CO+O2       ! 2.8E-11*exp(-26500/Tgas)
+C+CO2=>CO+CO      ! 1.00E-15
+###################
+@A + O => CO + O2           ! 2.80E-11*exp(-max(0.0,26500-0.45*@E)/Tgas)
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd) 
+  @E =  9.60e+02 1.92e+03  3.38e+03 3.85e+03
+
+@A + C => 2CO              ! 1E-15
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd)
+###################CO
+O+CO+ ANY_NEUTRAL =>CO2+ ANY_NEUTRAL       ! 8.2E-34*exp(-1510/Tgas)
+O3+CO=>CO2+O2       ! 4.00E-25
+C+CO+ ANY_NEUTRAL =>C2O+ ANY_NEUTRAL       ! 6.5E-32
+O2+CO=>CO2+O       ! 4.2E-12*exp(-24000/Tgas)
+###################
+@A + O + ANY_NEUTRAL => CO2 + ANY_NEUTRAL  ! 8.20E-34*exp(-1510.0/Tgas)
+@A = CO(V1)
+
+@A + CO => CO2 + O          ! 4.20E-12*exp(-max(0.0,24000-0.45*@E)/Tgas)
+  @A = O2(V1) O2(V2) O2(V3) 
+  @E = 2.24e+03 4.44e+03 6.62e+03
+
+@A + CO(V1) => CO2 + O      ! 4.20E-12*exp(-max(0.0,24000-0.45*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03
+
+@A + O3 => CO2 + O2          ! 4.0E-25
+@A =  CO(V1)
+
+@A + C + ANY_NEUTRAL => C2O + ANY_NEUTRAL    ! 6.50E-32
+  @A = CO(V1)
+
+###################O2
+O2+C=>CO+O       ! 3.0E-11
+O2+C2O=>CO2+CO       ! 3.3E-13
+O+O2+ ANY_NEUTRAL =>O3+ ANY_NEUTRAL       ! 1.81E-33*(Tgas/300)**(-1.20)
+###################
+@A + C => CO + O             ! 3.00E-11
+  @A =  O2(V1) O2(V2) O2(V3)
+
+@A + O + ANY_NEUTRAL => O3 + ANY_NEUTRAL     ! 1.81E-33*((Tgas/300.0)**(-1.20))
+  @A = O2(V1) O2(V2) O2(V3)
+
+###################
+O+C+ ANY_NEUTRAL =>CO+ ANY_NEUTRAL ! 2.136E-29*(Tgas/300)**(-3.08)*exp(-2114/Tgas)
+O+C2O=>CO+CO       ! 5.0E-11
+O+O3=>O2+O2       ! 3.1E-14*Tgas**(0.75)*exp(-1575/Tgas)
+O3+ ANY_NEUTRAL =>O2+O+ ANY_NEUTRAL       ! 4.1175E-10*exp(-11430/Tgas)
+O+O+ ANY_NEUTRAL =>O2+ ANY_NEUTRAL  ! 1.27E-32*exp(-170/Tgas)/(Tgas/300)
+#TABLE8离子
+###################
+###################CO2
+O2^+ + CO2+ ANY_NEUTRAL =>CO4^+ + ANY_NEUTRAL   !  2.3E-29
+O^+ + CO2=>O2^+ + CO   !  9.4E-10
+O^+ + CO2=>CO2^+ + O   !  4.5E-10
+C^+ + CO2=>CO^+ + CO   !  1.1E-09
+CO^+ + CO2=>CO2^+ + CO  !  1.0E-09
+O^- + CO2+ ANY_NEUTRAL =>CO3^- + ANY_NEUTRAL   !  9.0E-29
+O2^- + CO2+ ANY_NEUTRAL =>CO4^- + ANY_NEUTRAL   !  1.0E-29
+O3^- + CO2=>O2+CO3^-   !  5.5E-10
+O4^- + CO2=>CO4^- + O2   !  4.8E-10
+CO2^+ + CO2 + ANY_NEUTRAL =>C2O4^+ + ANY_NEUTRAL   !  3.0E-28
+###################
+
+@A + O^+ => O2^+ + CO                            ! 9.40E-10
+  @A = CO2(Va) CO2(Vb) CO2(V1) CO2(Vd)
+
+@A + O^+ => CO2^+ + O                            ! 4.50E-10
+  @A = CO2(Va) CO2(Vb) CO2(V1) CO2(Vd)
+
+@A + C^+ => CO^+ + CO                            ! 1.10E-09
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd)
+
+@A + CO^+ => CO2^+ + CO                          ! 1.00E-09 
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd)
+
+@A + O^- + ANY_NEUTRAL => CO3^- + ANY_NEUTRAL    ! 9.00E-29 
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd)
+
+@A + O2^- + ANY_NEUTRAL => CO4^- + ANY_NEUTRAL   ! 1.00E-29 
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd)
+
+@A + O3^- => O2 + CO3^-                          ! 5.50E-10 
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd)
+
+@A + O4^- => CO4^- + O2                          ! 4.80E-10 
+  @A = CO2(Va) CO2(Vb) CO2(V1) CO2(Vd)
+
+@A + CO2^+ + ANY_NEUTRAL => C2O4^+ + ANY_NEUTRAL ! 3.00E-28
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd) 
+
+@A + O2^+ + ANY_NEUTRAL => CO4^+ + ANY_NEUTRAL   ! 2.30E-29
+  @A = CO2(Va) CO2(Vb)  CO2(V1) CO2(Vd)
+###################
+@A + O^+ => O2^+ + CO                            ! 9.40E-10*(12.06/@E)**2
+  @A = CO2(E1) CO2(E2)
+  @E = 6.23 11.1
+
+@A + O^+ => CO2^+ + O                            ! 4.50E-10*(13.8/@E)**2
+  @A = CO2(E1) CO2(E2)
+  @E = 6.23 11.1
+
+@A + C^+ => CO^+ + CO                            ! 1.10E-09*(17.51/@E)**2
+  @A = CO2(E1) CO2(E2)
+  @E = 6.23 11.1
+
+@A + CO^+ => CO2^+ + CO                          ! 1.00E-09*(13.8/@E)**2 
+  @A = CO2(E1) CO2(E2)
+  @E = 6.23 11.1
+
+@A + O^- + ANY_NEUTRAL => CO3^- + ANY_NEUTRAL    ! 9.00E-29 
+  @A = CO2(E1) CO2(E2)
+
+@A + O2^- + ANY_NEUTRAL => CO4^- + ANY_NEUTRAL   ! 1.00E-29 
+  @A = CO2(E1) CO2(E2)
+
+@A + O3^- => O2 + CO3^-                          ! 5.50E-10 
+  @A = CO2(E1) CO2(E2)
+
+@A + O4^- => CO4^- + O2                          ! 4.80E-10 
+  @A = CO2(E1) CO2(E2)
+
+@A + CO2^+ + ANY_NEUTRAL => C2O4^+ + ANY_NEUTRAL ! 3.00E-28
+  @A = CO2(E1) CO2(E2)
+
+@A + O2^+ + ANY_NEUTRAL => CO4^+ + ANY_NEUTRAL   ! 2.30E-29
+  @A = CO2(E1) CO2(E2)
+
+@A + O2^+ + ANY_NEUTRAL => CO4^+ + ANY_NEUTRAL   ! 2.30E-29
+  @A = CO2(E1) CO2(E2)
+
+###################CO
+O^+ + CO=>CO^+ + O   !  4.9E-12*(Tgas/300)**(0.50)*exp(-4580/Tgas)
+O^- + CO=>CO2+E   !  5.5E-10
+CO3^- + CO=>2CO2+E   !  5.0E-13
+C2O3^+ + CO=>CO2+C2O2^+   !  1.1E-09
+C2O4^+ + CO=>C2O3^+ + CO2   !  9.0E-10
+C2O3^+ + CO + ANY_NEUTRAL =>C2O2^+ + CO2+ ANY_NEUTRAL   !  2.6E-26
+C2O4^+ + CO + ANY_NEUTRAL =>C2O3^+ +CO2+ ANY_NEUTRAL   !  4.2E-26
+C^+ + CO=>CO^+ + C   !  5.0E-13
+###################
+@A + O^+ => CO^+ + O          ! 4.90E-12*((Tgas/300.0)**(0.5))*exp(-4580.0/Tgas)
+  @A =  CO(V1)
+
+@A + O^- => CO2 + E                              ! 5.50E-10
+  @A = CO(V1) 
+
+@A + CO3^- => CO2 + CO2 + E                      ! 5.0E-13
+  @A = CO(V1)
+
+@A + C2O3^+ => CO2 + C2O2^+                      ! 1.10E-09
+  @A = CO(V1)
+
+@A + C2O4^+ => C2O3^+ + CO2                      ! 9.00E-10 
+  @A = CO(V1) 
+
+@A + C2O3^+ + ANY_NEUTRAL => C2O2^+ + CO2 + ANY_NEUTRAL ! 2.60E-26 
+  @A = CO(V1) 
+
+@A + C2O4^+ + ANY_NEUTRAL => C2O3^+ + CO2 + ANY_NEUTRAL ! 4.20E-26 
+  @A = CO(V1) 
+
+@A + C^+ => CO^+ + C                             ! 5.00E-13 
+  @A = CO(V1)
+###################
+@A + O^- => CO2 + E                              ! 5.50E-10
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+
+@A + CO3^- => CO2 + CO2 + E                      ! 5.00E-13 
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+@A + C2O3^+ => CO2 + C2O2^+                      ! 1.10E-09
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+@A + C2O4^+ => C2O3^+ + CO2                      ! 9.00E-10 
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+@A + C2O3^+ + ANY_NEUTRAL => C2O2^+ + CO2 + ANY_NEUTRAL ! 2.60E-26 
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+@A + C2O4^+ + ANY_NEUTRAL => C2O3^+ + CO2 + ANY_NEUTRAL ! 4.20E-26 
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+
+@A + C^+ => CO^+ + C                             ! 5.00E-13*(17.51/@E)**2 
+  @A = CO(E1) CO(E2) CO(E3) CO(E4)
+  @E = 6.22 7.9 13.5 10.01
+###################O2
+O2+CO2^+ =>O2^+ + CO2   !  5.3E-11
+O2+CO^+ =>O2^+ + CO   !  1.2E-10
+O2+C2O2^+ =>CO+CO+O2^+   !  5.0E-12
+O2+C^+ =>CO+O^+   !  6.2E-10
+O2+C^+=>CO^+ +O   !  3.8E-10
+O^+ + O2=>O2^+ +O   !  1.9E-10*(Tgas/300)**(-0.50)
+O2^+ + O2 + ANY_NEUTRAL =>O4^+ + ANY_NEUTRAL   !  2.4E-30
+O2^- + O2+ ANY_NEUTRAL =>O4^- + ANY_NEUTRAL   !  3.5E-31
+O^- + O2=>O3+E   !  1.00E-12
+O^- + O2 + ANY_NEUTRAL =>O3^- + ANY_NEUTRAL   !  3.0E-28/(Tgas/300)
+O2^- + O2=> O2+O2+E   !  2.18E-18
+O2+O3^- => O2+O3+E   !  2.3E-11
+
+
+
+###################
+@A + CO2^+ => O2^+ + CO2                         ! 5.30E-11
+  @A = O2(V1) O2(V2) O2(V3) 
+
+@A + CO^+ => O2^+ + CO                           ! 1.20E-10
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + C2O2^+ => CO + CO + O2^+                    ! 5.00E-12
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + C^+ => CO + O^+                             ! 6.20E-10
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + C^+ => CO^+ + O                             ! 3.80E-10
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + O^+ => O2^+ + O                 ! 1.90E-11*((Tgas/300.0)**(-0.50))
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + O2^+ + ANY_NEUTRAL => O4^+ + ANY_NEUTRAL    ! 2.40E-30
+  @A = O2(V1) O2(V2) O2(V3) 
+
+@A + O2^- + ANY_NEUTRAL => O4^- + ANY_NEUTRAL    ! 3.50E-31
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + O^- => O3 + E                               ! 1.00E-12
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + O^- + ANY_NEUTRAL => O3^- + ANY_NEUTRAL  ! 3.00E-28*((Tgas/300.0)**(-1.0))
+  @A = O2(V1) O2(V2) O2(V3) 
+
+@A + O2^- => @A + O2 + E                         ! 2.18E-18
+  @A = O2(V1) O2(V2) O2(V3)
+
+@A + O3^- => @A + O3 + E                         ! 2.30E-11
+  @A = O2(V1) O2(V2) O2(V3)
+###################
+@A + CO2^+ => O2^+ + CO2                         ! 5.30E-11*(12.06/@E)**2 
+  @A = O2(E1) O2(E2)
+  @E = 0.98 8.4
+
+@A + CO^+ => O2^+ + CO                           ! 1.20E-10*(12.06/@E)**2 
+  @A = O2(E1) O2(E2)
+  @E = 0.98 8.4
+
+@A + C2O2^+ => CO + CO + O2^+                    ! 5.00E-12
+  @A = O2(E1) O2(E2)
+
+@A + C^+ => CO + O^+                             ! 6.20E-10
+  @A = O2(E1) O2(E2)
+
+@A + C^+ => CO^+ + O                             ! 3.80E-10
+  @A = O2(E1) O2(E2)
+
+@A + O^+ => O2^+ + O                             ! 1.90E-11*((Tgas/300.0)**(-0.50))*(12.06/@E)**2 
+  @A = O2(E1) O2(E2)
+  @E = 0.98 8.4
+
+@A + O2^+ + ANY_NEUTRAL => O4^+ + ANY_NEUTRAL    ! 2.40E-30
+  @A = O2(E1) O2(E2)
+
+@A + O2^- + ANY_NEUTRAL => O4^- + ANY_NEUTRAL    ! 3.50E-31
+  @A = O2(E1) O2(E2)
+
+@A + O^- => O3 + E                               ! 3.00E-10
+  @A = O2(E1) O2(E2)
+
+@A + O^- + ANY_NEUTRAL => O3^- + ANY_NEUTRAL     ! 3.00E-28*((Tgas/300.0)**(-1.0))
+  @A = O2(E1) O2(E2)
+
+@A + O2^- => @A + O2 + E                         ! 2.18E-18
+@A = O2(E1) O2(E2)
+  
+@A + O3^- => @A + O3 + E                         ! 2.30E-11
+  @A = O2(E1) O2(E2)
+###################
+CO^+ + C=>CO+C^+   !  1.1E-10
+O2^+ + C=>CO^+ + O   !  5.2E-11
+O2^+ + C=>C^+ + O2   !  5.2E-11
+C2^+ + C=>C2+C^+   !  1.1E-10
+O+CO2^+ =>O2^+ + CO   !  1.64E-10
+O+CO2^+ =>O^+ + CO2   !  9.62E-11
+CO3^- + CO2^+ =>2CO2+O   !  5.0E-07
+CO4^- + CO2^+ =>2CO2+O2   !  5.0E-07
+O2^- + CO2^+ =>CO+O2+O   !  6.0E-07
+O+CO^+ =>CO+O^+  !  1.4E-10
+C2O2^+ + ANY_NEUTRAL =>CO^+ + CO + ANY_NEUTRAL   !  1.0E-12
+CO3^- + C2O2^+ =>CO2+2CO+O   !  5.0E-07
+CO4^- + C2O2^+ =>CO2+2CO+O2   !  5.0E-07
+O2^- + C2O2^+ =>2CO+O2   !  6.0E-07
+CO3^- + C2O3^+ =>2CO2+CO+O   !  5.0E-07
+CO4^- + C2O3^+ =>2CO2+CO+O2   !  5.0E-07
+O2^- + C2O3^+ =>CO2+CO+O2   !  6.0E-07
+C2O4^+ + ANY_NEUTRAL =>CO2^+ + CO2+ ANY_NEUTRAL   !  1.0E-14
+CO3^- + C2O4^+ =>3CO2+O   !  5.0E-07
+CO4^- + C2O4^+ =>3CO2+O2   !  5.0E-07
+O2^- + C2O4^+ =>2CO2+O2   !  6.0E-07
+O2^+ + CO3^- =>CO2+O2+O   !  3.0E-07
+#TABLE8 continued
+###################
+O+CO3^- =>CO2+O2^-   !  8.0E-11
+O2^+ + CO4^- =>CO2+O2+O2   !  3.0E-07
+O+CO4^- =>CO3^- + O2   !  1.1E-10
+O+CO4^- =>CO2+O2+O^-   !  1.4E-11
+O+CO4^- =>CO2+O3^-   !  1.4E-11
+O3+CO4^- =>CO2 + O3^- + O2   !  1.3E-10
+O^- + O3=>O3^- + O   !  8.0E-10
+O^- + O3=>O2+O2+E   !  3.0E-10
+O2^- + O3=>O3^- + O2   !  4.0E-10
+O3^- + O3=>O2+O2+O2+E   !  3.0E-10
+O^+ + O3=>O2^+ + O2   !  1.00E-10
+O^+ + O + ANY_NEUTRAL =>O2^+ + ANY_NEUTRAL   !  1.00E-29
+O^- + O=>O2 + E   !  2.3E-10
+O2^- + O=>O2 + O^-   !  3.3E-10
+O2^- + O=>O3 + E   !  3.3E-10
+O3^- + O=>O3+ O^-   !  1.00E-13
+O3^- + O=>O2+O2+E   !  1.00E-13
+O3^- + O=>O2^- + O2   !  2.5E-10
+O4^- + O=>O3^- + O2   !  4.0E-10
+O4^- + O=>O^- + O2+O2   !  3.0E-10
+O4^- + O=>O2^- + O3   !  3.0E-10
+O^+ + O2^- + ANY_NEUTRAL =>O3+ ANY_NEUTRAL   !  2.0E-25
+O^+ + O2^- =>O+O2   !  2.7E-07
+O2^+ + O2^-=>O2+O2   !  2.0E-07
+O2^+ + O2^-=>O2+O+O   !  4.2E-07
+O2^+ + O2^- + ANY_NEUTRAL =>O2+O2+ ANY_NEUTRAL   !  2.0E-25
+O2^- +ANY_NEUTRAL=>O2+ ANY_NEUTRAL+E ! 2.7E-10*(Tgas/300)**(0.50)*exp(-5590/Tgas)
+O2^+ + O3^- =>O2+O3   !  2.0E-07
+O2^+ + O3^- => O+O+O3   !  1.0E-07
+O^+ + O3^- =>O3+O   !  1.0E-07
+O3^- + ANY_NEUTRAL =>O3+E+ ANY_NEUTRAL   !  2.3E-11
+O^+ + O^- => O+O   !  4.0E-08
+O^+ + O^- + ANY_NEUTRAL =>O2+ ANY_NEUTRAL   !  2.0E-25
+O2^+ + O^- => O2+O   !  1.0E-07
+O2^+ + O^- =>O+O+O   !  2.6E-08
+O2^+ + O^- + ANY_NEUTRAL => O3+ ANY_NEUTRAL   !  2.0E-25
+ANY_NEUTRAL + O^- =>O+ ANY_NEUTRAL+E   !  4.0E-12
+ANY_NEUTRAL + O4^- =>O2^- +O2+ ANY_NEUTRAL   !  3.08E-12
+O4^+ + ANY_NEUTRAL => O2^+ + O2+ ANY_NEUTRAL   !  1.73E-13
+#TABLE9
+###################
+CO2(Va)+CO2=> CO2+CO2   !  1.07E-14
+CO2(Va)+CO=>CO2+CO   !  7.48E-15
+CO2(Va)+O2=> CO2+O2   !  7.48E-15
+CO2(Vb)+CO2=>CO2+CO2   !  9.00E-18
+CO2(Vb)+CO=> CO2+CO   !  2.79E-17
+CO2(Vb)+O2=>CO2+O2   !  2.79E-17
+CO2(Vb)+CO2=> CO2(Va)+CO2   !  2.90E-14
+CO2(Vb)+CO=>CO2(Va)+CO   !  2.03E-14
+CO2(Vb)+O2=> CO2(Va)+O2   !  2.03E-14
+CO2(V1)+CO2=>CO2(Vb)+CO2   !  7.72E-16
+CO2(V1)+CO=>CO2(Vb)+CO   !  2.32E-16
+CO2(V1)+O2=> CO2(Vb)+O2   !  3.09E-16
+CO2(V1)+CO2=>CO2(Vd)+CO2   !  6.05E-15
+CO2(V1)+CO=> CO2(Vd)+CO   !  1.81E-15
+CO2(V1)+O2=>CO2(Vd)+O2   !  2.42E-15
+CO2(V1)+CO2=> CO2(Va)+CO2(Vb)   !  2.42E-15
+CO2(V1)+CO2=>CO2(Va)+CO2   !  1.70E-18
+CO2(V1)+CO=> CO2(Va)+CO   !  5.10E-19
+CO2(V1)+O2=>CO2(Va)+O2   !  6.80E-19
+CO2(Vd)+CO2=>CO2(Vb)+CO2   !  4.33E-14
+CO2(Vd)+CO=> CO2(Vb)+CO   !  3.03E-14
+CO2(Vd)+O2=>CO2(Vb)+O2   !  3.03E-14
+CO2(Vd)+CO2=> CO2(Va)+CO2   !  9.08E-18
+CO2(Vd)+CO=>CO2(Va)+CO   !  6.18E-15
+CO2(Vd)+O2=>CO2(Va) +O2   !  6.18E-15
+CO(V1)+CO2=>CO+CO2   !  1.34E-23
+CO(V1)+CO=> CO+CO   !  1.34E-23
+CO(V1)+O2=>CO+O2   !  4.78E-24
+O2(V1)+CO2=> O2+CO2   !  7.55E-23
+O2(V1)+CO=>O2+CO   !  2.52E-23
+O2(V1)+O2=> O2+O2   !  2.52E-23
+O2(V2)+CO2=> O2+CO2   !  7.55E-23
+O2(V2)+CO=>O2+CO   !  2.52E-23
+O2(V2)+O2=> O2+O2   !  2.52E-23
+O2(V3)+CO2=>O2+CO2   !  7.55E-23
+O2(V3)+CO=> O2+CO   !  2.52E-23
+O2(V3)+O2=>O2+O2   !  2.52E-23
+
+###################
+CO2(E1) + ANY_NEUTRAL => CO2 + ANY_NEUTRAL  ! 1.0e-11 
+CO2(E2) + ANY_NEUTRAL => CO2 + ANY_NEUTRAL  ! 1.0e-11 
+
+CO(E1) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11
+CO(E2) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11 
+CO(E3) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11 
+CO(E4) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11  
+
+O2(E1) + ANY_NEUTRAL => O2 + ANY_NEUTRAL    ! 3.8e-18*exp(-205.0/Tgas)
+O2(E2) + ANY_NEUTRAL => O2 + ANY_NEUTRAL    ! 3.0e-13
+
+
+END

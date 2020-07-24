@@ -1,0 +1,709 @@
+#
+# CO2 vibrational splitting reaction set
+# 25 CO2 levels
+# 63 CO levels
+# 4 O2 levels
+# INPUT DATA FILE
+# ZDPLASKIN
+#
+#
+
+ELEMENTS
+E C O
+END
+
+SPECIES
+# ------------------------------------------------------
+# CO2 species 
+# ------------------------------------------------------
+#  CO2(Va) = (010)
+#  CO2(Vb) = (100), (020)
+#  CO2(Vc) = (110), (030)
+#  CO2(Vd) = (n00), (0n0) n=sum 4-8
+#  CO2(Vn) = (00n), n=1...21
+#  CO2(E1) = (1Πg)
+#  CO2(E2) = (1Δu)
+#
+CO2 
+CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd)
+CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+CO2(E1) CO2(E2)
+CO2^+ CO2^-
+# ------------------------------------------------------
+# CO species 
+# ------------------------------------------------------
+# CO(E1) CO(A3Π)
+# CO(E2) CO(A1Π)
+# CO(E3) CO(A3Σ),CO(D3Δ), CO(E3Σ), CO(B3Σ)
+# CO(E4) CO(C1Σ),CO(E1Π), CO(B1Σ), CO(I1Σ),CO(D1Δ)
+#
+CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+CO(E1) CO(E2) CO(E3) CO(E4)
+CO^+ CO3^- CO4^- CO4^+
+# ------------------------------------------------------
+# O3,O2 and O species 
+# ------------------------------------------------------
+# O2e1 O2(a1Δ) and O2(b1Σ)
+# O2e2 O2(B3Σ) and higher triplets
+#
+O3
+O2 O2(V1) O2(V2) O2(V3) O2(V4) O2(E1) O2(E2)
+O
+O2^+ O2^- O^+ O^- O3^- O4^- O4^+
+# ------------------------------------------------------
+# electrons and others
+# ------------------------------------------------------
+C2O C2O2^+ C2O3^+ C2O4^+
+C2 C2^+
+C C^+
+E
+END
+
+BOLSIG
+SET DBFILE CO2SPLIT2C_BOLSIGDB.DAT
+CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd)
+CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10)
+CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+CO2(E1) CO2(E2)
+CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+CO(E1) CO(E2) CO(E3) CO(E4)
+O2 O2(V1) O2(V2) O2(V3) O2(V4) O2(E1) O2(E2)
+O3 O C C2
+END
+
+
+REACTIONS
+
+
+# ------------------------------------------------------
+# Electron Impact Reactions
+# ------------------------------------------------------
+
+# ------------------------------------------------------
+# Electron Impact Reactions
+# ------------------------------------------------------
+
+# 1
+#E + CO2 => E + CO2      ! BOLSIG+ CO2
+
+# 2
+E + @A => E + E + CO2^+      ! BOLSIG+ @A -> CO2^+
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# 3
+E + @A => E + E + O + CO^+   ! BOLSIG+ @A -> CO^+
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# 4
+E + @A => E + E + C^+ + O2   ! BOLSIG+ @A -> C^+
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# 5
+E + @A => E + E + CO + O^+   ! BOLSIG+ @A -> O^+
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# 6
+E + CO2 => O2^++C+E+E     !0.05*0.65*1.4*1.0e-11*Te**(0.5)*(1+1.3*1.0e-5*Te)*exp(-1.5*1.0e5/Te)
+
+# 7
+E + @A => CO + O^-           ! BOLSIG+ @A -> CO+O^-
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) 
+
+# 8
+E + @A => E + CO + O  ! BOLSIG+ @A -> CO + O
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# 9-12
+E + CO2 => E + @B     ! BOLSIG+ CO2 -> @B
+  @B = CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd)
+
+E + CO2 => E + @B     ! BOLSIG+ CO2 -> @B
+ @B = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+
+# 13
+E + @A => E + CO2(E1) ! BOLSIG+ @A -> CO2(E1)
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# 14
+E + @A => E + CO2(E2) ! BOLSIG+ @A -> CO2(E2)
+  @A = CO2 
+  # CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# 15
+# E + CO => E + CO ! BOLSIG+ CO -> CO
+
+# 16
+E + @A => E + E + CO^+        ! BOLSIG+ @A -> CO^+
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 17
+E + @A => E + E + C^+ + O     ! BOLSIG+ @A -> C^+
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 18
+E + @A => E + E + C + O^+     ! BOLSIG+ @A -> O^+
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 19
+E + CO => C + O^-             ! BOLSIG+ CO -> O^-
+
+# 20
+E + @A => E + C + O     ! BOLSIG+ @A -> C+O
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 21
+E + CO => E + @B       ! BOLSIG+ CO -> @B
+  @B = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 22
+E + @A => CO(E1) + E    ! BOLSIG+ @A -> CO(E1)  
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 23
+E + @A => CO(E2) + E    ! BOLSIG+ @A -> CO(E2)     
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 24
+E + @A => CO(E3) + E    ! BOLSIG+ @A -> CO(E3)     
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 25
+E + @A => CO(E4) + E    ! BOLSIG+ @A -> CO(E4)
+  @A = CO 
+  # CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+# 26
+#E + C => C + E    ! BOLSIG+ C -> C
+
+# 27
+E + C => E + E + C^+          ! BOLSIG+ C -> C^+
+
+# 28
+#E + C2 => C2 + E    ! BOLSIG+ C2 -> C2
+
+# 29
+E + C2 => C + C + E     ! BOLSIG+ C2 -> C + C
+
+# 30
+E + C2 => E + E + C2^+        ! BOLSIG+ C2 -> C2^+
+
+# 31
+#E + O2 => E + O2    ! BOLSIG+ O2 
+
+# 32
+E + O2 => O + O + E     ! BOLSIG+ O2 -> O+O 
+
+# 33
+E + @A => O2^+ + E + E        ! BOLSIG+ O2 -> O2^+
+  @A = O2 
+  # O2(V1) O2(V2) O2(V3) O2(V4)
+
+# 34 
+E + @A => O + O^+ + E + E     ! BOLSIG+ O2 -> O^+
+  @A = O2 
+  # O2(V1) O2(V2) O2(V3) O2(V4)
+
+# 35 
+E + O2 => O + O^-                            ! BOLSIG+ O2 -> O^-   
+
+# 36-38
+# E + O2 => E + @B ! BOLSIG+ O2 -> @R
+#   @B = O2(V1)    O2(V1) O2(V2)    O2(V2) O2(V3)    O2(V3) O2(V4)    O2(V4)
+#   @R = O2(V1)res O2(V1) O2(V2)res O2(V2) O2(V3)res O2(V3) O2(V4)res O2(V4)
+E + O2 => E + @B ! BOLSIG+ O2 -> @R
+  @B = O2(V1) O2(V2)  O2(V3) 
+  @R = O2(V1) O2(V2)  O2(V3) 
+
+# 39
+E + @A => E + O2(E1)    ! BOLSIG+ O2 -> O2(E1)
+  @A = O2 
+  # O2(V1) O2(V2) O2(V3) O2(V4)
+
+# 40
+E + @A => E + O2(E2)    ! BOLSIG+ O2 -> O2(E2) 
+  @A = O2 
+  # O2(V1) O2(V2) O2(V3) O2(V4)
+
+# 41
+
+# 42
+E + O3 => O + O2 + E    ! BOLSIG+ O3 -> O2 + O
+
+# 43
+E + O3 => O + O2^+ + E + E    ! BOLSIG+ O3 -> O2^+   
+
+# 44
+E + O3 => O^+ + O^- + O + E   ! BOLSIG+ O3 -> O^+
+
+# 45
+E + O3 => O^- + O2            ! BOLSIG+ O3 -> O^-
+
+# 46
+E + O3 => O + O2^-            ! BOLSIG+ O3 -> O2^- 
+
+# 47
+
+# 48
+E + O => O^+ + E + E          ! BOLSIG+ O -> O^+  
+
+
+# ------------------------------------------------------
+# Electron-Ion Recombinations and Electron Attachment Reactions
+# ------------------------------------------------------
+
+# 49
+E + CO2^+ => CO + O         ! 2.0E-05*(Te/11605)**(-0.50)/Tgas 
+
+# 50
+E + CO2^+ => C + O2         ! 3.939E-07*(Te/11605)**(-0.40)
+
+# 51
+E + CO4^+ => CO2 + O2       ! 1.608E-07*(Te/11605)**(-0.50)   
+
+# 52
+E + CO^+ => C + O           ! 3.683E-08*(Te/11605)**(-0.55)
+
+# 53 
+E + C2O2^+ => CO + CO        ! 4.0E-07*(Te/11605)**(-0.34)
+
+# 54 
+E + C2O3^+ => CO2 + CO      ! 5.4E-08*(Te/11605)**(-0.70)
+
+# 55
+E + C2O4^+ => CO2 + CO2     ! 2.0E-05*Te**(-0.50)/Tgas
+
+# 56
+E + C2^+ => C + C           ! 1.79E-08*(Te/11605)**(-0.50)
+
+# 57
+E + O2 + ANY_NEUTRAL => O2^- + ANY_NEUTRAL       ! 3.00E-30
+
+# 58
+E + O3 + ANY_NEUTRAL => O3^- + ANY_NEUTRAL    ! 5.0E-31*(Te/11605)**(-0.5)
+
+# 59
+E + O + ANY_NEUTRAL => O^- + ANY_NEUTRAL     ! 1.00E-31 
+
+# 60
+E + O2^+ + ANY_NEUTRAL => O2 + ANY_NEUTRAL       ! 1.00E-26
+
+# 61
+E + O2^+ => O + O           ! 6.0E-07*(Te/11605)**(-0.5)*Tgas**(-0.50)
+
+# 62
+E + O^+ + ANY_NEUTRAL => O + ANY_NEUTRAL    ! 1.00E-26 
+
+# 63
+E + O4^+ => O2 + O2         ! 2.251E-07*(Te/11605)**(-0.5)
+
+
+# ------------------------------------------------------
+# Neutral Reactions
+# ------------------------------------------------------
+
+# 64
+O + CO2 => CO + O2    ! 2.8E-11*exp(-26500/Tgas)
+
+# 65 
+C + CO2 => CO + CO   ! 1.0E-15
+
+# 66 
+#O + CO2 + ANY_NEUTRAL => CO2 + ANY_NEUTRAL    ! 8.2E-34*exp(1510/Tgas)
+
+# 67
+O2 + CO => CO2 + O    ! 4.2E-12*exp(-24000/Tgas)
+
+# 68
+O3 + CO => CO2 + O2   ! 4.0e-25
+
+# 69 
+C + CO + ANY_NEUTRAL => C2O + ANY_NEUTRAL   ! 6.5e-32
+
+# 70
+O2 + C => CO + O      ! 3.0e-11
+
+# 71
+O + C + ANY_NEUTRAL => CO + ANY_NEUTRAL     ! 2.136E-29*(Tgas/300)**(-3.08)*exp(2114/Tgas)
+
+# 72
+O + C2O => CO + CO    ! 5.0E-11
+
+# 73 
+O2 + C2O => CO2 + CO   ! 3.3E-13
+
+# 74
+O + O3 => O2 + O2    ! 3.1E-14*Tgas**0.75*exp(-1575/Tgas)
+
+# 75
+O3 +ANY_NEUTRAL=> O2 + O +ANY_NEUTRAL  ! 4.1175E-10*exp(-11430/Tgas)
+
+# 76
+O + O2 +ANY_NEUTRAL=> O3 +ANY_NEUTRAL  ! 1.81E-33*(Tgas/300)**(-1.2)
+
+# 77
+O + O +ANY_NEUTRAL=> O2 +ANY_NEUTRAL   ! 1.27E-32*(Tgas/300)**(-1)*exp(-170/Tgas)
+
+
+# ------------------------------------------------------
+# Ion-Neutral and Ion-Ion Reactions
+# ------------------------------------------------------
+
+# 78
+O2^+ + CO2 + ANY_NEUTRAL => CO4^+ + ANY_NEUTRAL    ! 2.3E-29
+
+# 79
+O^+ + CO2 => O2^+ + CO     ! 9.4E-10
+
+# 80
+O^+ + CO2 => CO2^+ + O     ! 4.5E-10
+
+# 81
+C^+ + CO2 => CO^+ + CO     ! 1.1E-09
+
+# 82
+CO^+ + CO2 => CO2^+ + CO   ! 1.0E-9
+
+# 83
+O^- + CO2 + ANY_NEUTRAL => CO3^- + ANY_NEUTRAL    ! 9.0E-9
+#O^- + CO2 + ANY_NEUTRAL => CO3^- + ANY_NEUTRAL    ! 9.0E-9
+
+# 84
+O2^- + CO2 + ANY_NEUTRAL => CO4^- + ANY_NEUTRAL    ! 1.0E-29
+
+# 85
+O3^- + CO2 => O2 + CO3^-    ! 5.5E-10
+#O3^- + CO2 => O2 + CO3^-   ! 5.5E-10
+
+# 86
+O4^- + CO2 => CO4^- + O2    ! 4.8E-10
+
+# 87
+CO2^+ + CO2 + ANY_NEUTRAL => C2O4^+ + ANY_NEUTRAL    ! 3.0E-28
+
+# 88
+O^+ + CO => CO^+ + O   ! 4.9E-12*(Tgas/300)**0.5 * exp(-4500/Tgas)
+
+# 89
+O^- + CO => CO2 + E    ! 5.5E-10
+
+# 90
+CO3^- + CO => 2CO2 + E   ! 5.0E-13
+
+# 91
+C2O3^+ + CO => CO2 + C2O2^+    ! 1.1E-9
+
+# 92
+C2O4^+ + CO => C2O3^+ + CO2    ! 9.0E-10
+
+# 93
+C2O3^+ + CO + ANY_NEUTRAL => C2O2^+ + CO2 + ANY_NEUTRAL  ! 2.6E-26
+
+# 94
+C2O4^+ + CO + ANY_NEUTRAL => C2O3^+ + CO2 + ANY_NEUTRAL  ! 4.2E-26
+
+# 95
+C^+ + CO => CO^+ + C   ! 5.0E-13
+
+# 96
+CO^+ + C => CO + C^+   ! 1.1E-10
+
+# 97
+O2^+ + C => CO^+ + O   ! 5.2E-11
+
+# 98
+O2^+ + C => C^+ + O2   ! 5.2E-11
+
+# 99
+C2^+ + C => C2 + C^+   ! 1.1E-10
+
+# 100
+O + CO2^+ => O2^+ + CO   ! 1.64E-10
+
+# 101
+O + CO2^+ => O^+ + CO2   ! 9.62E-11
+
+# 102
+O2 + CO2^+ => O2^+ + CO2   ! 5.3E-11
+
+# 103
+CO3^- + CO2^+ => 2CO2 + O    ! 5.0E-7
+
+# 104
+CO4^- + CO2^+ => 2CO2 + O2   ! 5.0E-7
+
+# 105
+#CO2^- + CO2^+ => CO + O2 + O   ! 6.0E-7
+
+# 106
+O + CO^+ => CO + O^+   ! 1.4E-10
+
+# 107
+O2 + CO^+ => CO + O2^+   ! 1.2E-10
+
+# 108
+O2 + C2O2^+ => CO + CO + O2^+   ! 5.0E-12
+
+# 109
+C2O2^+ + ANY_NEUTRAL => CO^+ + CO + ANY_NEUTRAL    ! 1.0E-12
+
+# 110
+CO3^- + C2O2^+ => CO2 + 2CO + O    ! 5.0E-07
+
+# 111
+CO4^- + C2O2^+ => CO2 + 2CO + O2   ! 5.0E-07
+
+# 112
+O2^- + C2O2^+ => 2CO + O2    ! 6.0E-07
+
+# 113
+CO3^- + C2O3^+ => 2CO2 + CO + O    ! 5.0E-07
+
+# 114
+CO4^- + C2O3^+ => 2CO2 + CO + O2   ! 5.0E-07
+
+# 115
+O2^- + C2O3^+ => CO2 + CO + O2   ! 6.0E-07
+
+# 116
+C2O4^+ + ANY_NEUTRAL => CO2^+ + CO2 + ANY_NEUTRAL    ! 1.0E-14
+
+# 117
+CO3^- + C2O4^+ => 3CO2 + O   ! 5.0E-07
+
+# 118
+CO4^- + C2O4^+ => 3CO2 + O2    ! 5.0E-07
+
+# 119
+O2^- + C2O4^+ => 2CO2 + O2   ! 6.0E-07
+
+# 120
+#O2^+ + CO2^- => CO2 + O2 + O   ! 3.0E-07
+
+# 121
+O + CO3^- => CO2 + O2^-    ! 8.0E-11
+
+# 122
+O2^+ + CO4^- => CO2 + O2 + O2    ! 3.0E-07
+
+# 123
+O + CO4^- => CO3^- + O2    ! 1.1E-10
+
+# 124
+O + CO4^- => CO2 + O2 + O^-    ! 1.4E-11
+
+# 125
+O + CO4^- => CO2 + O3^-    ! 1.4E-11
+
+# 126
+O3 + CO4^- => CO2 + O3^- + O2    ! 1.3E-10
+
+# 127
+O2 + C^+ => CO + O^+   ! 6.2E-10
+
+# 128
+O2 + C^+ => CO^+ + O   ! 3.8E-10
+
+# 129
+O^+ + O2 => O2^+ + O   ! 1.9E-11*(Tgas/300)**(-0.5)
+
+# 130
+O2^+ + O2 + ANY_NEUTRAL => O4^+ + ANY_NEUTRAL    ! 2.4E-30
+
+# 131
+O2^- + O2 + ANY_NEUTRAL => O4^- + ANY_NEUTRAL    ! 3.5E-31
+
+# 132
+O^- + O2 => O3 + E   ! 1.0E-12
+
+# 133
+O^- + O2 + ANY_NEUTRAL => O3^- + ANY_NEUTRAL   ! 3.0E-28*(Tgas/300)**(-1)
+
+# 134
+O^- + O3 => O3^- + O   ! 8.0E-10
+
+# 135
+O^- + O3 => O2 + O2 + E    ! 3.0E-10
+
+# 136
+O2^- + O3 => O3^- + O2   ! 4.0E-10
+
+# 137
+O3^- + O3 => O2 + O2 + O2 + E    ! 3.0E-10
+
+# 138 
+O^+ + O3 => O2^+ + O2    ! 1.0E-10
+
+# 139
+O^+ + O + ANY_NEUTRAL => O2^+ + ANY_NEUTRAL    ! 1.0E-29
+
+# 140
+O^- + O => O2 + E    ! 2.3E-10
+
+# 141
+O2^- + O => O2 + O^-   ! 3.3E-10
+
+# 142
+O2^- + O => O3 + E   ! 3.3E-10
+
+# 143
+O3^- + O => O3 + O^-   ! 1.0E-13
+
+# 144
+O3^- + O => O2 + O2 + E    ! 1.0E-13
+
+# 145
+O3^- + O => O2^- + O2    ! 2.5E-10
+
+# 146
+O4^- + O => O3^- + O2    ! 4.0E-10 
+
+# 147
+O4^- + O => O^- + O2 + O2    ! 3.0E-10
+
+# 148
+O4^- + O => O2^- + O3    ! 3.0E-10
+
+# 149
+O^+ + O2^- + ANY_NEUTRAL => O3 + ANY_NEUTRAL   ! 2.0E-25
+
+# 150
+O^+ + O2^- => O + O2   ! 2.7E-7
+
+# 151
+O2^+ + O2^- => O2 + O2   ! 2.0E-7
+
+# 152
+O2^+ + O2^- => O2 + O + O    ! 4.2E-7
+
+# 153
+O2^+ + O2^- + ANY_NEUTRAL => O2 + O2 + ANY_NEUTRAL   ! 2.0E-25
+
+# 154
+O2^- + O2 => O2 + O2 + E     ! 2.18E-18
+
+# 155
+O2^- + ANY_NEUTRAL => O2 + ANY_NEUTRAL + E     ! 2.7E-10*(Tgas/300)**0.5*exp(-5590/Tgas)
+
+# 156
+O2^+ + O3^- => O2 + O3   ! 2.0E-07
+
+# 157
+O2^+ + O3^- => O + O + O3   ! 1.0E-07
+
+# 158
+O^+ + O3^- => O3 + O    ! 1.0E-07
+
+# 159
+O2 + O3^- => O2 + O3 + E   ! 2.3E-11
+
+# 160
+O3^- + ANY_NEUTRAL => O3 + E + ANY_NEUTRAL   ! 2.3E-11
+
+# 161
+O^+ + O^- => O + O     ! 4.0E-08
+
+# 162
+O^+ + O^- + ANY_NEUTRAL => O2 + ANY_NEUTRAL    ! 2.0E-25
+
+# 163
+O2^+ + O^- => O2 + O   ! 1.0E-07
+
+# 164
+O2^+ + O^- => O + O + O   ! 2.6E-08
+
+# 165
+O2^+ + O^- + ANY_NEUTRAL => O3 + ANY_NEUTRAL   ! 2.0E-25
+
+# 166
+ANY_NEUTRAL + O^- => O + ANY_NEUTRAL + E     ! 4.0E-12
+
+# 167
+ANY_NEUTRAL + O4^- => O2^- + O2 + ANY_NEUTRAL    ! 3.08E-12
+
+# 168
+# O2^+ + ANY_NEUTRAL => O2^+ + O2 + ANY_NEUTRAL    ! 1.73E-13
+
+
+# ------------------------------------------------------
+# Vibrational Relaxation Processes upon Collision
+# ------------------------------------------------------
+
+# 169-171
+CO2(Va) + @A => CO2 + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 1.07E-14 7.48-15 7.48-15
+
+# 172-174
+CO2(Vb) + @A => CO2 + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 9.0E-18 2.79E-17 2.79E-17
+
+# 175-177
+CO2(Vb) + @A => CO2(Va) + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 2.9E-14 2.03E-14 2.03E-14
+
+# 178-180
+CO2(V1) + @A => CO2(Vb) + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 7.72E-16 2.32E-16 3.09E-16
+
+# 181-183
+CO2(V1) + @A => CO2(Vd) + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 6.05E-15 1.81E-15 2.42E-15
+
+# 184
+CO2(V1) + CO2 => CO2(Va) + CO2(Vb)   ! 2.42E-15
+
+# 185-187
+CO2(V1) + @A => CO2(Va) + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 1.70E-18 5.1E-19 6.8E-19
+
+# 188-190
+CO2(Vd) + @A => CO2(Vb) + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 4.33E-14 3.03E-14  3.03E-14
+
+# 191-193
+CO2(Vd) + @A => CO2(Va) + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 9.08E-18 6.18E-15  6.18E-15
+
+# 194-196
+CO(V1) + @A => CO + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 1.34E-23 1.34E-23  4.78E-24
+
+# 197-199
+O2(V1) + @A => O2 + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 7.55E-23 2.52E-23  2.52E-23
+
+# 200-202
+O2(V2) + @A => O2 + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 7.55E-23 2.52E-23  2.52E-23
+
+# 203-205
+O2(V3) + @A => O2 + @A   ! @R
+  @A = CO2  CO  O2
+  @R = 7.55E-23 2.52E-23  2.52E-23
+
+END
