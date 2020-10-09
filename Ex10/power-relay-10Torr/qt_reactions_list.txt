@@ -1,0 +1,503 @@
+  1 bolsig:CO2->CO2^+                                
+  2 bolsig:CO2->CO^+                                 
+  3 bolsig:CO2->C^+                                  
+  4 bolsig:CO2->O^+                                  
+  5 E+CO2=>O2^++C+E+E                                
+  6 bolsig:CO2->CO+O^-                               
+  7 bolsig:CO2->CO+O                                 
+  8 bolsig:CO2->CO2(VA)                              
+  9 bolsig:CO2->CO2(VB)                              
+ 10 bolsig:CO2->CO2(V1)                              
+ 11 bolsig:CO2->CO2(VD)                              
+ 12 bolsig:CO2->CO2(E1)                              
+ 13 bolsig:CO2->CO2(E2)                              
+ 14 bolsig:CO2(E1)->CO2                              
+ 15 bolsig:CO2(E2)->CO2                              
+ 16 bolsig:CO2(VA)->CO+O                             
+ 17 bolsig:CO2(VB)->CO+O                             
+ 18 bolsig:CO2(VD)->CO+O                             
+ 19 bolsig:CO2(V1)->CO+O                             
+ 20 bolsig:CO2(VA)->CO2^+                            
+ 21 bolsig:CO2(VB)->CO2^+                            
+ 22 bolsig:CO2(VD)->CO2^+                            
+ 23 bolsig:CO2(V1)->CO2^+                            
+ 24 bolsig:CO2(VA)->CO^+                             
+ 25 bolsig:CO2(VB)->CO^+                             
+ 26 bolsig:CO2(VD)->CO^+                             
+ 27 bolsig:CO2(V1)->CO^+                             
+ 28 bolsig:CO2(VA)->C^+                              
+ 29 bolsig:CO2(VB)->C^+                              
+ 30 bolsig:CO2(VD)->C^+                              
+ 31 bolsig:CO2(V1)->C^+                              
+ 32 bolsig:CO2(VA)->O^+                              
+ 33 bolsig:CO2(VB)->O^+                              
+ 34 bolsig:CO2(VD)->O^+                              
+ 35 bolsig:CO2(V1)->O^+                              
+ 36 bolsig:CO2(VA)->CO+O^-                           
+ 37 bolsig:CO2(VB)->CO+O^-                           
+ 38 bolsig:CO2(VD)->CO+O^-                           
+ 39 bolsig:CO2(V1)->CO+O^-                           
+ 40 bolsig:CO2(VA)->CO2(E1)                          
+ 41 bolsig:CO2(VB)->CO2(E1)                          
+ 42 bolsig:CO2(VD)->CO2(E1)                          
+ 43 bolsig:CO2(V1)->CO2(E1)                          
+ 44 bolsig:CO2(VA)->CO2(E2)                          
+ 45 bolsig:CO2(VB)->CO2(E2)                          
+ 46 bolsig:CO2(VD)->CO2(E2)                          
+ 47 bolsig:CO2(V1)->CO2(E2)                          
+ 48 E+CO2(VA)=>O2^++C+E+E                            
+ 49 E+CO2(VB)=>O2^++C+E+E                            
+ 50 E+CO2(VD)=>O2^++C+E+E                            
+ 51 E+CO2(V1)=>O2^++C+E+E                            
+ 52 bolsig:CO2(VA)->CO2                              
+ 53 bolsig:CO2(VB)->CO2                              
+ 54 bolsig:CO2(VD)->CO2                              
+ 55 bolsig:CO2(V1)->CO2                              
+ 56 bolsig:CO2(E1)->CO+O                             
+ 57 bolsig:CO2(E2)->CO+O                             
+ 58 bolsig:CO2(E1)->CO2^+                            
+ 59 bolsig:CO2(E2)->CO2^+                            
+ 60 bolsig:CO2(E1)->CO^+                             
+ 61 bolsig:CO2(E2)->CO^+                             
+ 62 bolsig:CO2(E1)->C^+                              
+ 63 bolsig:CO2(E2)->C^+                              
+ 64 bolsig:CO2(E1)->O^+                              
+ 65 bolsig:CO2(E2)->O^+                              
+ 66 E+CO2(E1)=>O2^++C+E+E                            
+ 67 E+CO2(E2)=>O2^++C+E+E                            
+ 68 bolsig:CO->CO^+                                  
+ 69 bolsig:CO->C^+                                   
+ 70 bolsig:CO->O^+                                   
+ 71 bolsig:CO->O^-                                   
+ 72 bolsig:CO->C+O                                   
+ 73 bolsig:CO->CO(V1)                                
+ 74 bolsig:CO->CO(E1)                                
+ 75 bolsig:CO->CO(E2)                                
+ 76 bolsig:CO->CO(E3)                                
+ 77 bolsig:CO->CO(E4)                                
+ 78 bolsig:CO(E1)->CO                                
+ 79 bolsig:CO(E2)->CO                                
+ 80 bolsig:CO(E3)->CO                                
+ 81 bolsig:CO(E4)->CO                                
+ 82 bolsig:CO(V1)->C+O                               
+ 83 bolsig:CO(V1)->CO^+                              
+ 84 bolsig:CO(V1)->C^+                               
+ 85 bolsig:CO(V1)->O^+                               
+ 86 bolsig:CO(V1)->O^-                               
+ 87 bolsig:CO(V1)->CO(E1)                            
+ 88 bolsig:CO(V1)->CO(E2)                            
+ 89 bolsig:CO(V1)->CO(E3)                            
+ 90 bolsig:CO(V1)->CO(E4)                            
+ 91 bolsig:CO(V1)->CO                                
+ 92 bolsig:CO(E1)->C+O                               
+ 93 bolsig:CO(E2)->C+O                               
+ 94 bolsig:CO(E3)->C+O                               
+ 95 bolsig:CO(E4)->C+O                               
+ 96 bolsig:CO(E1)->CO^+                              
+ 97 bolsig:CO(E2)->CO^+                              
+ 98 bolsig:CO(E3)->CO^+                              
+ 99 bolsig:CO(E4)->CO^+                              
+100 bolsig:CO(E1)->C^+                               
+101 bolsig:CO(E2)->C^+                               
+102 bolsig:CO(E3)->C^+                               
+103 bolsig:CO(E4)->C^+                               
+104 bolsig:CO(E1)->O^+                               
+105 bolsig:CO(E2)->O^+                               
+106 bolsig:CO(E3)->O^+                               
+107 bolsig:CO(E4)->O^+                               
+108 bolsig:C->C^+                                    
+109 bolsig:C2->C+C                                   
+110 bolsig:C2->C2^+                                  
+111 bolsig:O2->O+O                                   
+112 bolsig:O2->O2^+                                  
+113 bolsig:O2->O^+                                   
+114 bolsig:O2->O^-                                   
+115 bolsig:O2->O2(V1)                                
+116 bolsig:O2->O2(V2)                                
+117 bolsig:O2->O2(V3)                                
+118 bolsig:O2->O2(E1)                                
+119 bolsig:O2->O2(E2)                                
+120 bolsig:O2(E1)->O2                                
+121 bolsig:O2(E2)->O2                                
+122 O2(E1)=>O2                                       
+123 O2(E2)=>O2                                       
+124 bolsig:O2->O2(E1)                                
+125 bolsig:O2->O2(E1)                                
+126 bolsig:O2->O2(E1)                                
+127 bolsig:O2->O2(E2)                                
+128 bolsig:O2->O2(E2)                                
+129 bolsig:O2->O2(E2)                                
+130 bolsig:O2->O2^+                                  
+131 bolsig:O2->O2^+                                  
+132 bolsig:O2->O2^+                                  
+133 bolsig:O2->O^+                                   
+134 bolsig:O2->O^+                                   
+135 bolsig:O2->O^+                                   
+136 bolsig:O2->O+O                                   
+137 bolsig:O2->O+O                                   
+138 bolsig:O2->O+O                                   
+139 bolsig:O2->O^-                                   
+140 bolsig:O2->O^-                                   
+141 bolsig:O2->O^-                                   
+142 bolsig:O2(V1)->O2                                
+143 bolsig:O2(V2)->O2                                
+144 bolsig:O2(V3)->O2                                
+145 bolsig:O2(E1)->O+O                               
+146 bolsig:O2(E2)->O+O                               
+147 bolsig:O2(E1)->O2^+                              
+148 bolsig:O2(E2)->O2^+                              
+149 bolsig:O2(E1)->O^+                               
+150 bolsig:O2(E2)->O^+                               
+151 bolsig:O3->O2+O                                  
+152 bolsig:O3->O2^+                                  
+153 bolsig:O3->O^+                                   
+154 bolsig:O3->O^-                                   
+155 bolsig:O3->O2^-                                  
+156 bolsig:O->O^+                                    
+157 E+CO2^+=>CO+O                                    
+158 E+CO2^+=>C+O2                                    
+159 E+CO4^+=>CO2+O2                                  
+160 E+CO^+=>C+O                                      
+161 E+C2O2^+=>CO+CO                                  
+162 E+C2O3^+=>CO2+CO                                 
+163 E+C2O4^+=>CO2+CO2                                
+164 E+C2^+=>C+C                                      
+165 E+O2+ANY_NEUTRAL=>O2^-+ANY_NEUTRAL               
+166 E+O3+ANY_NEUTRAL=>O3^-+ANY_NEUTRAL               
+167 E+O+ANY_NEUTRAL=>O^-+ANY_NEUTRAL                 
+168 E+O2^++ANY_NEUTRAL=>O2+ANY_NEUTRAL               
+169 E+O2^+=>O+O                                      
+170 E+O^++ANY_NEUTRAL=>O+ANY_NEUTRAL                 
+171 E+O4^+=>O2+O2                                    
+172 O+CO2=>CO+O2                                     
+173 C+CO2=>CO+CO                                     
+174 CO2(VA)+O=>CO+O2                                 
+175 CO2(VB)+O=>CO+O2                                 
+176 CO2(V1)+O=>CO+O2                                 
+177 CO2(VD)+O=>CO+O2                                 
+178 CO2(VA)+C=>2CO                                   
+179 CO2(VB)+C=>2CO                                   
+180 CO2(V1)+C=>2CO                                   
+181 CO2(VD)+C=>2CO                                   
+182 O+CO+ANY_NEUTRAL=>CO2+ANY_NEUTRAL                
+183 O3+CO=>CO2+O2                                    
+184 C+CO+ANY_NEUTRAL=>C2O+ANY_NEUTRAL                
+185 O2+CO=>CO2+O                                     
+186 CO(V1)+O+ANY_NEUTRAL=>CO2+ANY_NEUTRAL            
+187 O2(V1)+CO=>CO2+O                                 
+188 O2(V2)+CO=>CO2+O                                 
+189 O2(V3)+CO=>CO2+O                                 
+190 O2+CO(V1)=>CO2+O                                 
+191 O2(V1)+CO(V1)=>CO2+O                             
+192 O2(V2)+CO(V1)=>CO2+O                             
+193 O2(V3)+CO(V1)=>CO2+O                             
+194 CO(V1)+O3=>CO2+O2                                
+195 CO(V1)+C+ANY_NEUTRAL=>C2O+ANY_NEUTRAL            
+196 O2+C=>CO+O                                       
+197 O2+C2O=>CO2+CO                                   
+198 O+O2+ANY_NEUTRAL=>O3+ANY_NEUTRAL                 
+199 O2(V1)+C=>CO+O                                   
+200 O2(V2)+C=>CO+O                                   
+201 O2(V3)+C=>CO+O                                   
+202 O2(V1)+O+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+203 O2(V2)+O+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+204 O2(V3)+O+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+205 O+C+ANY_NEUTRAL=>CO+ANY_NEUTRAL                  
+206 O+C2O=>CO+CO                                     
+207 O+O3=>O2+O2                                      
+208 O3+ANY_NEUTRAL=>O2+O+ANY_NEUTRAL                 
+209 O+O+ANY_NEUTRAL=>O2+ANY_NEUTRAL                  
+210 O2^++CO2+ANY_NEUTRAL=>CO4^++ANY_NEUTRAL          
+211 O^++CO2=>O2^++CO                                 
+212 O^++CO2=>CO2^++O                                 
+213 C^++CO2=>CO^++CO                                 
+214 CO^++CO2=>CO2^++CO                               
+215 O^-+CO2+ANY_NEUTRAL=>CO3^-+ANY_NEUTRAL           
+216 O2^-+CO2+ANY_NEUTRAL=>CO4^-+ANY_NEUTRAL          
+217 O3^-+CO2=>O2+CO3^-                               
+218 O4^-+CO2=>CO4^-+O2                               
+219 CO2^++CO2+ANY_NEUTRAL=>C2O4^++ANY_NEUTRAL        
+220 CO2(VA)+O^+=>O2^++CO                             
+221 CO2(VB)+O^+=>O2^++CO                             
+222 CO2(V1)+O^+=>O2^++CO                             
+223 CO2(VD)+O^+=>O2^++CO                             
+224 CO2(VA)+O^+=>CO2^++O                             
+225 CO2(VB)+O^+=>CO2^++O                             
+226 CO2(V1)+O^+=>CO2^++O                             
+227 CO2(VD)+O^+=>CO2^++O                             
+228 CO2(VA)+C^+=>CO^++CO                             
+229 CO2(VB)+C^+=>CO^++CO                             
+230 CO2(V1)+C^+=>CO^++CO                             
+231 CO2(VD)+C^+=>CO^++CO                             
+232 CO2(VA)+CO^+=>CO2^++CO                           
+233 CO2(VB)+CO^+=>CO2^++CO                           
+234 CO2(V1)+CO^+=>CO2^++CO                           
+235 CO2(VD)+CO^+=>CO2^++CO                           
+236 CO2(VA)+O^-+ANY_NEUTRAL=>CO3^-+ANY_NEUTRAL       
+237 CO2(VB)+O^-+ANY_NEUTRAL=>CO3^-+ANY_NEUTRAL       
+238 CO2(V1)+O^-+ANY_NEUTRAL=>CO3^-+ANY_NEUTRAL       
+239 CO2(VD)+O^-+ANY_NEUTRAL=>CO3^-+ANY_NEUTRAL       
+240 CO2(VA)+O2^-+ANY_NEUTRAL=>CO4^-+ANY_NEUTRAL      
+241 CO2(VB)+O2^-+ANY_NEUTRAL=>CO4^-+ANY_NEUTRAL      
+242 CO2(V1)+O2^-+ANY_NEUTRAL=>CO4^-+ANY_NEUTRAL      
+243 CO2(VD)+O2^-+ANY_NEUTRAL=>CO4^-+ANY_NEUTRAL      
+244 CO2(VA)+O3^-=>O2+CO3^-                           
+245 CO2(VB)+O3^-=>O2+CO3^-                           
+246 CO2(V1)+O3^-=>O2+CO3^-                           
+247 CO2(VD)+O3^-=>O2+CO3^-                           
+248 CO2(VA)+O4^-=>CO4^-+O2                           
+249 CO2(VB)+O4^-=>CO4^-+O2                           
+250 CO2(V1)+O4^-=>CO4^-+O2                           
+251 CO2(VD)+O4^-=>CO4^-+O2                           
+252 CO2(VA)+CO2^++ANY_NEUTRAL=>C2O4^++ANY_NEUTRAL    
+253 CO2(VB)+CO2^++ANY_NEUTRAL=>C2O4^++ANY_NEUTRAL    
+254 CO2(V1)+CO2^++ANY_NEUTRAL=>C2O4^++ANY_NEUTRAL    
+255 CO2(VD)+CO2^++ANY_NEUTRAL=>C2O4^++ANY_NEUTRAL    
+256 CO2(VA)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+257 CO2(VB)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+258 CO2(V1)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+259 CO2(VD)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+260 CO2(E1)+O^+=>O2^++CO                             
+261 CO2(E2)+O^+=>O2^++CO                             
+262 CO2(E1)+O^+=>CO2^++O                             
+263 CO2(E2)+O^+=>CO2^++O                             
+264 CO2(E1)+C^+=>CO^++CO                             
+265 CO2(E2)+C^+=>CO^++CO                             
+266 CO2(E1)+CO^+=>CO2^++CO                           
+267 CO2(E2)+CO^+=>CO2^++CO                           
+268 CO2(E1)+O^-+ANY_NEUTRAL=>CO3^-+ANY_NEUTRAL       
+269 CO2(E2)+O^-+ANY_NEUTRAL=>CO3^-+ANY_NEUTRAL       
+270 CO2(E1)+O2^-+ANY_NEUTRAL=>CO4^-+ANY_NEUTRAL      
+271 CO2(E2)+O2^-+ANY_NEUTRAL=>CO4^-+ANY_NEUTRAL      
+272 CO2(E1)+O3^-=>O2+CO3^-                           
+273 CO2(E2)+O3^-=>O2+CO3^-                           
+274 CO2(E1)+O4^-=>CO4^-+O2                           
+275 CO2(E2)+O4^-=>CO4^-+O2                           
+276 CO2(E1)+CO2^++ANY_NEUTRAL=>C2O4^++ANY_NEUTRAL    
+277 CO2(E2)+CO2^++ANY_NEUTRAL=>C2O4^++ANY_NEUTRAL    
+278 CO2(E1)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+279 CO2(E2)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+280 CO2(E1)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+281 CO2(E2)+O2^++ANY_NEUTRAL=>CO4^++ANY_NEUTRAL      
+282 O^++CO=>CO^++O                                   
+283 O^-+CO=>CO2+E                                    
+284 CO3^-+CO=>2CO2+E                                 
+285 C2O3^++CO=>CO2+C2O2^+                            
+286 C2O4^++CO=>C2O3^++CO2                            
+287 C2O3^++CO+ANY_NEUTRAL=>C2O2^++CO2+ANY_NEUTRAL    
+288 C2O4^++CO+ANY_NEUTRAL=>C2O3^++CO2+ANY_NEUTRAL    
+289 C^++CO=>CO^++C                                   
+290 CO(V1)+O^+=>CO^++O                               
+291 CO(V1)+O^-=>CO2+E                                
+292 CO(V1)+CO3^-=>CO2+CO2+E                          
+293 CO(V1)+C2O3^+=>CO2+C2O2^+                        
+294 CO(V1)+C2O4^+=>C2O3^++CO2                        
+295 CO(V1)+C2O3^++ANY_NEUTRAL=>C2O2^++CO2+ANY_NEUTRAL
+296 CO(V1)+C2O4^++ANY_NEUTRAL=>C2O3^++CO2+ANY_NEUTRAL
+297 CO(V1)+C^+=>CO^++C                               
+298 CO(E1)+O^-=>CO2+E                                
+299 CO(E2)+O^-=>CO2+E                                
+300 CO(E3)+O^-=>CO2+E                                
+301 CO(E4)+O^-=>CO2+E                                
+302 CO(E1)+CO3^-=>CO2+CO2+E                          
+303 CO(E2)+CO3^-=>CO2+CO2+E                          
+304 CO(E3)+CO3^-=>CO2+CO2+E                          
+305 CO(E4)+CO3^-=>CO2+CO2+E                          
+306 CO(E1)+C2O3^+=>CO2+C2O2^+                        
+307 CO(E2)+C2O3^+=>CO2+C2O2^+                        
+308 CO(E3)+C2O3^+=>CO2+C2O2^+                        
+309 CO(E4)+C2O3^+=>CO2+C2O2^+                        
+310 CO(E1)+C2O4^+=>C2O3^++CO2                        
+311 CO(E2)+C2O4^+=>C2O3^++CO2                        
+312 CO(E3)+C2O4^+=>C2O3^++CO2                        
+313 CO(E4)+C2O4^+=>C2O3^++CO2                        
+314 CO(E1)+C2O3^++ANY_NEUTRAL=>C2O2^++CO2+ANY_NEUTRAL
+315 CO(E2)+C2O3^++ANY_NEUTRAL=>C2O2^++CO2+ANY_NEUTRAL
+316 CO(E3)+C2O3^++ANY_NEUTRAL=>C2O2^++CO2+ANY_NEUTRAL
+317 CO(E4)+C2O3^++ANY_NEUTRAL=>C2O2^++CO2+ANY_NEUTRAL
+318 CO(E1)+C2O4^++ANY_NEUTRAL=>C2O3^++CO2+ANY_NEUTRAL
+319 CO(E2)+C2O4^++ANY_NEUTRAL=>C2O3^++CO2+ANY_NEUTRAL
+320 CO(E3)+C2O4^++ANY_NEUTRAL=>C2O3^++CO2+ANY_NEUTRAL
+321 CO(E4)+C2O4^++ANY_NEUTRAL=>C2O3^++CO2+ANY_NEUTRAL
+322 CO(E1)+C^+=>CO^++C                               
+323 CO(E2)+C^+=>CO^++C                               
+324 CO(E3)+C^+=>CO^++C                               
+325 CO(E4)+C^+=>CO^++C                               
+326 O2+CO2^+=>O2^++CO2                               
+327 O2+CO^+=>O2^++CO                                 
+328 O2+C2O2^+=>CO+CO+O2^+                            
+329 O2+C^+=>CO+O^+                                   
+330 O2+C^+=>CO^++O                                   
+331 O^++O2=>O2^++O                                   
+332 O2^++O2+ANY_NEUTRAL=>O4^++ANY_NEUTRAL            
+333 O2^-+O2+ANY_NEUTRAL=>O4^-+ANY_NEUTRAL            
+334 O^-+O2=>O3+E                                     
+335 O^-+O2+ANY_NEUTRAL=>O3^-+ANY_NEUTRAL             
+336 O2^-+O2=>O2+O2+E                                 
+337 O2+O3^-=>O2+O3+E                                 
+338 O2(V1)+CO2^+=>O2^++CO2                           
+339 O2(V2)+CO2^+=>O2^++CO2                           
+340 O2(V3)+CO2^+=>O2^++CO2                           
+341 O2(V1)+CO^+=>O2^++CO                             
+342 O2(V2)+CO^+=>O2^++CO                             
+343 O2(V3)+CO^+=>O2^++CO                             
+344 O2(V1)+C2O2^+=>CO+CO+O2^+                        
+345 O2(V2)+C2O2^+=>CO+CO+O2^+                        
+346 O2(V3)+C2O2^+=>CO+CO+O2^+                        
+347 O2(V1)+C^+=>CO+O^+                               
+348 O2(V2)+C^+=>CO+O^+                               
+349 O2(V3)+C^+=>CO+O^+                               
+350 O2(V1)+C^+=>CO^++O                               
+351 O2(V2)+C^+=>CO^++O                               
+352 O2(V3)+C^+=>CO^++O                               
+353 O2(V1)+O^+=>O2^++O                               
+354 O2(V2)+O^+=>O2^++O                               
+355 O2(V3)+O^+=>O2^++O                               
+356 O2(V1)+O2^++ANY_NEUTRAL=>O4^++ANY_NEUTRAL        
+357 O2(V2)+O2^++ANY_NEUTRAL=>O4^++ANY_NEUTRAL        
+358 O2(V3)+O2^++ANY_NEUTRAL=>O4^++ANY_NEUTRAL        
+359 O2(V1)+O2^-+ANY_NEUTRAL=>O4^-+ANY_NEUTRAL        
+360 O2(V2)+O2^-+ANY_NEUTRAL=>O4^-+ANY_NEUTRAL        
+361 O2(V3)+O2^-+ANY_NEUTRAL=>O4^-+ANY_NEUTRAL        
+362 O2(V1)+O^-=>O3+E                                 
+363 O2(V2)+O^-=>O3+E                                 
+364 O2(V3)+O^-=>O3+E                                 
+365 O2(V1)+O^-+ANY_NEUTRAL=>O3^-+ANY_NEUTRAL         
+366 O2(V2)+O^-+ANY_NEUTRAL=>O3^-+ANY_NEUTRAL         
+367 O2(V3)+O^-+ANY_NEUTRAL=>O3^-+ANY_NEUTRAL         
+368 O2(V1)+O2^-=>O2(V1)+O2+E                         
+369 O2(V2)+O2^-=>O2(V2)+O2+E                         
+370 O2(V3)+O2^-=>O2(V3)+O2+E                         
+371 O2(V1)+O3^-=>O2(V1)+O3+E                         
+372 O2(V2)+O3^-=>O2(V2)+O3+E                         
+373 O2(V3)+O3^-=>O2(V3)+O3+E                         
+374 O2(E1)+CO2^+=>O2^++CO2                           
+375 O2(E2)+CO2^+=>O2^++CO2                           
+376 O2(E1)+CO^+=>O2^++CO                             
+377 O2(E2)+CO^+=>O2^++CO                             
+378 O2(E1)+C2O2^+=>CO+CO+O2^+                        
+379 O2(E2)+C2O2^+=>CO+CO+O2^+                        
+380 O2(E1)+C^+=>CO+O^+                               
+381 O2(E2)+C^+=>CO+O^+                               
+382 O2(E1)+C^+=>CO^++O                               
+383 O2(E2)+C^+=>CO^++O                               
+384 O2(E1)+O^+=>O2^++O                               
+385 O2(E2)+O^+=>O2^++O                               
+386 O2(E1)+O2^++ANY_NEUTRAL=>O4^++ANY_NEUTRAL        
+387 O2(E2)+O2^++ANY_NEUTRAL=>O4^++ANY_NEUTRAL        
+388 O2(E1)+O2^-+ANY_NEUTRAL=>O4^-+ANY_NEUTRAL        
+389 O2(E2)+O2^-+ANY_NEUTRAL=>O4^-+ANY_NEUTRAL        
+390 O2(E1)+O^-=>O3+E                                 
+391 O2(E2)+O^-=>O3+E                                 
+392 O2(E1)+O^-+ANY_NEUTRAL=>O3^-+ANY_NEUTRAL         
+393 O2(E2)+O^-+ANY_NEUTRAL=>O3^-+ANY_NEUTRAL         
+394 O2(E1)+O2^-=>O2(E1)+O2+E                         
+395 O2(E2)+O2^-=>O2(E2)+O2+E                         
+396 O2(E1)+O3^-=>O2(E1)+O3+E                         
+397 O2(E2)+O3^-=>O2(E2)+O3+E                         
+398 CO^++C=>CO+C^+                                   
+399 O2^++C=>CO^++O                                   
+400 O2^++C=>C^++O2                                   
+401 C2^++C=>C2+C^+                                   
+402 O+CO2^+=>O2^++CO                                 
+403 O+CO2^+=>O^++CO2                                 
+404 CO3^-+CO2^+=>2CO2+O                              
+405 CO4^-+CO2^+=>2CO2+O2                             
+406 O2^-+CO2^+=>CO+O2+O                              
+407 O+CO^+=>CO+O^+                                   
+408 C2O2^++ANY_NEUTRAL=>CO^++CO+ANY_NEUTRAL          
+409 CO3^-+C2O2^+=>CO2+2CO+O                          
+410 CO4^-+C2O2^+=>CO2+2CO+O2                         
+411 O2^-+C2O2^+=>2CO+O2                              
+412 CO3^-+C2O3^+=>2CO2+CO+O                          
+413 CO4^-+C2O3^+=>2CO2+CO+O2                         
+414 O2^-+C2O3^+=>CO2+CO+O2                           
+415 C2O4^++ANY_NEUTRAL=>CO2^++CO2+ANY_NEUTRAL        
+416 CO3^-+C2O4^+=>3CO2+O                             
+417 CO4^-+C2O4^+=>3CO2+O2                            
+418 O2^-+C2O4^+=>2CO2+O2                             
+419 O2^++CO3^-=>CO2+O2+O                             
+420 O+CO3^-=>CO2+O2^-                                
+421 O2^++CO4^-=>CO2+O2+O2                            
+422 O+CO4^-=>CO3^-+O2                                
+423 O+CO4^-=>CO2+O2+O^-                              
+424 O+CO4^-=>CO2+O3^-                                
+425 O3+CO4^-=>CO2+O3^-+O2                            
+426 O^-+O3=>O3^-+O                                   
+427 O^-+O3=>O2+O2+E                                  
+428 O2^-+O3=>O3^-+O2                                 
+429 O3^-+O3=>O2+O2+O2+E                              
+430 O^++O3=>O2^++O2                                  
+431 O^++O+ANY_NEUTRAL=>O2^++ANY_NEUTRAL              
+432 O^-+O=>O2+E                                      
+433 O2^-+O=>O2+O^-                                   
+434 O2^-+O=>O3+E                                     
+435 O3^-+O=>O3+O^-                                   
+436 O3^-+O=>O2+O2+E                                  
+437 O3^-+O=>O2^-+O2                                  
+438 O4^-+O=>O3^-+O2                                  
+439 O4^-+O=>O^-+O2+O2                                
+440 O4^-+O=>O2^-+O3                                  
+441 O^++O2^-+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+442 O^++O2^-=>O+O2                                   
+443 O2^++O2^-=>O2+O2                                 
+444 O2^++O2^-=>O2+O+O                                
+445 O2^++O2^-+ANY_NEUTRAL=>O2+O2+ANY_NEUTRAL         
+446 O2^-+ANY_NEUTRAL=>O2+ANY_NEUTRAL+E               
+447 O2^++O3^-=>O2+O3                                 
+448 O2^++O3^-=>O+O+O3                                
+449 O^++O3^-=>O3+O                                   
+450 O3^-+ANY_NEUTRAL=>O3+E+ANY_NEUTRAL               
+451 O^++O^-=>O+O                                     
+452 O^++O^-+ANY_NEUTRAL=>O2+ANY_NEUTRAL              
+453 O2^++O^-=>O2+O                                   
+454 O2^++O^-=>O+O+O                                  
+455 O2^++O^-+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+456 ANY_NEUTRAL+O^-=>O+ANY_NEUTRAL+E                 
+457 ANY_NEUTRAL+O4^-=>O2^-+O2+ANY_NEUTRAL            
+458 O4^++ANY_NEUTRAL=>O2^++O2+ANY_NEUTRAL            
+459 CO2(VA)+CO2=>CO2+CO2                             
+460 CO2(VA)+CO=>CO2+CO                               
+461 CO2(VA)+O2=>CO2+O2                               
+462 CO2(VB)+CO2=>CO2+CO2                             
+463 CO2(VB)+CO=>CO2+CO                               
+464 CO2(VB)+O2=>CO2+O2                               
+465 CO2(VB)+CO2=>CO2(VA)+CO2                         
+466 CO2(VB)+CO=>CO2(VA)+CO                           
+467 CO2(VB)+O2=>CO2(VA)+O2                           
+468 CO2(V1)+CO2=>CO2(VB)+CO2                         
+469 CO2(V1)+CO=>CO2(VB)+CO                           
+470 CO2(V1)+O2=>CO2(VB)+O2                           
+471 CO2(V1)+CO2=>CO2(VD)+CO2                         
+472 CO2(V1)+CO=>CO2(VD)+CO                           
+473 CO2(V1)+O2=>CO2(VD)+O2                           
+474 CO2(V1)+CO2=>CO2(VA)+CO2(VB)                     
+475 CO2(V1)+CO2=>CO2(VA)+CO2                         
+476 CO2(V1)+CO=>CO2(VA)+CO                           
+477 CO2(V1)+O2=>CO2(VA)+O2                           
+478 CO2(VD)+CO2=>CO2(VB)+CO2                         
+479 CO2(VD)+CO=>CO2(VB)+CO                           
+480 CO2(VD)+O2=>CO2(VB)+O2                           
+481 CO2(VD)+CO2=>CO2(VA)+CO2                         
+482 CO2(VD)+CO=>CO2(VA)+CO                           
+483 CO2(VD)+O2=>CO2(VA)+O2                           
+484 CO(V1)+CO2=>CO+CO2                               
+485 CO(V1)+CO=>CO+CO                                 
+486 CO(V1)+O2=>CO+O2                                 
+487 O2(V1)+CO2=>O2+CO2                               
+488 O2(V1)+CO=>O2+CO                                 
+489 O2(V1)+O2=>O2+O2                                 
+490 O2(V2)+CO2=>O2+CO2                               
+491 O2(V2)+CO=>O2+CO                                 
+492 O2(V2)+O2=>O2+O2                                 
+493 O2(V3)+CO2=>O2+CO2                               
+494 O2(V3)+CO=>O2+CO                                 
+495 O2(V3)+O2=>O2+O2                                 
+496 CO2(E1)+ANY_NEUTRAL=>CO2+ANY_NEUTRAL             
+497 CO2(E2)+ANY_NEUTRAL=>CO2+ANY_NEUTRAL             
+498 CO(E1)+ANY_NEUTRAL=>CO+ANY_NEUTRAL               
+499 CO(E2)+ANY_NEUTRAL=>CO+ANY_NEUTRAL               
+500 CO(E3)+ANY_NEUTRAL=>CO+ANY_NEUTRAL               
+501 CO(E4)+ANY_NEUTRAL=>CO+ANY_NEUTRAL               
+502 O2(E1)+ANY_NEUTRAL=>O2+ANY_NEUTRAL               
+503 O2(E2)+ANY_NEUTRAL=>O2+ANY_NEUTRAL               
