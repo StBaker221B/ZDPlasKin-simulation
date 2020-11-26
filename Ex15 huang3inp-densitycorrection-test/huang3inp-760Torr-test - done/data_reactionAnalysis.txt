@@ -1,0 +1,205 @@
+CO2 species
+   1  CO2      0.0000
+   2  CO2(VA)  0.0828
+   3  CO2(VB)  0.1657
+   4  CO2(V1)  0.2913
+   5  CO2(VD)  0.3314
+   6  CO2(E1)  0.0000
+   7  CO2(E2)  0.0000
+
+CO species
+   1  CO       0.0000
+   2  CO(V1)   0.2657
+   3  CO(E1)   0.0000
+   4  CO(E2)   0.0000
+   5  CO(E3)   0.0000
+   6  CO(E4)   0.0000
+
+O2 species
+   1  O2     
+   2  O2(V1) 
+   3  O2(V2) 
+   4  O2(V3) 
+   5  O2(E1) 
+   6  O2(E2) 
+
+Electron impact excitation of vibrational levels (CO_evx)
+   1  bolsig:CO->CO(V1)                                  0.2657
+
+Electron impact dissociation (CO_ed)
+   1  bolsig:CO->C+O                                    13.5000
+   2  bolsig:CO(V1)->C+O                                13.2343
+   3  bolsig:CO(E1)->C+O                                13.5000
+   4  bolsig:CO(E2)->C+O                                13.5000
+   5  bolsig:CO(E3)->C+O                                13.5000
+   6  bolsig:CO(E4)->C+O                                13.5000
+
+Electron impact ionization (CO_ei)
+   1  bolsig:CO->CO^+                                   17.5000
+   2  bolsig:CO(V1)->CO^+                               17.2343
+   3  bolsig:CO(E1)->CO^+                               17.5000
+   4  bolsig:CO(E2)->CO^+                               17.5000
+   5  bolsig:CO(E3)->CO^+                               17.5000
+   6  bolsig:CO(E4)->CO^+                               17.5000
+
+Electron impact excitation of vibrational levels (evx)
+   1  bolsig:CO2->CO2(VA)                                0.0828
+   2  bolsig:CO2->CO2(VB)                                0.1657
+   3  bolsig:CO2->CO2(V1)                                0.2913
+   4  bolsig:CO2->CO2(VD)                                0.3314
+   5  bolsig:CO2(VA)->CO2                                0.0000
+   6  bolsig:CO2(VB)->CO2                                0.0000
+   7  bolsig:CO2(VD)->CO2                                0.0000
+   8  bolsig:CO2(V1)->CO2                               -0.2913
+
+Electron impact excitation of asymmetric vibrational levels (eva)
+   1  bolsig:CO2->CO2(V1)                                0.2913
+   2  bolsig:CO2(VA)->CO2                                0.0000
+   3  bolsig:CO2(VB)->CO2                                0.0000
+   4  bolsig:CO2(VD)->CO2                                0.0000
+   5  bolsig:CO2(V1)->CO2                               -0.2913
+
+Electron impact excitation of symmetric vibrational levels (evs)
+   1  bolsig:CO2->CO2(VA)                                0.0828
+   2  bolsig:CO2->CO2(VB)                                0.1657
+   3  bolsig:CO2->CO2(VD)                                0.3314
+
+Electron impact excitation of electronic levels (eex)
+   1  bolsig:CO2->CO2(E1)                                6.2300
+   2  bolsig:CO2->CO2(E2)                               11.1000
+   3  bolsig:CO2(VA)->CO2(E1)                            6.2300
+   4  bolsig:CO2(VB)->CO2(E1)                            6.2300
+   5  bolsig:CO2(VD)->CO2(E1)                            6.2300
+   6  bolsig:CO2(V1)->CO2(E1)                            6.2300
+   7  bolsig:CO2(VA)->CO2(E2)                           11.1000
+   8  bolsig:CO2(VB)->CO2(E2)                           11.1000
+   9  bolsig:CO2(VD)->CO2(E2)                           11.1000
+  10  bolsig:CO2(V1)->CO2(E2)                           11.1000
+
+Electron impact excitation from ground to asymmetric levels (evag)
+   1  bolsig:CO2->CO2(V1)                              
+
+Electron impact dissociation (ed)
+   1  bolsig:CO2->CO+O                                  11.9000
+   2  bolsig:CO2(VA)->CO+O                              11.8172
+   3  bolsig:CO2(VB)->CO+O                              11.7343
+   4  bolsig:CO2(VD)->CO+O                              11.5686
+   5  bolsig:CO2(V1)->CO+O                              11.6087
+   6  bolsig:CO2(E1)->CO+O                              11.9000
+   7  bolsig:CO2(E2)->CO+O                              11.9000
+
+Electron impact ionization (ei)
+   1  bolsig:CO2->CO2^+                                 13.8000
+   2  bolsig:CO2(VA)->CO2^+                             13.7172
+   3  bolsig:CO2(VB)->CO2^+                             13.6343
+   4  bolsig:CO2(VD)->CO2^+                             13.4686
+   5  bolsig:CO2(V1)->CO2^+                             13.5087
+   6  bolsig:CO2(E1)->CO2^+                             13.8000
+   7  bolsig:CO2(E2)->CO2^+                             13.8000
+
+Electron impact dissociative ionization (edi)
+   1  bolsig:CO2->CO^+                                  19.5000
+   2  bolsig:CO2->C^+                                   27.8000
+   3  bolsig:CO2->O^+                                   19.1000
+   4  bolsig:CO2(VA)->CO^+                              19.4172
+   5  bolsig:CO2(VB)->CO^+                              19.3343
+   6  bolsig:CO2(VD)->CO^+                              19.1686
+   7  bolsig:CO2(V1)->CO^+                              19.2087
+   8  bolsig:CO2(VA)->C^+                               27.7172
+   9  bolsig:CO2(VB)->C^+                               27.6343
+  10  bolsig:CO2(VD)->C^+                               27.4686
+  11  bolsig:CO2(V1)->C^+                               27.5087
+  12  bolsig:CO2(VA)->O^+                               19.0172
+  13  bolsig:CO2(VB)->O^+                               18.9343
+  14  bolsig:CO2(VD)->O^+                               18.7686
+  15  bolsig:CO2(V1)->O^+                               18.8087
+  16  bolsig:CO2(E1)->CO^+                              19.5000
+  17  bolsig:CO2(E2)->CO^+                              19.5000
+  18  bolsig:CO2(E1)->C^+                               27.8000
+  19  bolsig:CO2(E2)->C^+                               27.8000
+  20  bolsig:CO2(E1)->O^+                               19.1000
+  21  bolsig:CO2(E2)->O^+                               19.1000
+
+Electron impact dissociative attachment (eda)
+   1  bolsig:CO2->CO+O^-                                 3.8500
+   2  bolsig:CO2(VA)->CO+O^-                             3.7672
+   3  bolsig:CO2(VB)->CO+O^-                             3.6843
+   4  bolsig:CO2(VD)->CO+O^-                             3.5186
+   5  bolsig:CO2(V1)->CO+O^-                             3.5587
+
+Dissociation by any neutral (vdm)
+
+Dissociation by O (vdo)
+   1  CO2(VA)+O=>CO+O2                                   0.0828
+   2  CO2(VB)+O=>CO+O2                                   0.1657
+   3  CO2(V1)+O=>CO+O2                                   0.2913
+   4  CO2(VD)+O=>CO+O2                                   0.3314
+
+VT relaxation (vt)
+   1  CO2(VA)+CO2=>CO2+CO2                               0.0828
+   2  CO2(VA)+CO=>CO2+CO                                 0.0828
+   3  CO2(VA)+O2=>CO2+O2                                 0.0828
+   4  CO2(VB)+CO2=>CO2+CO2                               0.1657
+   5  CO2(VB)+CO=>CO2+CO                                 0.1657
+   6  CO2(VB)+O2=>CO2+O2                                 0.1657
+   7  CO2(VB)+CO2=>CO2(VA)+CO2                           0.0829
+   8  CO2(VB)+CO=>CO2(VA)+CO                             0.0829
+   9  CO2(VB)+O2=>CO2(VA)+O2                             0.0829
+  10  CO2(V1)+CO2=>CO2(VB)+CO2                           0.1256
+  11  CO2(V1)+CO=>CO2(VB)+CO                             0.1256
+  12  CO2(V1)+O2=>CO2(VB)+O2                             0.1256
+  13  CO2(V1)+CO2=>CO2(VD)+CO2                          -0.0401
+  14  CO2(V1)+CO=>CO2(VD)+CO                            -0.0401
+  15  CO2(V1)+O2=>CO2(VD)+O2                            -0.0401
+  16  CO2(V1)+CO2=>CO2(VA)+CO2                           0.2085
+  17  CO2(V1)+CO=>CO2(VA)+CO                             0.2085
+  18  CO2(V1)+O2=>CO2(VA)+O2                             0.2085
+  19  CO2(VD)+CO2=>CO2(VB)+CO2                           0.1657
+  20  CO2(VD)+CO=>CO2(VB)+CO                             0.1657
+  21  CO2(VD)+O2=>CO2(VB)+O2                             0.1657
+  22  CO2(VD)+CO2=>CO2(VA)+CO2                           0.2486
+  23  CO2(VD)+CO=>CO2(VA)+CO                             0.2486
+  24  CO2(VD)+O2=>CO2(VA)+O2                             0.2486
+
+VT relaxation due to a priori assumptions (vtx)
+   1  bolsig:CO2(VA)->CO2                                0.0828
+   2  bolsig:CO2(VB)->CO2                                0.1657
+   3  bolsig:CO2(VD)->CO2                                0.3314
+
+VV' relaxation between asymmetric and symmetric mode (vvt)
+   1  CO2(V1)+CO2=>CO2(VA)+CO2(VB)                       0.0428
+
+VV relaxation among CO2 (vv)
+
+VV relaxation with CO (vvi)
+
+O loss reactions (ol)
+   1  E+O+ANY_NEUTRAL=>O^-+ANY_NEUTRAL                 
+   2  O+CO2=>CO+O2                                     
+   3  O+CO+ANY_NEUTRAL=>CO2+ANY_NEUTRAL                
+   4  CO(V1)+O+ANY_NEUTRAL=>CO2+ANY_NEUTRAL            
+   5  O+O2+ANY_NEUTRAL=>O3+ANY_NEUTRAL                 
+   6  O2(V1)+O+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+   7  O2(V2)+O+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+   8  O2(V3)+O+ANY_NEUTRAL=>O3+ANY_NEUTRAL             
+   9  O+C+ANY_NEUTRAL=>CO+ANY_NEUTRAL                  
+  10  O+C2O=>CO+CO                                     
+  11  O+O3=>O2+O2                                      
+  12  O+O+ANY_NEUTRAL=>O2+ANY_NEUTRAL                  
+  13  O+CO2^+=>O2^++CO                                 
+  14  O+CO2^+=>O^++CO2                                 
+  15  O+CO^+=>CO+O^+                                   
+  16  O+CO3^-=>CO2+O2^-                                
+  17  O+CO4^-=>CO3^-+O2                                
+  18  O+CO4^-=>CO2+O2+O^-                              
+  19  O+CO4^-=>CO2+O3^-                                
+  20  O^++O+ANY_NEUTRAL=>O2^++ANY_NEUTRAL              
+  21  O^-+O=>O2+E                                      
+  22  O2^-+O=>O2+O^-                                   
+  23  O2^-+O=>O3+E                                     
+  24  O3^-+O=>O3+O^-                                   
+  25  O3^-+O=>O2+O2+E                                  
+  26  O3^-+O=>O2^-+O2                                  
+  27  O4^-+O=>O3^-+O2                                  
+  28  O4^-+O=>O^-+O2+O2                                
+  29  O4^-+O=>O2^-+O3                                  

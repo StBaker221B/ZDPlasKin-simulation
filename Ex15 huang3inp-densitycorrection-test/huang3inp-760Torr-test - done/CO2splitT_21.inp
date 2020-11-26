@@ -1,0 +1,2065 @@
+#
+# CO2 vibrational splitting reaction set
+# 25 CO2 levels
+# 63 CO levels
+# 4 O2 levels
+# INPUT DATA FILE
+# ZDPLASKIN
+#
+#
+
+ELEMENTS
+E C O
+END
+
+SPECIES
+# ------------------------------------------------------
+# CO2 species 
+# ------------------------------------------------------
+#  CO2(Va) = (010)
+#  CO2(Vb) = (100), (020)
+#  CO2(Vc) = (110), (030)
+#  CO2(Vd) = (n00), (0n0) n=sum 4-8
+#  CO2(Vn) = (00n), n=1...21
+#  CO2(E1) = (1Πg)
+#  CO2(E2) = (1Δu)
+#
+CO2 
+CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd)
+CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+CO2(E1) CO2(E2)
+CO2^+ 
+# ------------------------------------------------------
+# CO species 
+# ------------------------------------------------------
+# CO(E1) CO(A3Π)
+# CO(E2) CO(A1Π)
+# CO(E3) CO(A3Σ),CO(D3Δ), CO(E3Σ), CO(B3Σ)
+# CO(E4) CO(C1Σ),CO(E1Π), CO(B1Σ), CO(I1Σ),CO(D1Δ)
+#
+CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+CO(E1) CO(E2) CO(E3) CO(E4)
+CO^+ CO3^- CO4^- CO4^+
+# ------------------------------------------------------
+# O3,O2 and O species 
+# ------------------------------------------------------
+# O2e1 O2(a1Δ) and O2(b1Σ)
+# O2e2 O2(B3Σ) and higher triplets
+#
+O3
+O2 O2(V1) O2(V2) O2(V3) O2(V4) O2(E1) O2(E2)
+O
+O2^+ O2^- O^+ O^- O3^- O4^- O4^+
+# ------------------------------------------------------
+# electrons and others
+# ------------------------------------------------------
+C2O C2O2^+ C2O3^+ C2O4^+
+C2 C2^+
+C C^+
+E
+END
+
+BOLSIG
+SET DBFILE CO2SPLIT2C_BOLSIGDB.DAT
+CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd)
+CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10)
+CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+CO2(E1) CO2(E2)
+CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+CO(E1) CO(E2) CO(E3) CO(E4)
+O2 O2(V1) O2(V2) O2(V3) O2(V4) O2(E1) O2(E2)
+O3 O C C2
+END
+
+
+REACTIONS
+
+$ double precision::rvt1,rvt2,rvt3,rvts
+$ rvt1 = 0.43*exp(-407.0*Tgas**(-0.33333)+824.0*Tgas**(-0.66667))
+$ rvt2 = 0.86*exp(-404.0*Tgas**(-0.33333)+1096.0*Tgas**(-0.66667))
+$ rvt3 = 1.43e-5*exp(-252.0*Tgas**(-0.33333)+685.0*Tgas**(-0.66667))
+$ rvts = 7.14e-8*exp(-177.0*Tgas**(-0.33333)+451.0*Tgas**(-0.66667))
+
+
+
+# ------------------------------------------------------
+# electron impact reactions: vibrational excitation
+# ------------------------------------------------------
+# symmetric levels
+E + CO2 => E + @B     ! BOLSIG+ CO2 -> @B
+  @B = CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd)
+
+# asymmetric levels from CO2
+E + CO2 => E + @B     ! BOLSIG+ CO2 -> @B
+ @B = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# asymmetric levels from CO2(Va)
+E + CO2(Va) => E + @B + 0.0828_eV     ! BOLSIG+ CO2(Va) -> @B
+ @B = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + CO2(Vb) => E + @B + 0.1657_eV    ! BOLSIG+ CO2(Vb) -> @B
+ @B = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + CO2(Vc) => E + @B + 0.2486_eV    ! BOLSIG+ CO2(Vc) -> @B
+ @B = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + CO2(Vd) => E + @B + 0.3314_eV    ! BOLSIG+ CO2(Vd) -> @B
+ @B = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# asymmetric levels from CO2(V1)
+E + CO2(V1) => E + @B     ! BOLSIG+ CO2(V1) -> @B
+ @B = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# asymmetric levels from CO2(V2)
+E + CO2(V2) => E + @B     ! BOLSIG+ CO2(V2) -> @B
+ @B = CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+# asymmetric levels from CO2(V3)
+E + CO2(V3) => E + @B     ! BOLSIG+ CO2(V3) -> @B
+ @B = CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+
+# asymmetric levels from CO2(V4)
+E + CO2(V4) => E + @B     ! BOLSIG+ CO2(V4) -> @B
+ @B = CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+
+# asymmetric levels from CO2(V5)
+E + CO2(V5) => E + @B     ! BOLSIG+ CO2(V5) -> @B
+ @B = CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+
+# CO molecule
+E + CO => E + @B       ! BOLSIG+ CO -> @B
+  @B = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+E + CO(V1) => E + @B       ! BOLSIG+ CO(V1) -> @B
+  @B = CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11)
+
+E + CO(V2) => E + @B       ! BOLSIG+ CO(V2) -> @B
+  @B = CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12)
+
+E + CO(V3) => E + @B       ! BOLSIG+ CO(V3) -> @B
+  @B = CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13)
+
+E + CO(V4) => E + @B       ! BOLSIG+ CO(V4) -> @B
+  @B = CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14)
+
+E + CO(V5) => E + @B       ! BOLSIG+ CO(V5) -> @B
+  @B = CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15)
+
+
+# O2 molecule
+E + O2 => E + @B ! BOLSIG+ O2 -> @R
+  @B = O2(V1)    O2(V1) O2(V2)    O2(V2) O2(V3)    O2(V3) O2(V4)    O2(V4)
+  @R = O2(V1)res O2(V1) O2(V2)res O2(V2) O2(V3)res O2(V3) O2(V4)res O2(V4)
+
+E + @B => E + O2 ! BOLSIG+ @B -> O2
+  @B = O2(V1) O2(V2) O2(V3) O2(V4)
+
+# ------------------------------------------------------
+# electron impact reactions: electronic excitation
+# ------------------------------------------------------
+E + @A => E + CO + O  ! BOLSIG+ @A -> CO + O
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + @A => E + CO2(E1) ! BOLSIG+ @A -> CO2(E1)
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+
+E + @A => E + CO2(E2) ! BOLSIG+ @A -> CO2(E2)
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+
+E + CO2(E1) => E + CO2 ! BOLSIG+ CO2(E1) -> CO2
+E + CO2(E2) => E + CO2 ! BOLSIG+ CO2(E2) -> CO2
+
+E + @A => E + C + O     ! BOLSIG+ @A -> C+O
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+E + @A => CO(E1) + E    ! BOLSIG+ @A -> CO(E1)  
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+E + @A => CO(E2) + E    ! BOLSIG+ @A -> CO(E2)     
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+E + @A => CO(E3) + E    ! BOLSIG+ @A -> CO(E3)     
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+E + @A => CO(E4) + E    ! BOLSIG+ @A -> CO(E4)
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+E + CO(E1) => CO + E    ! BOLSIG+ CO(E1) -> CO  
+E + CO(E2) => CO + E    ! BOLSIG+ CO(E2) -> CO     
+E + CO(E3) => CO + E    ! BOLSIG+ CO(E3) -> CO     
+E + CO(E4) => CO + E    ! BOLSIG+ CO(E4) -> CO
+
+E + C2 => C + C + E     ! BOLSIG+ C2 -> C + C
+E + O2 => O + O + E     ! BOLSIG+ O2 -> O+O 
+
+E + @A => E + O2(E1)    ! BOLSIG+ O2 -> O2(E1)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4)
+E + @A => E + O2(E2)    ! BOLSIG+ O2 -> O2(E2) 
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4)
+E + O2(E1) => E + O2    ! BOLSIG+ O2(E1) -> O2
+E + O2(E2) => E + O2    ! BOLSIG+ O2(E2) -> O2 
+
+E + O3 => O + O2 + E    ! BOLSIG+ O3 -> O2 + O
+
+# ------------------------------------------------------
+# electron impact reactions: Ionization
+# ------------------------------------------------------
+E + @A => E + E + CO2^+      ! BOLSIG+ @A -> CO2^+
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + @A => E + E + O + CO^+   ! BOLSIG+ @A -> CO^+
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + @A => E + E + C^+ + O2   ! BOLSIG+ @A -> C^+
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + @A => E + E + CO + O^+   ! BOLSIG+ @A -> O^+
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21)
+
+E + @A => E + E + CO^+        ! BOLSIG+ @A -> CO^+
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+E + @A => E + E + C^+ + O     ! BOLSIG+ @A -> C^+
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+E + @A => E + E + C + O^+     ! BOLSIG+ @A -> O^+
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10)
+
+E + C => E + E + C^+          ! BOLSIG+ C -> C^+
+
+E + C2 => E + E + C2^+        ! BOLSIG+ C2 -> C2^+
+
+E + @A => O2^+ + E + E        ! BOLSIG+ O2 -> O2^+
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4)
+E + @A => O + O^+ + E + E     ! BOLSIG+ O2 -> O^+
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4)
+
+E + O3 => O + O2^+ + E + E    ! BOLSIG+ O3 -> O2^+   
+E + O3 => O^+ + O^- + O + E   ! BOLSIG+ O3 -> O^+
+
+E + O => O^+ + E + E          ! BOLSIG+ O -> O^+  
+
+# ------------------------------------------------------
+# electron impact reactions: Attachment
+# ------------------------------------------------------
+E + @A => CO + O^-           ! BOLSIG+ @A -> CO+O^-
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) 
+
+E + CO => C + O^-             ! BOLSIG+ CO -> O^-
+
+E + O2 + ANY_NEUTRAL => O2^- + ANY_NEUTRAL   ! BOLSIG+ O2 -> O2^- 
+E + O2 => O + O^-                            ! BOLSIG+ O2 -> O^-   
+
+E + O3 => O^- + O2            ! BOLSIG+ O3 -> O^-
+E + O3 => O + O2^-            ! BOLSIG+ O3 -> O2^- 
+E + O3 + ANY_NEUTRAL => O3^- + ANY_NEUTRAL    ! 5.39E-29*Te**(-0.5)
+
+E + O + ANY_NEUTRAL => O^- + ANY_NEUTRAL     ! 1.00E-31 
+
+# ------------------------------------------------------
+# heavy particle reactions: neutral - neutral
+# ------------------------------------------------------
+@A + ANY_NEUTRAL + @H_eV => CO + O + ANY_NEUTRAL   ! 4.39E-7*exp(-max(0.0,6.5e4-@E)/Tgas)
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+  @E = 0.00e+00 9.60e+02 1.92e+03 2.88e+03 3.38e+03 3.85e+03 6.72e+03 1.00e+04 1.33e+04 1.65e+04 1.97e+04 2.29e+04 2.60e+04 2.91e+04 3.22e+04 3.52e+04 3.82e+04 4.11e+04 4.41e+04 4.69e+04 4.98e+04 
+  @H = 5.520 5.437 5.354 5.271 5.229 5.189 4.941 4.655 4.373 4.095 3.819 3.546 3.276 3.010 2.747 2.486 2.229 1.975 1.724 1.476 1.231 
+
+@A + ANY_NEUTRAL + @H_eV => CO + O + ANY_NEUTRAL   ! 4.39E-7*exp(-max(0.0,6.5e4-@E)/Tgas)
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @E = 5.26e+04 5.53e+04 5.81e+04 6.08e+04 6.34e+04 
+  @H = 0.989 0.750 0.515 0.282 0.053 
+
+@A + O + @H_eV => CO + O2           ! 7.77E-12*exp(-max(0.0,1.66e4-0.5*@E)/Tgas)
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) 
+  @E = 0.00e+00 9.60e+02 1.92e+03 2.88e+03 3.38e+03 3.85e+03 
+  @H = 0.350 0.267 0.184 0.101 0.059 0.019 
+
+@A + O => CO + O2 + @H_eV           ! 7.77E-12*exp(-max(0.0,1.66e4-0.5*@E)/Tgas)
+  @A = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @E = 6.72e+03 1.00e+04 1.33e+04 1.65e+04 1.97e+04 2.29e+04 2.60e+04 2.91e+04 3.22e+04 3.52e+04 3.82e+04 4.11e+04 4.41e+04 4.69e+04 4.98e+04 5.26e+04 5.53e+04 5.81e+04 6.08e+04 6.34e+04 
+  @H = 0.229 0.515 0.797 1.075 1.351 1.624 1.894 2.160 2.423 2.684 2.941 3.195 3.446 3.694 3.939 4.181 4.420 4.655 4.888 5.117 
+
+@A + C => 2CO + @H_eV               ! 1E-15
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+  @H = 5.640 5.723 5.806 5.889 5.931 5.971 6.219 6.505 6.787 7.065 7.341 7.614 7.884 8.150 8.413 8.674 8.931 9.185 9.436 9.684 9.929 
+
+@A + C => 2CO + @H_eV               ! 1E-15
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @H = 10.171 10.410 10.645 10.878 11.107 
+
+@A + O + ANY_NEUTRAL => CO2 + ANY_NEUTRAL + @H_eV  ! 8.20E-34*exp(-1510.0/Tgas)
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 5.520 5.786 6.048 6.307 6.563 6.816 7.065 7.312 7.555 7.795 8.032 8.265 8.496 8.724 8.948 9.170 9.388 9.604 9.817 10.027 10.233 
+
+# possible addition of all CO levels
+@A + CO => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 0.350 0.543 0.733 0.920 1.104 
+
+@A + CO(V1) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 0.616 0.809 0.999 1.186 1.370 
+
+@A + CO(V2) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 0.878 1.071 1.261 1.448 1.633 
+
+@A + CO(V3) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 1.137 1.330 1.520 1.708 1.892 
+
+@A + CO(V4) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 1.393 1.586 1.776 1.963 2.148 
+
+@A + CO(V5) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 1.646 1.839 2.029 2.216 2.400 
+
+@A + CO(V6) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 1.895 2.088 2.278 2.466 2.650 
+
+@A + CO(V7) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 2.142 2.335 2.525 2.712 2.896 
+
+@A + CO(V8) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 2.385 2.578 2.768 2.955 3.139 
+
+@A + CO(V9) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 2.625 2.818 3.008 3.195 3.379 
+
+@A + CO(V10) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 2.862 3.055 3.245 3.432 3.616 
+
+@A + CO(V11) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 3.095 3.288 3.478 3.665 3.850 
+
+@A + CO(V12) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 3.326 3.519 3.709 3.896 4.080 
+
+@A + CO(V13) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 3.554 3.747 3.937 4.124 4.308 
+
+@A + CO(V14) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 3.778 3.971 4.161 4.348 4.533 
+
+@A + CO(V15) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 4.000 4.193 4.383 4.570 4.754 
+
+@A + CO(V16) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 4.218 4.411 4.601 4.789 4.973 
+
+@A + CO(V17) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 4.434 4.627 4.817 5.004 5.188 
+
+@A + CO(V18) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 4.647 4.840 5.030 5.217 5.401 
+
+@A + CO(V19) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 4.857 5.049 5.240 5.427 5.611 
+
+@A + CO(V20) => CO2 + O + @H_eV          ! 1.23E-12*exp(-max(0.0,1.28e4-0.5*@E)/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = 0.00e+00 2.24e+03 4.44e+03 6.62e+03 8.75e+03 
+  @H = 5.063 5.256 5.446 5.634 5.818 
+
+
+@A + O3 => CO2 + O2 + @H_eV         ! 4.0E-25
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 4.410 4.676 4.938 5.197 5.453 5.706 5.955 6.202 6.445 6.685 6.922 7.155 7.386 7.614 7.838 8.060 8.278 8.494 8.707 8.917 9.123 
+
+@A + C + ANY_NEUTRAL => C2O + ANY_NEUTRAL    ! 6.50E-32
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+
+@A + ANY_NEUTRAL + @H_eV => C + O + ANY_NEUTRAL     ! 1.52E-4*(Tgas/298)**(-3.1)*exp(-max(0.0,1.29e5-@E)/Tgas)
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @E = 0.00e+00 3.08e+03 6.13e+03 9.14e+03 1.21e+04 1.50e+04 1.79e+04 2.08e+04 2.36e+04 2.64e+04 2.91e+04 3.19e+04 3.45e+04 3.72e+04 3.98e+04 4.24e+04 4.49e+04 4.74e+04 4.99e+04 5.23e+04 5.47e+04 
+  @H = 11.160 10.894 10.632 10.373 10.117 9.864 9.615 9.368 9.125 8.885 8.648 8.415 8.184 7.956 7.732 7.510 7.292 7.076 6.863 6.653 6.447 
+
+@A + C => CO + O + @H_eV            ! 3.00E-11
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @H = 5.990 6.183 6.373 6.560 6.744 
+
+@A + O + ANY_NEUTRAL => O3 + ANY_NEUTRAL + @H_eV     ! 6.11E-34*((Tgas/300.0)**(-2.60))
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+  @H = 1.100 1.293 1.483 1.670 1.854 
+
+
+# --------- reactions of species without vibrational levels ---------------
+O + C + ANY_NEUTRAL => CO + ANY_NEUTRAL + 11.6_eV  ! 2.14E-29*((Tgas/300.0)**(-3.08))*exp(-2114.0/Tgas)
+O + C2O => CO + CO          ! 5.00E-11 
+O2 + C2O => CO2 + CO        ! 3.30E-13 
+O + O3 => O2 + O2 + 4.06_eV                        ! 3.10E-14*((Tgas/300.0)**(0.75))*exp(-1575.0/Tgas)
+O3 + ANY_NEUTRAL + 1.10_eV => O2 + O + ANY_NEUTRAL ! 4.12E-10*exp(-11430.0/Tgas)
+O + O + ANY_NEUTRAL => O2 + ANY_NEUTRAL + 5.17_eV  ! 1.27E-32*((Tgas/300.0)**(-1.00))*exp(-170.0/Tgas)
+
+# ------------------------------------------------------
+# heavy particle reactions: ion - neutral
+# ------------------------------------------------------
+@A + O^+ => O2^+ + CO                            ! 9.40E-10
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + O^+ => O2^+ + CO                            ! 9.40E-10
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + O^+ => CO2^+ + O                            ! 4.50E-10
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + O^+ => CO2^+ + O                            ! 4.50E-10
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + C^+ => CO^+ + CO                            ! 1.10E-09
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + C^+ => CO^+ + CO                            ! 1.10E-09
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + CO^+ => CO2^+ + CO                          ! 1.00E-09 
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + CO^+ => CO2^+ + CO                          ! 1.00E-09 
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + O^- + ANY_NEUTRAL => CO3^- + ANY_NEUTRAL    ! 9.00E-29 
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + O^- + ANY_NEUTRAL => CO3^- + ANY_NEUTRAL    ! 9.00E-29 
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + O2^- + ANY_NEUTRAL => CO4^- + ANY_NEUTRAL   ! 1.00E-29 
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + O2^- + ANY_NEUTRAL => CO4^- + ANY_NEUTRAL   ! 1.00E-29 
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + O3^- => O2 + CO3^-                          ! 5.50E-10 
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + O3^- => O2 + CO3^-                          ! 5.50E-10 
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + O4^- => CO4^- + O2                          ! 4.80E-10 
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + O4^- => CO4^- + O2                          ! 4.80E-10 
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + CO2^+ + ANY_NEUTRAL => C2O4^+ + ANY_NEUTRAL ! 3.00E-28
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + CO2^+ + ANY_NEUTRAL => C2O4^+ + ANY_NEUTRAL ! 3.00E-28
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + O2^+ + ANY_NEUTRAL => CO4^+ + ANY_NEUTRAL   ! 2.30E-29
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) CO2(V1) CO2(Vd) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+
+@A + O2^+ + ANY_NEUTRAL => CO4^+ + ANY_NEUTRAL   ! 2.30E-29
+  @A = CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+
+@A + O^+ => CO^+ + O                             ! 4.90E-12*((Tgas/300.0)**(0.5))*exp(-4580.0/Tgas)
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+@A + O^- => CO2 + E                              ! 5.50E-10
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+
+@A + CO3^- => CO2 + CO2 + E                      ! 5.50E-17 
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+
+@A + C2O3^+ => CO2 + C2O2^+                      ! 1.10E-09
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+@A + C2O4^+ => C2O3^+ + CO2                      ! 9.00E-10 
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+@A + C2O3^+ + ANY_NEUTRAL => C2O2^+ + CO2 + ANY_NEUTRAL ! 2.60E-26 
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+@A + C2O4^+ + ANY_NEUTRAL => C2O3^+ + CO2 + ANY_NEUTRAL ! 4.20E-26 
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+@A + C^+ => CO^+ + C                             ! 5.00E-13 
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+
+@A + CO2^+ => O2^+ + CO2                         ! 5.30E-11
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + CO^+ => O2^+ + CO                           ! 1.20E-10
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + C2O2^+ => CO + CO + O2^+                    ! 5.00E-12
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + C^+ => CO + O^+                             ! 6.20E-10
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + C^+ => CO^+ + O                             ! 3.80E-10
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + O^+ => O2^+ + O                             ! 1.90E-11*((Tgas/300.0)**(-0.50))
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + O2^+ + ANY_NEUTRAL => O4^+ + ANY_NEUTRAL    ! 2.40E-30
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + O2^- + ANY_NEUTRAL => O4^- + ANY_NEUTRAL    ! 3.50E-31
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + O^- => O3 + E                               ! 1.00E-12
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + O^- + ANY_NEUTRAL => O3^- + ANY_NEUTRAL     ! 3.00E-28*((Tgas/300.0)**(-1.0))
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + O2^- => @A + O2 + E                         ! 2.18E-18
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+@A + O3^- => @A + O3 + E                         ! 2.30E-18
+  @A = O2 O2(V1) O2(V2) O2(V3) O2(V4) 
+
+
+# --------- reactions of species without vibrational levels ---------------
+CO^+ + C => CO + C^+        ! 1.10E-10 
+O2^+ + C => CO^+ + O        ! 5.20E-11 
+O2^+ + C => C^+ + O2        ! 5.20E-11 
+C2^+ + C => C2 + C^+        ! 1.10E-10  
+O + CO2^+ => O2^+ + CO      ! 1.64E-10 
+O + CO2^+ => O^+ + CO2      ! 9.62E-11 
+O + CO^+ => CO + O^+         ! 1.40E-10 
+O + CO3^- => CO2 + O2^-            ! 8.00E-11 
+O + CO4^- => CO3^- + O2            ! 1.10E-10 
+O + CO4^- => CO2 + O2 + O^-        ! 0.14E-10 
+O + CO4^- => CO2 + O3^-            ! 0.14E-10 
+O + O^+ + ANY_NEUTRAL => O2^+ + ANY_NEUTRAL     ! 1.00E-29 
+O + O^- => O2 + E           ! 2.30E-10
+O + O2^- => O2 + O^-        ! 3.30E-10
+O + O2^- => O3 + E          ! 3.30E-10 
+O + O3^- => O2 + O2 + E     ! 1.00E-13 
+O + O3^- => O2^- + O2       ! 2.50E-10
+O + O3^- => O3 + O^-        ! 1.00E-13 
+O + O4^- => O3^- + O2       ! 4.00E-10 
+O + O4^- => O^- + O2 + O2   ! 3.00E-10 
+O + O4^+ => O2^+ + O3       ! 3.00E-10 
+O3 + CO4^- => CO2 + O3^- + O2       ! 4.00E-18
+O3 + O^- => O3^- + O            ! 8.00E-10 
+O3 + O^- => O2 + O2 + E         ! 3.00E-10 
+O3 + O2^- => O3^- + O2          ! 4.00E-10 
+O3 + O3^- => O2 + O2 + O2 + E   ! 3.00E-10 
+O3 + O^+ => O2^+ + O2           ! 1.00E-10 
+O2^- + ANY_NEUTRAL => O2 + ANY_NEUTRAL + E  ! 2.70E-10*((Tgas/300.0)**(0.50))*exp(-5590.0/Tgas)
+O3^- + ANY_NEUTRAL => O3 + ANY_NEUTRAL + E  ! 2.30E-11 
+O^- + ANY_NEUTRAL => O + ANY_NEUTRAL + E    ! 4.00E-12 
+O4^- + ANY_NEUTRAL => O2^- + O2 + ANY_NEUTRAL   ! 3.08E-12
+O4^+ + ANY_NEUTRAL => O2^+ + O2 + ANY_NEUTRAL   ! 1.73E-13 
+C2O2^+ + ANY_NEUTRAL => CO^+ + CO + ANY_NEUTRAL   ! 1.00E-12 
+C2O4^+ + ANY_NEUTRAL => CO2^+ + CO2 + ANY_NEUTRAL ! 1.00E-14 
+
+# ------------------------------------------------------
+# heavy particle reactions: electron - ion
+# ------------------------------------------------------
+E + CO2^+ => CO + O         ! 2.15E-03*Te**(-0.50)/Tgas 
+E + CO2^+ => C + O2         ! 1.66E-05*Te**(-0.40)
+E + C2O2^+ => CO + CO        ! 9.64E-06*Te**(-0.34)
+
+E + CO4^+ => CO2 + O2       ! 4.31E-05*Te**(-0.50)   
+E + CO^+ => C + O           ! 6.33E-06*Te**(-0.55)
+
+E + C2O3^+ => CO2 + CO      ! 3.78E-05*Te**(-0.70)
+E + C2O4^+ => CO2 + CO2     ! 2.15E-03*Te**(-0.50)/Tgas
+
+E + C2^+ => C + C           ! 1.93E-06*Te**(-0.50)
+
+E + O2^+ + ANY_NEUTRAL => O2 + ANY_NEUTRAL       ! 1.00E-26
+E + O2^+ => O + O           ! 6.46E-05*Te**(-0.5)*Tgas**(-0.50)
+E + O^+ + ANY_NEUTRAL => O + ANY_NEUTRAL        ! 1.00E-26 
+E + O4^+ => O2 + O2         ! 2.42E-05*Te**(-0.50)
+
+# ------------------------------------------------------
+# heavy particle reactions: ion - ion
+# ------------------------------------------------------
+CO3^- + CO2^+ => CO2 + CO2 + O      ! 5.00E-07 
+CO4^- + CO2^+ => CO2 + CO2 + O2     ! 5.00E-07 
+O2^- + CO2^+ => CO + O2 + O         ! 6.00E-07 
+
+CO3^- + C2O2^+ => CO2 + CO + CO + O   ! 5.00E-07 
+CO4^- + C2O2^+ => CO2 + CO + CO + O2  ! 5.00E-07 
+O2^- + C2O2^+ => CO + CO + O2         ! 6.00E-07 
+
+CO3^- + C2O3^+ => CO2 + CO2 + CO + O    ! 5.00E-07
+CO4^- + C2O3^+ => CO2 + CO2 + CO + O2   ! 5.00E-07 
+O2^- + C2O3^+ => CO2 + CO + O2          ! 6.00E-07 
+
+CO3^- + C2O4^+ => CO2 + CO2 + CO2 + O   ! 5.00E-07 
+CO4^- + C2O4^+ => CO2 + CO2 + CO2 + O2  ! 5.00E-07 
+O2^- + C2O4^+ => CO2 + CO2 + O2         ! 6.00E-07 
+
+O2^+ + CO3^- => CO2 + O2 + O            ! 3.00E-07 
+O2^+ + CO4^- => CO2 + O2 + O2           ! 3.00E-07 
+
+O^+ + O2^- => O + O2           ! 2.70E-07 
+O2^+ + O2^- => O2 + O2         ! 2.00E-07 
+O2^+ + O2^- => O2 + O + O      ! 4.20E-07 
+O2^+ + O2^- + ANY_NEUTRAL => O2 + O2 + ANY_NEUTRAL ! 2.00E-25 
+O^+ + O2^- + ANY_NEUTRAL => O3 + ANY_NEUTRAL       ! 2.00E-25 
+
+O2^+ + O3^- => O2 + O3      ! 2.00E-07 
+O2^+ + O3^- => O + O + O3   ! 1.00E-07 
+O^+ + O3^- => O3 + O        ! 1.00E-07 
+
+O^+ + O^- => O + O          ! 4.00E-08 
+O^+ + O^- + ANY_NEUTRAL => O2 + ANY_NEUTRAL     ! 2.00E-25
+O2^+ + O^- => O2 + O        ! 1.00E-07 
+O2^+ + O^- => O + O + O     ! 2.60E-08 
+O2^+ + O^- + ANY_NEUTRAL => O3 + ANY_NEUTRAL    ! 2.00E-25
+
+# ------------------------------------------------------
+# CO2 VT relaxation
+# ------------------------------------------------------
+# symmetric levels
+@A + ANY_NEUTRAL => @C + ANY_NEUTRAL + @H_eV    ! @S*rvts
+  @A = CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) 
+  @C = CO2 CO2(Va) CO2(Vb) CO2(Vc) 
+  @H = 0.083 0.083 0.083 0.083 
+  @S = 1.00e+00 2.00e+00 5.00e+00 6.67e+00 
+
+@A + ANY_NEUTRAL + @H_eV => @C + ANY_NEUTRAL    ! @S*@G*exp(@E/Tgas)*rvts
+  @A = CO2 CO2(Va) CO2(Vb) CO2(Vc) 
+  @C = CO2(Va) CO2(Vb) CO2(Vc) CO2(Vd) 
+  @E = -9.60e+02 -9.62e+02 -9.61e+02 -9.61e+02 
+  @H = 0.083 0.083 0.083 0.083 
+  @G = 1.00e+00 3.00e+00 1.00e+00 2.00e+00 
+  @S = 1.00e+00 2.00e+00 5.00e+00 6.67e+00 
+
+
+# asymmetric levels
+# CO2V1 => symmetric levels
+# (0 0 n) -> (0 1 n-1)
+CO2(V1) + ANY_NEUTRAL => CO2(Va) + ANY_NEUTRAL + 0.209_eV  ! rvt1
+CO2(Va) + ANY_NEUTRAL + 0.209_eV  => CO2(V1) + ANY_NEUTRAL ! rvt1*exp(-2.42e3/Tgas)
+
+# (0 0 n) -> (0 2 n-1)
+CO2(V1) + ANY_NEUTRAL => CO2(Vb) + ANY_NEUTRAL + 0.126_eV  ! rvt2
+CO2(Vb) + ANY_NEUTRAL + 0.126_eV  => CO2(V1) + ANY_NEUTRAL ! rvt2*0.3333*exp(-1.46e3/Tgas)
+
+# (0 0 n) -> (0 3 n-1)
+CO2(V1) + ANY_NEUTRAL => CO2(Vc) + ANY_NEUTRAL + 0.043_eV  ! rvt3
+CO2(Vc) + ANY_NEUTRAL + 0.043_eV => CO2(V1) + ANY_NEUTRAL  ! rvt3*0.3333*exp(-4.96e2/Tgas)
+
+# CO2V(n) => CO2V(n-1), n>=2, sum of 3 transitions to symmetric sublevels
+@A + ANY_NEUTRAL => @C + ANY_NEUTRAL + @H_eV          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @H = 0.288 0.285 0.282 0.279 0.276 0.273 0.270 0.267 0.263 0.260 0.257 0.254 0.251 0.248 0.245 0.242 0.239 0.236 0.233 0.229 
+  @X = 2.14e-02 4.88e-02 9.73e-02 1.77e-01 3.01e-01 4.84e-01 7.43e-01 1.09e+00 1.56e+00 2.17e+00 2.96e+00 3.98e+00 5.28e+00 6.94e+00 9.02e+00 1.16e+01 1.46e+01 1.82e+01 2.22e+01 2.66e+01 
+  @Y = 3.43e+02 3.49e+02 3.54e+02 3.59e+02 3.64e+02 3.68e+02 3.71e+02 3.74e+02 3.77e+02 3.80e+02 3.82e+02 3.85e+02 3.87e+02 3.90e+02 3.92e+02 3.94e+02 3.97e+02 3.99e+02 4.00e+02 4.02e+02 
+  @Z = 9.95e+02 1.01e+03 1.02e+03 1.03e+03 1.03e+03 1.04e+03 1.04e+03 1.04e+03 1.05e+03 1.05e+03 1.05e+03 1.06e+03 1.06e+03 1.07e+03 1.07e+03 1.08e+03 1.09e+03 1.09e+03 1.10e+03 1.10e+03 
+
+@A + ANY_NEUTRAL + @H_eV => @C + ANY_NEUTRAL          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @C = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @E = -3.34e+03 -3.31e+03 -3.27e+03 -3.24e+03 -3.20e+03 -3.16e+03 -3.13e+03 -3.09e+03 -3.06e+03 -3.02e+03 -2.99e+03 -2.95e+03 -2.91e+03 -2.88e+03 -2.84e+03 -2.81e+03 -2.77e+03 -2.73e+03 -2.70e+03 -2.66e+03 
+  @H = 0.288 0.285 0.282 0.279 0.276 0.273 0.270 0.267 0.263 0.260 0.257 0.254 0.251 0.248 0.245 0.242 0.239 0.236 0.233 0.229 
+  @X = 2.14e-02 4.88e-02 9.73e-02 1.77e-01 3.01e-01 4.84e-01 7.43e-01 1.09e+00 1.56e+00 2.17e+00 2.96e+00 3.98e+00 5.28e+00 6.94e+00 9.02e+00 1.16e+01 1.46e+01 1.82e+01 2.22e+01 2.66e+01 
+  @Y = 3.43e+02 3.49e+02 3.54e+02 3.59e+02 3.64e+02 3.68e+02 3.71e+02 3.74e+02 3.77e+02 3.80e+02 3.82e+02 3.85e+02 3.87e+02 3.90e+02 3.92e+02 3.94e+02 3.97e+02 3.99e+02 4.00e+02 4.02e+02 
+  @Z = 9.95e+02 1.01e+03 1.02e+03 1.03e+03 1.03e+03 1.04e+03 1.04e+03 1.04e+03 1.05e+03 1.05e+03 1.05e+03 1.06e+03 1.06e+03 1.07e+03 1.07e+03 1.08e+03 1.09e+03 1.09e+03 1.10e+03 1.10e+03 
+
+# ------------------------------------------------------
+# CO2 VV' relaxation
+# ------------------------------------------------------
+# basic reaction 
+CO2(V1) + CO2 => CO2(Va) + CO2(Vb) + 496.8_K  ! 2.134e-5*exp(-242.0*Tgas**(-0.33333)+633.0*Tgas**(-0.66667))
+CO2(Va) + CO2(Vb) + 496.8_K => CO2(V1) + CO2  ! 2.134e-5*exp(-242.0*Tgas**(-0.33333)+633.0*Tgas**(-0.66667))*0.33333*exp(-496.8/Tgas)
+# scaled higher level reactions 
+@A + CO2 => @C + CO2(Va) + @H_eV          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @H = 0.205 0.202 0.199 0.196 0.193 0.190 0.187 0.184 0.181 0.178 0.174 0.171 0.168 0.165 0.162 0.159 0.156 0.153 0.150 0.147 
+  @X = 2.13e-05 3.19e-05 4.24e-05 5.29e-05 6.34e-05 7.38e-05 8.41e-05 9.45e-05 1.05e-04 1.15e-04 1.25e-04 1.35e-04 1.45e-04 1.55e-04 1.65e-04 1.75e-04 1.85e-04 1.95e-04 2.05e-04 2.15e-04 
+  @Y = 2.42e+02 2.42e+02 2.41e+02 2.41e+02 2.41e+02 2.41e+02 2.41e+02 2.41e+02 2.40e+02 2.40e+02 2.40e+02 2.40e+02 2.40e+02 2.39e+02 2.39e+02 2.39e+02 2.39e+02 2.39e+02 2.38e+02 2.38e+02 
+  @Z = 6.34e+02 6.34e+02 6.35e+02 6.35e+02 6.36e+02 6.37e+02 6.37e+02 6.38e+02 6.38e+02 6.39e+02 6.40e+02 6.40e+02 6.41e+02 6.41e+02 6.42e+02 6.42e+02 6.43e+02 6.44e+02 6.44e+02 6.45e+02 
+
+@A + CO2(Va) + @H_eV => @C + CO2          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*@G*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @C = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @E = -2.38e+03 -2.35e+03 -2.31e+03 -2.28e+03 -2.24e+03 -2.20e+03 -2.17e+03 -2.13e+03 -2.10e+03 -2.06e+03 -2.02e+03 -1.99e+03 -1.95e+03 -1.92e+03 -1.88e+03 -1.85e+03 -1.81e+03 -1.77e+03 -1.74e+03 -1.70e+03 
+  @H = 0.205 0.202 0.199 0.196 0.193 0.190 0.187 0.184 0.181 0.178 0.174 0.171 0.168 0.165 0.162 0.159 0.156 0.153 0.150 0.147 
+  @G = 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 1.00e+00 
+  @X = 2.13e-05 3.19e-05 4.24e-05 5.29e-05 6.34e-05 7.38e-05 8.41e-05 9.45e-05 1.05e-04 1.15e-04 1.25e-04 1.35e-04 1.45e-04 1.55e-04 1.65e-04 1.75e-04 1.85e-04 1.95e-04 2.05e-04 2.15e-04 
+  @Y = 2.42e+02 2.42e+02 2.41e+02 2.41e+02 2.41e+02 2.41e+02 2.41e+02 2.41e+02 2.40e+02 2.40e+02 2.40e+02 2.40e+02 2.40e+02 2.39e+02 2.39e+02 2.39e+02 2.39e+02 2.39e+02 2.38e+02 2.38e+02 
+  @Z = 6.34e+02 6.34e+02 6.35e+02 6.35e+02 6.36e+02 6.37e+02 6.37e+02 6.38e+02 6.38e+02 6.39e+02 6.40e+02 6.40e+02 6.41e+02 6.41e+02 6.42e+02 6.42e+02 6.43e+02 6.44e+02 6.44e+02 6.45e+02 
+
+@A + CO2 => @C + CO2(Vb) + @H_eV          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @H = 0.122 0.119 0.116 0.113 0.110 0.107 0.104 0.101 0.098 0.095 0.092 0.088 0.085 0.082 0.079 0.076 0.073 0.070 0.067 0.064 
+  @X = 2.10e-05 3.11e-05 4.08e-05 5.02e-05 5.92e-05 6.79e-05 7.62e-05 8.41e-05 9.17e-05 9.88e-05 1.06e-04 1.12e-04 1.18e-04 1.24e-04 1.30e-04 1.35e-04 1.41e-04 1.46e-04 1.52e-04 1.58e-04 
+  @Y = 2.41e+02 2.40e+02 2.38e+02 2.37e+02 2.36e+02 2.35e+02 2.33e+02 2.32e+02 2.31e+02 2.29e+02 2.28e+02 2.27e+02 2.26e+02 2.24e+02 2.23e+02 2.22e+02 2.21e+02 2.20e+02 2.19e+02 2.18e+02 
+  @Z = 6.37e+02 6.41e+02 6.45e+02 6.49e+02 6.52e+02 6.56e+02 6.60e+02 6.64e+02 6.67e+02 6.71e+02 6.75e+02 6.79e+02 6.83e+02 6.87e+02 6.91e+02 6.95e+02 7.00e+02 7.04e+02 7.09e+02 7.14e+02 
+
+@A + CO2(Vb) + @H_eV => @C + CO2          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*@G*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @C = CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) CO2(V21) 
+  @E = -1.42e+03 -1.39e+03 -1.35e+03 -1.31e+03 -1.28e+03 -1.24e+03 -1.21e+03 -1.17e+03 -1.13e+03 -1.10e+03 -1.06e+03 -1.03e+03 -9.91e+02 -9.55e+02 -9.19e+02 -8.83e+02 -8.47e+02 -8.11e+02 -7.75e+02 -7.39e+02 
+  @H = 0.122 0.119 0.116 0.113 0.110 0.107 0.104 0.101 0.098 0.095 0.092 0.088 0.085 0.082 0.079 0.076 0.073 0.070 0.067 0.064 
+  @G = 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 3.33e-01 
+  @X = 2.10e-05 3.11e-05 4.08e-05 5.02e-05 5.92e-05 6.79e-05 7.62e-05 8.41e-05 9.17e-05 9.88e-05 1.06e-04 1.12e-04 1.18e-04 1.24e-04 1.30e-04 1.35e-04 1.41e-04 1.46e-04 1.52e-04 1.58e-04 
+  @Y = 2.41e+02 2.40e+02 2.38e+02 2.37e+02 2.36e+02 2.35e+02 2.33e+02 2.32e+02 2.31e+02 2.29e+02 2.28e+02 2.27e+02 2.26e+02 2.24e+02 2.23e+02 2.22e+02 2.21e+02 2.20e+02 2.19e+02 2.18e+02 
+  @Z = 6.37e+02 6.41e+02 6.45e+02 6.49e+02 6.52e+02 6.56e+02 6.60e+02 6.64e+02 6.67e+02 6.71e+02 6.75e+02 6.79e+02 6.83e+02 6.87e+02 6.91e+02 6.95e+02 7.00e+02 7.04e+02 7.09e+02 7.14e+02 
+
+# ------------------------------------------------------
+# CO VT relaxation
+# ------------------------------------------------------
+@A + ANY_NEUTRAL => @C + ANY_NEUTRAL + @H_eV          ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @H = 0.266 0.262 0.259 0.256 0.253 0.249 0.246 0.243 0.240 0.237 0.234 0.231 0.228 0.225 0.222 0.219 0.216 0.213 0.210 0.207
+  @X = 8.84e-12 1.71e-11 2.48e-11 3.20e-11 3.88e-11 4.51e-11 5.09e-11 5.64e-11 6.15e-11 6.63e-11 7.07e-11 7.49e-11 7.87e-11 8.23e-11 8.57e-11 8.88e-11 9.17e-11 9.44e-11 9.69e-11 9.92e-11 
+  @Y = 2.22e+02 2.20e+02 2.18e+02 2.16e+02 2.14e+02 2.12e+02 2.11e+02 2.09e+02 2.07e+02 2.05e+02 2.03e+02 2.01e+02 2.00e+02 1.98e+02 1.96e+02 1.94e+02 1.93e+02 1.91e+02 1.89e+02 1.87e+02  
+  @Z = 3.79e+02 3.87e+02 3.95e+02 4.02e+02 4.10e+02 4.18e+02 4.25e+02 4.33e+02 4.40e+02 4.48e+02 4.55e+02 4.62e+02 4.70e+02 4.77e+02 4.84e+02 4.91e+02 4.98e+02 5.05e+02 5.12e+02 5.19e+02 
+
+
+@A + ANY_NEUTRAL + @H_eV => @C + ANY_NEUTRAL          ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)  
+  @E = -3.08e+03 -3.05e+03 -3.01e+03 -2.97e+03 -2.93e+03 -2.89e+03 -2.86e+03 -2.82e+03 -2.78e+03 -2.75e+03 -2.71e+03 -2.68e+03 -2.64e+03 -2.61e+03 -2.57e+03 -2.54e+03 -2.50e+03 -2.47e+03 -2.43e+03 -2.40e+03 
+  @H = 0.266 0.262 0.259 0.256 0.253 0.249 0.246 0.243 0.240 0.237 0.234 0.231 0.228 0.225 0.222 0.219 0.216 0.213 0.210 0.207 
+  @X = 8.84e-12 1.71e-11 2.48e-11 3.20e-11 3.88e-11 4.51e-11 5.09e-11 5.64e-11 6.15e-11 6.63e-11 7.07e-11 7.49e-11 7.87e-11 8.23e-11 8.57e-11 8.88e-11 9.17e-11 9.44e-11 9.69e-11 9.92e-11 
+  @Y = 2.22e+02 2.20e+02 2.18e+02 2.16e+02 2.14e+02 2.12e+02 2.11e+02 2.09e+02 2.07e+02 2.05e+02 2.03e+02 2.01e+02 2.00e+02 1.98e+02 1.96e+02 1.94e+02 1.93e+02 1.91e+02 1.89e+02 1.87e+02  
+  @Z = 3.79e+02 3.87e+02 3.95e+02 4.02e+02 4.10e+02 4.18e+02 4.25e+02 4.33e+02 4.40e+02 4.48e+02 4.55e+02 4.62e+02 4.70e+02 4.77e+02 4.84e+02 4.91e+02 4.98e+02 5.05e+02 5.12e+02 5.19e+02 
+
+
+# ------------------------------------------------------
+# O2 VT relaxation
+# ------------------------------------------------------
+@A + ANY_NEUTRAL => @C + ANY_NEUTRAL + @H_eV          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = O2(V1) O2(V2) O2(V3) O2(V4) 
+  @C = O2 O2(V1) O2(V2) O2(V3) 
+  @H = 0.193 0.190 0.187 0.184 
+  @X = 7.99e-05 1.50e-04 2.15e-04 2.73e-04 
+  @Y = 3.20e+02 3.16e+02 3.13e+02 3.10e+02 
+  @Z = 6.15e+02 6.07e+02 6.00e+02 5.93e+02 
+
+@A + ANY_NEUTRAL + @H_eV => @C + ANY_NEUTRAL          ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = O2 O2(V1) O2(V2) O2(V3) 
+  @C = O2(V1) O2(V2) O2(V3) O2(V4) 
+  @E = -2.24e+03 -2.21e+03 -2.17e+03 -2.14e+03 
+  @H = 0.193 0.190 0.187 0.184 
+  @X = 7.99e-05 1.50e-04 2.15e-04 2.73e-04 
+  @Y = 3.20e+02 3.16e+02 3.13e+02 3.10e+02 
+  @Z = 6.15e+02 6.07e+02 6.00e+02 5.93e+02 
+
+# ------------------------------------------------------
+# CO2 VV relaxation
+# ------------------------------------------------------
+CO2(V2) + @A + @H_eV => CO2(V1) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 
+  @C = CO2(V1) 
+  @H = 0.003 
+  @X = 1.67e-11 
+  @Y = -2.47e+01 
+  @Z = -6.57e+01 
+
+CO2(V1) + @A => CO2(V2) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) 
+  @C = CO2 
+  @E = 3.59e+01 
+  @H = 0.003 
+  @X = 1.67e-11 
+  @Y = -2.47e+01 
+  @Z = -6.57e+01 
+
+CO2(V3) + @A + @H_eV => CO2(V2) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) 
+  @C = CO2(V1) CO2(V2) 
+  @H = 0.006 0.003 
+  @X = 2.49e-11 5.07e-11 
+  @Y = -2.48e+01 -2.47e+01 
+  @Z = -8.52e+01 -6.57e+01 
+
+CO2(V2) + @A => CO2(V3) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) 
+  @C = CO2 CO2(V1) 
+  @E = 7.18e+01 3.59e+01 
+  @H = 0.006 0.003 
+  @X = 2.49e-11 5.07e-11 
+  @Y = -2.48e+01 -2.47e+01 
+  @Z = -8.52e+01 -6.57e+01 
+
+CO2(V4) + @A + @H_eV => CO2(V3) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) 
+  @C = CO2(V1) CO2(V2) CO2(V3) 
+  @H = 0.009 0.006 0.003 
+  @X = 3.37e-11 6.70e-11 1.02e-10 
+  @Y = -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V3) + @A => CO2(V4) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) 
+  @C = CO2 CO2(V1) CO2(V2) 
+  @E = 1.08e+02 7.18e+01 3.59e+01 
+  @H = 0.009 0.006 0.003 
+  @X = 3.37e-11 6.70e-11 1.02e-10 
+  @Y = -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V5) + @A + @H_eV => CO2(V4) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) 
+  @H = 0.012 0.009 0.006 0.003 
+  @X = 4.38e-11 8.52e-11 1.27e-10 1.73e-10 
+  @Y = -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V4) + @A => CO2(V5) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) 
+  @E = 1.44e+02 1.08e+02 7.18e+01 3.60e+01 
+  @H = 0.012 0.009 0.006 0.003 
+  @X = 4.38e-11 8.52e-11 1.27e-10 1.73e-10 
+  @Y = -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V6) + @A + @H_eV => CO2(V5) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) 
+  @H = 0.015 0.012 0.009 0.006 0.003 
+  @X = 5.53e-11 1.06e-10 1.55e-10 2.05e-10 2.62e-10 
+  @Y = -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V5) + @A => CO2(V6) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) 
+  @E = 1.79e+02 1.44e+02 1.08e+02 7.18e+01 3.59e+01 
+  @H = 0.015 0.012 0.009 0.006 0.003 
+  @X = 5.53e-11 1.06e-10 1.55e-10 2.05e-10 2.62e-10 
+  @Y = -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V7) + @A + @H_eV => CO2(V6) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) 
+  @H = 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 6.83e-11 1.30e-10 1.88e-10 2.44e-10 3.03e-10 3.70e-10 
+  @Y = -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V6) + @A => CO2(V7) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) 
+  @E = 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.17e+01 3.59e+01 
+  @H = 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 6.83e-11 1.30e-10 1.88e-10 2.44e-10 3.03e-10 3.70e-10 
+  @Y = -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V8) + @A + @H_eV => CO2(V7) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) 
+  @H = 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 8.29e-11 1.58e-10 2.26e-10 2.90e-10 3.52e-10 4.20e-10 4.99e-10 
+  @Y = -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V7) + @A => CO2(V8) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) 
+  @E = 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.17e+01 3.59e+01 
+  @H = 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 8.29e-11 1.58e-10 2.26e-10 2.90e-10 3.52e-10 4.20e-10 4.99e-10 
+  @Y = -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V9) + @A + @H_eV => CO2(V8) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) 
+  @H = 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 9.89e-11 1.88e-10 2.69e-10 3.43e-10 4.12e-10 4.81e-10 5.57e-10 6.49e-10 
+  @Y = -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V8) + @A => CO2(V9) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) 
+  @E = 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.43e+02 1.08e+02 7.17e+01 3.59e+01 
+  @H = 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 9.89e-11 1.88e-10 2.69e-10 3.43e-10 4.12e-10 4.81e-10 5.57e-10 6.49e-10 
+  @Y = -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V10) + @A + @H_eV => CO2(V9) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) 
+  @H = 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.16e-10 2.22e-10 3.18e-10 4.03e-10 4.81e-10 5.55e-10 6.30e-10 7.15e-10 8.20e-10 
+  @Y = -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V9) + @A => CO2(V10) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) 
+  @E = 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.18e+01 3.60e+01 
+  @H = 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.16e-10 2.22e-10 3.18e-10 4.03e-10 4.81e-10 5.55e-10 6.30e-10 7.15e-10 8.20e-10 
+  @Y = -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V11) + @A + @H_eV => CO2(V10) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) 
+  @H = 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.35e-10 2.58e-10 3.70e-10 4.71e-10 5.61e-10 6.42e-10 7.20e-10 8.01e-10 8.94e-10 1.01e-09 
+  @Y = -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V10) + @A => CO2(V11) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) 
+  @E = 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.18e+01 3.59e+01 
+  @H = 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.35e-10 2.58e-10 3.70e-10 4.71e-10 5.61e-10 6.42e-10 7.20e-10 8.01e-10 8.94e-10 1.01e-09 
+  @Y = -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V12) + @A + @H_eV => CO2(V11) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) 
+  @H = 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.54e-10 2.97e-10 4.28e-10 5.45e-10 6.49e-10 7.42e-10 8.26e-10 9.08e-10 9.94e-10 1.10e-09 1.23e-09 
+  @Y = -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V11) + @A => CO2(V12) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) 
+  @E = 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.17e+01 3.59e+01 
+  @H = 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.54e-10 2.97e-10 4.28e-10 5.45e-10 6.49e-10 7.42e-10 8.26e-10 9.08e-10 9.94e-10 1.10e-09 1.23e-09 
+  @Y = -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V13) + @A + @H_eV => CO2(V12) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) 
+  @H = 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.75e-10 3.38e-10 4.88e-10 6.24e-10 7.46e-10 8.53e-10 9.48e-10 1.03e-09 1.12e-09 1.21e-09 1.32e-09 1.47e-09 
+  @Y = -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V12) + @A => CO2(V13) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) 
+  @E = 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.17e+01 3.59e+01 
+  @H = 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.75e-10 3.38e-10 4.88e-10 6.24e-10 7.46e-10 8.53e-10 9.48e-10 1.03e-09 1.12e-09 1.21e-09 1.32e-09 1.47e-09 
+  @Y = -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V14) + @A + @H_eV => CO2(V13) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) 
+  @H = 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.96e-10 3.80e-10 5.52e-10 7.09e-10 8.50e-10 9.75e-10 1.08e-09 1.18e-09 1.27e-09 1.35e-09 1.45e-09 1.57e-09 1.73e-09 
+  @Y = -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V13) + @A => CO2(V14) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) 
+  @E = 4.67e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.80e+02 1.44e+02 1.08e+02 7.18e+01 3.60e+01 
+  @H = 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.96e-10 3.80e-10 5.52e-10 7.09e-10 8.50e-10 9.75e-10 1.08e-09 1.18e-09 1.27e-09 1.35e-09 1.45e-09 1.57e-09 1.73e-09 
+  @Y = -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V15) + @A + @H_eV => CO2(V14) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) 
+  @H = 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.17e-10 4.24e-10 6.18e-10 7.97e-10 9.60e-10 1.10e-09 1.23e-09 1.34e-09 1.44e-09 1.53e-09 1.61e-09 1.71e-09 1.84e-09 2.02e-09 
+  @Y = -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V14) + @A => CO2(V15) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) 
+  @E = 5.02e+02 4.67e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.18e+01 3.59e+01 
+  @H = 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.17e-10 4.24e-10 6.18e-10 7.97e-10 9.60e-10 1.10e-09 1.23e-09 1.34e-09 1.44e-09 1.53e-09 1.61e-09 1.71e-09 1.84e-09 2.02e-09 
+  @Y = -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V16) + @A + @H_eV => CO2(V15) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) 
+  @H = 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.40e-10 4.69e-10 6.86e-10 8.89e-10 1.07e-09 1.24e-09 1.39e-09 1.52e-09 1.63e-09 1.72e-09 1.81e-09 1.90e-09 2.00e-09 2.14e-09 2.34e-09 
+  @Y = -5.96e+00 -7.49e+00 -9.07e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.83e+02 -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V15) + @A => CO2(V16) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) 
+  @E = 5.38e+02 5.02e+02 4.66e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.17e+01 3.59e+01 
+  @H = 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.40e-10 4.69e-10 6.86e-10 8.89e-10 1.07e-09 1.24e-09 1.39e-09 1.52e-09 1.63e-09 1.72e-09 1.81e-09 1.90e-09 2.00e-09 2.14e-09 2.34e-09 
+  @Y = -5.96e+00 -7.49e+00 -9.07e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.83e+02 -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V17) + @A + @H_eV => CO2(V16) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+  @H = 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.62e-10 5.15e-10 7.56e-10 9.83e-10 1.19e-09 1.39e-09 1.56e-09 1.71e-09 1.84e-09 1.94e-09 2.04e-09 2.12e-09 2.21e-09 2.32e-09 2.46e-09 2.68e-09 
+  @Y = -4.47e+00 -5.96e+00 -7.50e+00 -9.07e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V16) + @A => CO2(V17) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) 
+  @E = 5.74e+02 5.38e+02 5.02e+02 4.66e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.17e+01 3.59e+01 
+  @H = 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.62e-10 5.15e-10 7.56e-10 9.83e-10 1.19e-09 1.39e-09 1.56e-09 1.71e-09 1.84e-09 1.94e-09 2.04e-09 2.12e-09 2.21e-09 2.32e-09 2.46e-09 2.68e-09 
+  @Y = -4.47e+00 -5.96e+00 -7.50e+00 -9.07e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V18) + @A + @H_eV => CO2(V17) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) 
+  @H = 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.86e-10 5.62e-10 8.27e-10 1.08e-09 1.32e-09 1.53e-09 1.73e-09 1.91e-09 2.06e-09 2.18e-09 2.29e-09 2.38e-09 2.46e-09 2.55e-09 2.66e-09 2.82e-09 3.05e-09 
+  @Y = -3.00e+00 -4.46e+00 -5.96e+00 -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V17) + @A => CO2(V18) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) 
+  @E = 6.10e+02 5.74e+02 5.38e+02 5.02e+02 4.67e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.80e+02 1.44e+02 1.08e+02 7.18e+01 3.60e+01 
+  @H = 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.86e-10 5.62e-10 8.27e-10 1.08e-09 1.32e-09 1.53e-09 1.73e-09 1.91e-09 2.06e-09 2.18e-09 2.29e-09 2.38e-09 2.46e-09 2.55e-09 2.66e-09 2.82e-09 3.05e-09 
+  @Y = -3.00e+00 -4.46e+00 -5.96e+00 -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V19) + @A + @H_eV => CO2(V18) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) 
+  @H = 0.056 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 3.09e-10 6.10e-10 9.00e-10 1.18e-09 1.44e-09 1.68e-09 1.91e-09 2.11e-09 2.29e-09 2.44e-09 2.56e-09 2.67e-09 2.75e-09 2.83e-09 2.92e-09 3.03e-09 3.20e-09 3.45e-09 
+  @Y = -1.57e+00 -3.00e+00 -4.47e+00 -5.96e+00 -7.50e+00 -9.07e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.23e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.27e+02 -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V18) + @A => CO2(V19) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) 
+  @E = 6.46e+02 6.10e+02 5.74e+02 5.38e+02 5.02e+02 4.66e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.43e+02 1.08e+02 7.17e+01 3.57e+01 
+  @H = 0.056 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 3.09e-10 6.10e-10 9.00e-10 1.18e-09 1.44e-09 1.68e-09 1.91e-09 2.11e-09 2.29e-09 2.44e-09 2.56e-09 2.67e-09 2.75e-09 2.83e-09 2.92e-09 3.03e-09 3.20e-09 3.45e-09 
+  @Y = -1.57e+00 -3.00e+00 -4.47e+00 -5.96e+00 -7.50e+00 -9.07e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.23e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.27e+02 -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.39e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V20) + @A + @H_eV => CO2(V19) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) 
+  @H = 0.059 0.056 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 3.33e-10 6.58e-10 9.73e-10 1.28e-09 1.57e-09 1.84e-09 2.09e-09 2.32e-09 2.53e-09 2.71e-09 2.86e-09 2.98e-09 3.08e-09 3.16e-09 3.23e-09 3.31e-09 3.43e-09 3.60e-09 3.88e-09 
+  @Y = -1.54e-01 -1.57e+00 -3.00e+00 -4.46e+00 -5.96e+00 -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.42e+02 -3.27e+02 -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V19) + @A => CO2(V20) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) 
+  @E = 6.82e+02 6.46e+02 6.10e+02 5.74e+02 5.38e+02 5.02e+02 4.67e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.17e+01 3.60e+01 
+  @H = 0.059 0.056 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 3.33e-10 6.58e-10 9.73e-10 1.28e-09 1.57e-09 1.84e-09 2.09e-09 2.32e-09 2.53e-09 2.71e-09 2.86e-09 2.98e-09 3.08e-09 3.16e-09 3.23e-09 3.31e-09 3.43e-09 3.60e-09 3.88e-09 
+  @Y = -1.54e-01 -1.57e+00 -3.00e+00 -4.46e+00 -5.96e+00 -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.91e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.42e+02 -3.27e+02 -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.58e+01 
+
+CO2(V21) + @A + @H_eV => CO2(V20) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) 
+  @C = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @H = 0.062 0.059 0.056 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 3.58e-10 7.08e-10 1.05e-09 1.38e-09 1.70e-09 2.00e-09 2.28e-09 2.54e-09 2.78e-09 2.98e-09 3.16e-09 3.31e-09 3.43e-09 3.52e-09 3.59e-09 3.66e-09 3.74e-09 3.85e-09 4.04e-09 4.34e-09 
+  @Y = 1.24e+00 -1.55e-01 -1.57e+00 -3.00e+00 -4.47e+00 -5.96e+00 -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.57e+02 -3.42e+02 -3.27e+02 -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+CO2(V20) + @A => CO2(V21) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) CO2(V20) 
+  @C = CO2 CO2(V1) CO2(V2) CO2(V3) CO2(V4) CO2(V5) CO2(V6) CO2(V7) CO2(V8) CO2(V9) CO2(V10) CO2(V11) CO2(V12) CO2(V13) CO2(V14) CO2(V15) CO2(V16) CO2(V17) CO2(V18) CO2(V19) 
+  @E = 7.18e+02 6.82e+02 6.46e+02 6.10e+02 5.74e+02 5.38e+02 5.02e+02 4.67e+02 4.31e+02 3.95e+02 3.59e+02 3.23e+02 2.87e+02 2.51e+02 2.15e+02 1.79e+02 1.44e+02 1.08e+02 7.18e+01 3.59e+01 
+  @H = 0.062 0.059 0.056 0.053 0.049 0.046 0.043 0.040 0.037 0.034 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 3.58e-10 7.08e-10 1.05e-09 1.38e-09 1.70e-09 2.00e-09 2.28e-09 2.54e-09 2.78e-09 2.98e-09 3.16e-09 3.31e-09 3.43e-09 3.52e-09 3.59e-09 3.66e-09 3.74e-09 3.85e-09 4.04e-09 4.34e-09 
+  @Y = 1.24e+00 -1.55e-01 -1.57e+00 -3.00e+00 -4.47e+00 -5.96e+00 -7.49e+00 -9.06e+00 -1.07e+01 -1.23e+01 -1.40e+01 -1.57e+01 -1.75e+01 -1.92e+01 -2.08e+01 -2.22e+01 -2.35e+01 -2.44e+01 -2.48e+01 -2.47e+01 
+  @Z = -3.57e+02 -3.42e+02 -3.27e+02 -3.12e+02 -2.97e+02 -2.83e+02 -2.68e+02 -2.54e+02 -2.40e+02 -2.25e+02 -2.11e+02 -1.97e+02 -1.83e+02 -1.68e+02 -1.53e+02 -1.38e+02 -1.22e+02 -1.04e+02 -8.52e+01 -6.57e+01 
+
+# ------------------------------------------------------
+# CO VV relaxation
+# ------------------------------------------------------
+CO(V2) + @A + @H_eV => CO(V1) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO 
+  @C = CO(V1) 
+  @H = 0.003 
+  @X = 1.32e-15 
+  @Y = -1.97e+00 
+  @Z = 8.23e+01 
+
+CO(V1) + @A => CO(V2) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) 
+  @C = CO 
+  @E = 3.83e+01 
+  @H = 0.003 
+  @X = 1.32e-15 
+  @Y = -1.97e+00 
+  @Z = 8.23e+01 
+
+CO(V3) + @A + @H_eV => CO(V2) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) 
+  @C = CO(V1) CO(V2) 
+  @H = 0.007 0.003 
+  @X = 7.38e-16 4.01e-15 
+  @Y = -3.03e+01 -1.93e+00 
+  @Z = -1.37e+02 8.25e+01 
+
+CO(V2) + @A => CO(V3) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) 
+  @C = CO CO(V1) 
+  @E = 7.64e+01 3.81e+01 
+  @H = 0.007 0.003 
+  @X = 7.38e-16 4.01e-15 
+  @Y = -3.03e+01 -1.93e+00 
+  @Z = -1.37e+02 8.25e+01 
+
+CO(V4) + @A + @H_eV => CO(V3) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) 
+  @C = CO(V1) CO(V2) CO(V3) 
+  @H = 0.010 0.007 0.003 
+  @X = 5.02e-14 2.01e-15 8.14e-15 
+  @Y = 3.14e+01 -3.00e+01 -1.88e+00 
+  @Z = 2.60e+01 -1.34e+02 8.28e+01 
+
+CO(V3) + @A => CO(V4) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) 
+  @C = CO CO(V1) CO(V2) 
+  @E = 1.14e+02 7.59e+01 3.78e+01 
+  @H = 0.010 0.007 0.003 
+  @X = 5.02e-14 2.01e-15 8.14e-15 
+  @Y = 3.14e+01 -3.00e+01 -1.88e+00 
+  @Z = 2.60e+01 -1.34e+02 8.28e+01 
+
+CO(V5) + @A + @H_eV => CO(V4) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) 
+  @H = 0.013 0.010 0.006 0.003 
+  @X = 3.47e-14 1.27e-13 3.86e-15 1.38e-14 
+  @Y = 2.38e+01 3.13e+01 -2.97e+01 -1.83e+00 
+  @Z = -1.51e+01 2.59e+01 -1.32e+02 8.31e+01 
+
+CO(V4) + @A => CO(V5) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) 
+  @C = CO CO(V1) CO(V2) CO(V3) 
+  @E = 1.52e+02 1.13e+02 7.53e+01 3.75e+01 
+  @H = 0.013 0.010 0.006 0.003 
+  @X = 3.47e-14 1.27e-13 3.86e-15 1.38e-14 
+  @Y = 2.38e+01 3.13e+01 -2.97e+01 -1.83e+00 
+  @Z = -1.51e+01 2.59e+01 -1.32e+02 8.31e+01 
+
+CO(V6) + @A + @H_eV => CO(V5) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @H = 0.016 0.013 0.010 0.006 0.003 
+  @X = 4.25e-14 8.43e-14 2.33e-13 6.33e-15 2.10e-14 
+  @Y = 2.43e+01 2.38e+01 3.12e+01 -2.94e+01 -1.79e+00 
+  @Z = -3.06e+01 -1.46e+01 2.58e+01 -1.29e+02 8.34e+01 
+
+CO(V5) + @A => CO(V6) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) 
+  @E = 1.89e+02 1.51e+02 1.13e+02 7.48e+01 3.73e+01 
+  @H = 0.016 0.013 0.010 0.006 0.003 
+  @X = 4.25e-14 8.43e-14 2.33e-13 6.33e-15 2.10e-14 
+  @Y = 2.43e+01 2.38e+01 3.12e+01 -2.94e+01 -1.79e+00 
+  @Z = -3.06e+01 -1.46e+01 2.58e+01 -1.29e+02 8.34e+01 
+
+CO(V7) + @A + @H_eV => CO(V6) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @H = 0.019 0.016 0.013 0.010 0.006 0.003 
+  @X = 5.12e-14 1.00e-13 1.49e-13 3.67e-13 9.45e-15 2.98e-14 
+  @Y = 2.50e+01 2.43e+01 2.38e+01 3.12e+01 -2.90e+01 -1.74e+00 
+  @Z = -4.51e+01 -3.01e+01 -1.42e+01 2.55e+01 -1.26e+02 8.37e+01 
+
+CO(V6) + @A => CO(V7) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @E = 2.26e+02 1.88e+02 1.50e+02 1.12e+02 7.43e+01 3.70e+01 
+  @H = 0.019 0.016 0.013 0.010 0.006 0.003 
+  @X = 5.12e-14 1.00e-13 1.49e-13 3.67e-13 9.45e-15 2.98e-14 
+  @Y = 2.50e+01 2.43e+01 2.38e+01 3.12e+01 -2.90e+01 -1.74e+00 
+  @Z = -4.51e+01 -3.01e+01 -1.42e+01 2.55e+01 -1.26e+02 8.37e+01 
+
+CO(V8) + @A + @H_eV => CO(V7) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @H = 0.023 0.019 0.016 0.013 0.010 0.006 0.003 
+  @X = 6.07e-14 1.18e-13 1.74e-13 2.31e-13 5.30e-13 1.33e-14 4.04e-14 
+  @Y = 2.59e+01 2.50e+01 2.43e+01 2.38e+01 3.10e+01 -2.87e+01 -1.70e+00 
+  @Z = -5.89e+01 -4.45e+01 -2.95e+01 -1.37e+01 2.51e+01 -1.24e+02 8.40e+01 
+
+CO(V7) + @A => CO(V8) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @E = 2.63e+02 2.24e+02 1.86e+02 1.49e+02 1.11e+02 7.37e+01 3.67e+01 
+  @H = 0.023 0.019 0.016 0.013 0.010 0.006 0.003 
+  @X = 6.07e-14 1.18e-13 1.74e-13 2.31e-13 5.30e-13 1.33e-14 4.04e-14 
+  @Y = 2.59e+01 2.50e+01 2.43e+01 2.38e+01 3.10e+01 -2.87e+01 -1.70e+00 
+  @Z = -5.89e+01 -4.45e+01 -2.95e+01 -1.37e+01 2.51e+01 -1.24e+02 8.40e+01 
+
+CO(V9) + @A + @H_eV => CO(V8) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @H = 0.026 0.022 0.019 0.016 0.013 0.009 0.006 0.003 
+  @X = 7.09e-14 1.38e-13 2.02e-13 2.65e-13 3.29e-13 7.22e-13 1.79e-14 5.27e-14 
+  @Y = 2.68e+01 2.58e+01 2.49e+01 2.42e+01 2.38e+01 3.09e+01 -2.84e+01 -1.65e+00 
+  @Z = -7.22e+01 -5.82e+01 -4.39e+01 -2.90e+01 -1.32e+01 2.46e+01 -1.21e+02 8.43e+01 
+
+CO(V8) + @A => CO(V9) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @E = 2.99e+02 2.61e+02 2.23e+02 1.85e+02 1.47e+02 1.10e+02 7.32e+01 3.65e+01 
+  @H = 0.026 0.022 0.019 0.016 0.013 0.009 0.006 0.003 
+  @X = 7.09e-14 1.38e-13 2.02e-13 2.65e-13 3.29e-13 7.22e-13 1.79e-14 5.27e-14 
+  @Y = 2.68e+01 2.58e+01 2.49e+01 2.42e+01 2.38e+01 3.09e+01 -2.84e+01 -1.65e+00 
+  @Z = -7.22e+01 -5.82e+01 -4.39e+01 -2.90e+01 -1.32e+01 2.46e+01 -1.21e+02 8.43e+01 
+
+CO(V10) + @A + @H_eV => CO(V9) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @H = 0.029 0.026 0.022 0.019 0.016 0.013 0.009 0.006 0.003 
+  @X = 8.19e-14 1.59e-13 2.33e-13 3.03e-13 3.72e-13 4.44e-13 9.43e-13 2.33e-14 6.70e-14 
+  @Y = 2.78e+01 2.68e+01 2.58e+01 2.49e+01 2.42e+01 2.38e+01 3.07e+01 -2.80e+01 -1.61e+00 
+  @Z = -8.51e+01 -7.14e+01 -5.75e+01 -4.33e+01 -2.84e+01 -1.27e+01 2.39e+01 -1.18e+02 8.46e+01 
+
+CO(V9) + @A => CO(V10) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @E = 3.35e+02 2.97e+02 2.59e+02 2.21e+02 1.84e+02 1.46e+02 1.09e+02 7.27e+01 3.62e+01 
+  @H = 0.029 0.026 0.022 0.019 0.016 0.013 0.009 0.006 0.003 
+  @X = 8.19e-14 1.59e-13 2.33e-13 3.03e-13 3.72e-13 4.44e-13 9.43e-13 2.33e-14 6.70e-14 
+  @Y = 2.78e+01 2.68e+01 2.58e+01 2.49e+01 2.42e+01 2.38e+01 3.07e+01 -2.80e+01 -1.61e+00 
+  @Z = -8.51e+01 -7.14e+01 -5.75e+01 -4.33e+01 -2.84e+01 -1.27e+01 2.39e+01 -1.18e+02 8.46e+01 
+
+CO(V11) + @A + @H_eV => CO(V10) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @H = 0.032 0.029 0.025 0.022 0.019 0.016 0.013 0.009 0.006 0.003 
+  @X = 9.36e-14 1.82e-13 2.66e-13 3.45e-13 4.22e-13 4.97e-13 5.78e-13 1.19e-12 2.95e-14 8.31e-14 
+  @Y = 2.89e+01 2.78e+01 2.67e+01 2.57e+01 2.49e+01 2.42e+01 2.38e+01 3.05e+01 -2.77e+01 -1.56e+00 
+  @Z = -9.76e+01 -8.42e+01 -7.07e+01 -5.69e+01 -4.26e+01 -2.79e+01 -1.22e+01 2.31e+01 -1.15e+02 8.48e+01 
+
+CO(V10) + @A => CO(V11) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @E = 3.71e+02 3.33e+02 2.95e+02 2.57e+02 2.20e+02 1.82e+02 1.45e+02 1.09e+02 7.21e+01 3.59e+01 
+  @H = 0.032 0.029 0.025 0.022 0.019 0.016 0.013 0.009 0.006 0.003 
+  @X = 9.36e-14 1.82e-13 2.66e-13 3.45e-13 4.22e-13 4.97e-13 5.78e-13 1.19e-12 2.95e-14 8.31e-14 
+  @Y = 2.89e+01 2.78e+01 2.67e+01 2.57e+01 2.49e+01 2.42e+01 2.38e+01 3.05e+01 -2.77e+01 -1.56e+00 
+  @Z = -9.76e+01 -8.42e+01 -7.07e+01 -5.69e+01 -4.26e+01 -2.79e+01 -1.22e+01 2.31e+01 -1.15e+02 8.48e+01 
+
+CO(V12) + @A + @H_eV => CO(V11) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @H = 0.035 0.032 0.028 0.025 0.022 0.019 0.016 0.012 0.009 0.006 0.003 
+  @X = 1.06e-13 2.06e-13 3.01e-13 3.91e-13 4.76e-13 5.58e-13 6.41e-13 7.30e-13 1.47e-12 3.67e-14 1.01e-13 
+  @Y = 3.00e+01 2.88e+01 2.77e+01 2.66e+01 2.57e+01 2.48e+01 2.42e+01 2.38e+01 3.02e+01 -2.73e+01 -1.52e+00 
+  @Z = -1.10e+02 -9.67e+01 -8.34e+01 -6.99e+01 -5.62e+01 -4.20e+01 -2.74e+01 -1.18e+01 2.22e+01 -1.13e+02 8.51e+01 
+
+CO(V11) + @A => CO(V12) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @E = 4.07e+02 3.69e+02 3.31e+02 2.93e+02 2.55e+02 2.18e+02 1.81e+02 1.44e+02 1.08e+02 7.16e+01 3.57e+01 
+  @H = 0.035 0.032 0.028 0.025 0.022 0.019 0.016 0.012 0.009 0.006 0.003 
+  @X = 1.06e-13 2.06e-13 3.01e-13 3.91e-13 4.76e-13 5.58e-13 6.41e-13 7.30e-13 1.47e-12 3.67e-14 1.01e-13 
+  @Y = 3.00e+01 2.88e+01 2.77e+01 2.66e+01 2.57e+01 2.48e+01 2.42e+01 2.38e+01 3.02e+01 -2.73e+01 -1.52e+00 
+  @Z = -1.10e+02 -9.67e+01 -8.34e+01 -6.99e+01 -5.62e+01 -4.20e+01 -2.74e+01 -1.18e+01 2.22e+01 -1.13e+02 8.51e+01 
+
+CO(V13) + @A + @H_eV => CO(V12) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) 
+  @H = 0.038 0.035 0.032 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.19e-13 2.32e-13 3.39e-13 4.40e-13 5.35e-13 6.26e-13 7.14e-13 8.03e-13 9.02e-13 1.77e-12 4.48e-14 1.22e-13 
+  @Y = 3.10e+01 2.99e+01 2.87e+01 2.76e+01 2.66e+01 2.56e+01 2.48e+01 2.41e+01 2.38e+01 2.99e+01 -2.70e+01 -1.47e+00 
+  @Z = -1.22e+02 -1.09e+02 -9.57e+01 -8.25e+01 -6.91e+01 -5.55e+01 -4.14e+01 -2.68e+01 -1.13e+01 2.11e+01 -1.10e+02 8.54e+01 
+
+CO(V12) + @A => CO(V13) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @E = 4.42e+02 4.04e+02 3.66e+02 3.28e+02 2.91e+02 2.53e+02 2.16e+02 1.80e+02 1.43e+02 1.07e+02 7.11e+01 3.54e+01 
+  @H = 0.038 0.035 0.032 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.19e-13 2.32e-13 3.39e-13 4.40e-13 5.35e-13 6.26e-13 7.14e-13 8.03e-13 9.02e-13 1.77e-12 4.48e-14 1.22e-13 
+  @Y = 3.10e+01 2.99e+01 2.87e+01 2.76e+01 2.66e+01 2.56e+01 2.48e+01 2.41e+01 2.38e+01 2.99e+01 -2.70e+01 -1.47e+00 
+  @Z = -1.22e+02 -1.09e+02 -9.57e+01 -8.25e+01 -6.91e+01 -5.55e+01 -4.14e+01 -2.68e+01 -1.13e+01 2.11e+01 -1.10e+02 8.54e+01 
+
+CO(V14) + @A + @H_eV => CO(V13) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) 
+  @H = 0.041 0.038 0.035 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.32e-13 2.59e-13 3.79e-13 4.92e-13 5.99e-13 7.00e-13 7.96e-13 8.90e-13 9.85e-13 1.09e-12 2.10e-12 5.40e-14 1.44e-13 
+  @Y = 3.21e+01 3.09e+01 2.98e+01 2.87e+01 2.76e+01 2.65e+01 2.56e+01 2.48e+01 2.41e+01 2.38e+01 2.96e+01 -2.66e+01 -1.43e+00 
+  @Z = -1.34e+02 -1.21e+02 -1.08e+02 -9.48e+01 -8.17e+01 -6.84e+01 -5.48e+01 -4.08e+01 -2.63e+01 -1.08e+01 1.99e+01 -1.07e+02 8.57e+01 
+
+CO(V13) + @A => CO(V14) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) 
+  @E = 4.78e+02 4.39e+02 4.01e+02 3.63e+02 3.26e+02 2.89e+02 2.52e+02 2.15e+02 1.78e+02 1.42e+02 1.06e+02 7.06e+01 3.51e+01 
+  @H = 0.041 0.038 0.035 0.031 0.028 0.025 0.022 0.019 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.32e-13 2.59e-13 3.79e-13 4.92e-13 5.99e-13 7.00e-13 7.96e-13 8.90e-13 9.85e-13 1.09e-12 2.10e-12 5.40e-14 1.44e-13 
+  @Y = 3.21e+01 3.09e+01 2.98e+01 2.87e+01 2.76e+01 2.65e+01 2.56e+01 2.48e+01 2.41e+01 2.38e+01 2.96e+01 -2.66e+01 -1.43e+00 
+  @Z = -1.34e+02 -1.21e+02 -1.08e+02 -9.48e+01 -8.17e+01 -6.84e+01 -5.48e+01 -4.08e+01 -2.63e+01 -1.08e+01 1.99e+01 -1.07e+02 8.57e+01 
+
+CO(V15) + @A + @H_eV => CO(V14) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) 
+  @H = 0.044 0.041 0.038 0.034 0.031 0.028 0.025 0.022 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.46e-13 2.86e-13 4.20e-13 5.47e-13 6.66e-13 7.78e-13 8.84e-13 9.86e-13 1.09e-12 1.19e-12 1.31e-12 2.45e-12 6.43e-14 1.69e-13 
+  @Y = 3.31e+01 3.20e+01 3.08e+01 2.97e+01 2.86e+01 2.75e+01 2.65e+01 2.55e+01 2.47e+01 2.41e+01 2.38e+01 2.92e+01 -2.63e+01 -1.38e+00 
+  @Z = -1.46e+02 -1.33e+02 -1.20e+02 -1.07e+02 -9.39e+01 -8.08e+01 -6.76e+01 -5.41e+01 -4.02e+01 -2.57e+01 -1.03e+01 1.85e+01 -1.04e+02 8.59e+01 
+
+CO(V14) + @A => CO(V15) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) 
+  @E = 5.12e+02 4.74e+02 4.36e+02 3.98e+02 3.61e+02 3.23e+02 2.86e+02 2.50e+02 2.13e+02 1.77e+02 1.41e+02 1.05e+02 7.00e+01 3.49e+01 
+  @H = 0.044 0.041 0.038 0.034 0.031 0.028 0.025 0.022 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.46e-13 2.86e-13 4.20e-13 5.47e-13 6.66e-13 7.78e-13 8.84e-13 9.86e-13 1.09e-12 1.19e-12 1.31e-12 2.45e-12 6.43e-14 1.69e-13 
+  @Y = 3.31e+01 3.20e+01 3.08e+01 2.97e+01 2.86e+01 2.75e+01 2.65e+01 2.55e+01 2.47e+01 2.41e+01 2.38e+01 2.92e+01 -2.63e+01 -1.38e+00 
+  @Z = -1.46e+02 -1.33e+02 -1.20e+02 -1.07e+02 -9.39e+01 -8.08e+01 -6.76e+01 -5.41e+01 -4.02e+01 -2.57e+01 -1.03e+01 1.85e+01 -1.04e+02 8.59e+01 
+
+CO(V16) + @A + @H_eV => CO(V15) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) 
+  @H = 0.047 0.044 0.041 0.037 0.034 0.031 0.028 0.025 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.60e-13 3.15e-13 4.63e-13 6.04e-13 7.37e-13 8.62e-13 9.80e-13 1.09e-12 1.20e-12 1.30e-12 1.41e-12 1.54e-12 2.82e-12 7.58e-14 1.96e-13 
+  @Y = 3.41e+01 3.30e+01 3.19e+01 3.07e+01 2.96e+01 2.85e+01 2.74e+01 2.64e+01 2.55e+01 2.47e+01 2.41e+01 2.38e+01 2.88e+01 -2.59e+01 -1.34e+00 
+  @Z = -1.58e+02 -1.45e+02 -1.32e+02 -1.19e+02 -1.06e+02 -9.30e+01 -8.00e+01 -6.68e+01 -5.34e+01 -3.95e+01 -2.52e+01 -9.74e+00 1.69e+01 -1.02e+02 8.62e+01 
+
+CO(V15) + @A => CO(V16) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) 
+  @E = 5.47e+02 5.09e+02 4.71e+02 4.33e+02 3.95e+02 3.58e+02 3.21e+02 2.84e+02 2.48e+02 2.12e+02 1.76e+02 1.40e+02 1.05e+02 6.95e+01 3.46e+01 
+  @H = 0.047 0.044 0.041 0.037 0.034 0.031 0.028 0.025 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.60e-13 3.15e-13 4.63e-13 6.04e-13 7.37e-13 8.62e-13 9.80e-13 1.09e-12 1.20e-12 1.30e-12 1.41e-12 1.54e-12 2.82e-12 7.58e-14 1.96e-13 
+  @Y = 3.41e+01 3.30e+01 3.19e+01 3.07e+01 2.96e+01 2.85e+01 2.74e+01 2.64e+01 2.55e+01 2.47e+01 2.41e+01 2.38e+01 2.88e+01 -2.59e+01 -1.34e+00 
+  @Z = -1.58e+02 -1.45e+02 -1.32e+02 -1.19e+02 -1.06e+02 -9.30e+01 -8.00e+01 -6.68e+01 -5.34e+01 -3.95e+01 -2.52e+01 -9.74e+00 1.69e+01 -1.02e+02 8.62e+01 
+
+CO(V17) + @A + @H_eV => CO(V16) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) 
+  @H = 0.050 0.047 0.044 0.040 0.037 0.034 0.031 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.75e-13 3.44e-13 5.07e-13 6.63e-13 8.11e-13 9.50e-13 1.08e-12 1.20e-12 1.32e-12 1.43e-12 1.54e-12 1.66e-12 1.80e-12 3.20e-12 8.86e-14 2.26e-13 
+  @Y = 3.51e+01 3.40e+01 3.29e+01 3.18e+01 3.06e+01 2.95e+01 2.84e+01 2.74e+01 2.64e+01 2.55e+01 2.47e+01 2.41e+01 2.38e+01 2.84e+01 -2.56e+01 -1.30e+00 
+  @Z = -1.70e+02 -1.56e+02 -1.43e+02 -1.30e+02 -1.18e+02 -1.05e+02 -9.20e+01 -7.91e+01 -6.61e+01 -5.27e+01 -3.89e+01 -2.47e+01 -9.22e+00 1.52e+01 -9.89e+01 8.65e+01 
+
+CO(V16) + @A => CO(V17) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) 
+  @E = 5.81e+02 5.43e+02 5.05e+02 4.67e+02 4.30e+02 3.92e+02 3.55e+02 3.19e+02 2.82e+02 2.46e+02 2.10e+02 1.74e+02 1.39e+02 1.04e+02 6.90e+01 3.43e+01 
+  @H = 0.050 0.047 0.044 0.040 0.037 0.034 0.031 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.75e-13 3.44e-13 5.07e-13 6.63e-13 8.11e-13 9.50e-13 1.08e-12 1.20e-12 1.32e-12 1.43e-12 1.54e-12 1.66e-12 1.80e-12 3.20e-12 8.86e-14 2.26e-13 
+  @Y = 3.51e+01 3.40e+01 3.29e+01 3.18e+01 3.06e+01 2.95e+01 2.84e+01 2.74e+01 2.64e+01 2.55e+01 2.47e+01 2.41e+01 2.38e+01 2.84e+01 -2.56e+01 -1.30e+00 
+  @Z = -1.70e+02 -1.56e+02 -1.43e+02 -1.30e+02 -1.18e+02 -1.05e+02 -9.20e+01 -7.91e+01 -6.61e+01 -5.27e+01 -3.89e+01 -2.47e+01 -9.22e+00 1.52e+01 -9.89e+01 8.65e+01 
+
+CO(V18) + @A + @H_eV => CO(V17) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) 
+  @H = 0.053 0.050 0.046 0.043 0.040 0.037 0.034 0.030 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.89e-13 3.74e-13 5.52e-13 7.24e-13 8.87e-13 1.04e-12 1.19e-12 1.32e-12 1.45e-12 1.57e-12 1.69e-12 1.80e-12 1.93e-12 2.09e-12 3.60e-12 1.03e-13 2.59e-13 
+  @Y = 3.60e+01 3.50e+01 3.39e+01 3.28e+01 3.17e+01 3.05e+01 2.94e+01 2.83e+01 2.73e+01 2.63e+01 2.54e+01 2.46e+01 2.41e+01 2.39e+01 2.78e+01 -2.52e+01 -1.25e+00 
+  @Z = -1.81e+02 -1.68e+02 -1.55e+02 -1.42e+02 -1.29e+02 -1.17e+02 -1.04e+02 -9.11e+01 -7.83e+01 -6.53e+01 -5.20e+01 -3.83e+01 -2.41e+01 -8.69e+00 1.32e+01 -9.62e+01 8.68e+01 
+
+CO(V17) + @A => CO(V18) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) 
+  @E = 6.16e+02 5.77e+02 5.39e+02 5.01e+02 4.64e+02 4.26e+02 3.89e+02 3.53e+02 3.16e+02 2.80e+02 2.44e+02 2.08e+02 1.73e+02 1.38e+02 1.03e+02 6.84e+01 3.41e+01 
+  @H = 0.053 0.050 0.046 0.043 0.040 0.037 0.034 0.030 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 1.89e-13 3.74e-13 5.52e-13 7.24e-13 8.87e-13 1.04e-12 1.19e-12 1.32e-12 1.45e-12 1.57e-12 1.69e-12 1.80e-12 1.93e-12 2.09e-12 3.60e-12 1.03e-13 2.59e-13 
+  @Y = 3.60e+01 3.50e+01 3.39e+01 3.28e+01 3.17e+01 3.05e+01 2.94e+01 2.83e+01 2.73e+01 2.63e+01 2.54e+01 2.46e+01 2.41e+01 2.39e+01 2.78e+01 -2.52e+01 -1.25e+00 
+  @Z = -1.81e+02 -1.68e+02 -1.55e+02 -1.42e+02 -1.29e+02 -1.17e+02 -1.04e+02 -9.11e+01 -7.83e+01 -6.53e+01 -5.20e+01 -3.83e+01 -2.41e+01 -8.69e+00 1.32e+01 -9.62e+01 8.68e+01 
+
+CO(V19) + @A + @H_eV => CO(V18) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) 
+  @H = 0.056 0.053 0.049 0.046 0.043 0.040 0.036 0.033 0.030 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.04e-13 4.04e-13 5.98e-13 7.86e-13 9.66e-13 1.14e-12 1.30e-12 1.45e-12 1.59e-12 1.72e-12 1.84e-12 1.97e-12 2.09e-12 2.22e-12 2.40e-12 4.00e-12 1.18e-13 2.94e-13 
+  @Y = 3.69e+01 3.59e+01 3.48e+01 3.38e+01 3.27e+01 3.16e+01 3.04e+01 2.93e+01 2.83e+01 2.72e+01 2.62e+01 2.54e+01 2.46e+01 2.40e+01 2.39e+01 2.73e+01 -2.49e+01 -1.21e+00 
+  @Z = -1.93e+02 -1.80e+02 -1.67e+02 -1.54e+02 -1.41e+02 -1.28e+02 -1.15e+02 -1.03e+02 -9.02e+01 -7.74e+01 -6.45e+01 -5.13e+01 -3.77e+01 -2.36e+01 -8.15e+00 1.11e+01 -9.35e+01 8.70e+01 
+
+CO(V18) + @A => CO(V19) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) 
+  @E = 6.49e+02 6.11e+02 5.73e+02 5.35e+02 4.98e+02 4.60e+02 4.23e+02 3.87e+02 3.50e+02 3.14e+02 2.78e+02 2.42e+02 2.07e+02 1.72e+02 1.37e+02 1.02e+02 6.79e+01 3.38e+01 
+  @H = 0.056 0.053 0.049 0.046 0.043 0.040 0.036 0.033 0.030 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.04e-13 4.04e-13 5.98e-13 7.86e-13 9.66e-13 1.14e-12 1.30e-12 1.45e-12 1.59e-12 1.72e-12 1.84e-12 1.97e-12 2.09e-12 2.22e-12 2.40e-12 4.00e-12 1.18e-13 2.94e-13 
+  @Y = 3.69e+01 3.59e+01 3.48e+01 3.38e+01 3.27e+01 3.16e+01 3.04e+01 2.93e+01 2.83e+01 2.72e+01 2.62e+01 2.54e+01 2.46e+01 2.40e+01 2.39e+01 2.73e+01 -2.49e+01 -1.21e+00 
+  @Z = -1.93e+02 -1.80e+02 -1.67e+02 -1.54e+02 -1.41e+02 -1.28e+02 -1.15e+02 -1.03e+02 -9.02e+01 -7.74e+01 -6.45e+01 -5.13e+01 -3.77e+01 -2.36e+01 -8.15e+00 1.11e+01 -9.35e+01 8.70e+01 
+
+CO(V20) + @A + @H_eV => CO(V19) + @C   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @H = 0.059 0.056 0.052 0.049 0.046 0.043 0.039 0.036 0.033 0.030 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.19e-13 4.34e-13 6.45e-13 8.49e-13 1.05e-12 1.23e-12 1.41e-12 1.58e-12 1.73e-12 1.88e-12 2.01e-12 2.14e-12 2.27e-12 2.40e-12 2.54e-12 2.73e-12 4.41e-12 1.35e-13 3.32e-13 
+  @Y = 3.78e+01 3.68e+01 3.58e+01 3.47e+01 3.36e+01 3.26e+01 3.15e+01 3.03e+01 2.93e+01 2.82e+01 2.72e+01 2.62e+01 2.53e+01 2.46e+01 2.40e+01 2.39e+01 2.67e+01 -2.45e+01 -1.17e+00 
+  @Z = -2.05e+02 -1.91e+02 -1.78e+02 -1.65e+02 -1.52e+02 -1.40e+02 -1.27e+02 -1.14e+02 -1.02e+02 -8.93e+01 -7.66e+01 -6.37e+01 -5.06e+01 -3.70e+01 -2.30e+01 -7.60e+00 8.77e+00 -9.07e+01 8.73e+01 
+
+CO(V19) + @A => CO(V20) + @C + @H_eV   ! @X*Tgas*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) 
+  @E = 6.83e+02 6.45e+02 6.06e+02 5.69e+02 5.31e+02 4.94e+02 4.57e+02 4.20e+02 3.84e+02 3.47e+02 3.11e+02 2.76e+02 2.40e+02 2.05e+02 1.70e+02 1.36e+02 1.01e+02 6.74e+01 3.35e+01 
+  @H = 0.059 0.056 0.052 0.049 0.046 0.043 0.039 0.036 0.033 0.030 0.027 0.024 0.021 0.018 0.015 0.012 0.009 0.006 0.003 
+  @X = 2.19e-13 4.34e-13 6.45e-13 8.49e-13 1.05e-12 1.23e-12 1.41e-12 1.58e-12 1.73e-12 1.88e-12 2.01e-12 2.14e-12 2.27e-12 2.40e-12 2.54e-12 2.73e-12 4.41e-12 1.35e-13 3.32e-13 
+  @Y = 3.78e+01 3.68e+01 3.58e+01 3.47e+01 3.36e+01 3.26e+01 3.15e+01 3.03e+01 2.93e+01 2.82e+01 2.72e+01 2.62e+01 2.53e+01 2.46e+01 2.40e+01 2.39e+01 2.67e+01 -2.45e+01 -1.17e+00 
+  @Z = -2.05e+02 -1.91e+02 -1.78e+02 -1.65e+02 -1.52e+02 -1.40e+02 -1.27e+02 -1.14e+02 -1.02e+02 -8.93e+01 -7.66e+01 -6.37e+01 -5.06e+01 -3.70e+01 -2.30e+01 -7.60e+00 8.77e+00 -9.07e+01 8.73e+01 
+
+
+# ------------------------------------------------------
+# CO2 VV relaxation with CO 
+# ------------------------------------------------------
+CO2(V1) + @A => CO2 + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.026 0.029 0.032 0.035 0.039 0.042 0.045 0.048 0.051 0.054 0.058 0.061 0.064 0.067 0.070 0.073 0.076 0.079 0.081 0.084 
+  @X = 4.80e-12 1.05e-11 1.70e-11 2.46e-11 3.32e-11 4.28e-11 5.34e-11 6.51e-11 7.79e-11 9.17e-11 1.07e-10 1.23e-10 1.40e-10 1.59e-10 1.79e-10 2.00e-10 2.22e-10 2.46e-10 2.72e-10 2.99e-10 
+  @Y = -1.22e-06 2.29e+00 4.60e+00 6.88e+00 9.13e+00 1.13e+01 1.35e+01 1.56e+01 1.77e+01 1.97e+01 2.17e+01 2.37e+01 2.56e+01 2.74e+01 2.93e+01 3.11e+01 3.29e+01 3.47e+01 3.64e+01 3.82e+01 
+  @Z = -1.53e+02 -1.60e+02 -1.67e+02 -1.74e+02 -1.80e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.41e+02 -2.48e+02 -2.55e+02 -2.62e+02 -2.68e+02 -2.75e+02 -2.82e+02 
+
+
+CO2 + @A + @H_eV => CO2(V1) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)  
+  @E = -2.96e+02 -3.34e+02 -3.73e+02 -4.10e+02 -4.48e+02 -4.85e+02 -5.22e+02 -5.59e+02 -5.95e+02 -6.32e+02 -6.67e+02 -7.03e+02 -7.39e+02 -7.74e+02 -8.09e+02 -8.43e+02 -8.78e+02 -9.12e+02 -9.45e+02 -9.79e+02
+  @H = 0.026 0.029 0.032 0.035 0.039 0.042 0.045 0.048 0.051 0.054 0.058 0.061 0.064 0.067 0.070 0.073 0.076 0.079 0.081 0.084 
+  @X = 4.80e-12 1.05e-11 1.70e-11 2.46e-11 3.32e-11 4.28e-11 5.34e-11 6.51e-11 7.79e-11 9.17e-11 1.07e-10 1.23e-10 1.40e-10 1.59e-10 1.79e-10 2.00e-10 2.22e-10 2.46e-10 2.72e-10 2.99e-10 
+  @Y = -1.22e-06 2.29e+00 4.60e+00 6.88e+00 9.13e+00 1.13e+01 1.35e+01 1.56e+01 1.77e+01 1.97e+01 2.17e+01 2.37e+01 2.56e+01 2.74e+01 2.93e+01 3.11e+01 3.29e+01 3.47e+01 3.64e+01 3.82e+01 
+  @Z = -1.53e+02 -1.60e+02 -1.67e+02 -1.74e+02 -1.80e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.41e+02 -2.48e+02 -2.55e+02 -2.62e+02 -2.68e+02 -2.75e+02 -2.82e+02 
+
+
+CO2(V2) + @A => CO2(V1) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.022 0.026 0.029 0.032 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.058 0.061 0.064 0.067 0.070 0.073 0.075 0.078 0.081
+  @X = 8.96e-12 1.95e-11 3.19e-11 4.61e-11 6.24e-11 8.07e-11 1.01e-10 1.24e-10 1.48e-10 1.75e-10 2.04e-10 2.36e-10 2.69e-10 3.05e-10 3.44e-10 3.85e-10 4.29e-10 4.76e-10 5.26e-10 5.78e-10 
+  @Y = -2.10e+00 1.45e-01 2.43e+00 4.71e+00 6.98e+00 9.22e+00 1.14e+01 1.36e+01 1.57e+01 1.77e+01 1.97e+01 2.17e+01 2.36e+01 2.55e+01 2.74e+01 2.92e+01 3.10e+01 3.28e+01 3.46e+01 3.63e+01 
+  @Z = -1.46e+02 -1.53e+02 -1.60e+02 -1.67e+02 -1.74e+02 -1.80e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.41e+02 -2.48e+02 -2.54e+02 -2.61e+02 -2.68e+02 -2.75e+02 
+
+
+CO2(V1) + @A + @H_eV => CO2(V2) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @E = -2.60e+02 -2.99e+02 -3.37e+02 -3.74e+02 -4.12e+02 -4.49e+02 -4.86e+02 -5.23e+02 -5.59e+02 -5.96e+02 -6.32e+02 -6.67e+02 -7.03e+02 -7.38e+02 -7.73e+02 -8.07e+02 -8.42e+02 -8.76e+02 -9.10e+02 -9.43e+02  
+  @H = 0.022 0.026 0.029 0.032 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.058 0.061 0.064 0.067 0.070 0.073 0.075 0.078 0.081
+  @X = 8.96e-12 1.95e-11 3.19e-11 4.61e-11 6.24e-11 8.07e-11 1.01e-10 1.24e-10 1.48e-10 1.75e-10 2.04e-10 2.36e-10 2.69e-10 3.05e-10 3.44e-10 3.85e-10 4.29e-10 4.76e-10 5.26e-10 5.78e-10  
+  @Y = -2.10e+00 1.45e-01 2.43e+00 4.71e+00 6.98e+00 9.22e+00 1.14e+01 1.36e+01 1.57e+01 1.77e+01 1.97e+01 2.17e+01 2.36e+01 2.55e+01 2.74e+01 2.92e+01 3.10e+01 3.28e+01 3.46e+01 3.63e+01  
+  @Z = -1.46e+02 -1.53e+02 -1.60e+02 -1.67e+02 -1.74e+02 -1.80e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.41e+02 -2.48e+02 -2.54e+02 -2.61e+02 -2.68e+02 -2.75e+02 
+
+
+CO2(V3) + @A => CO2(V2) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.019 0.023 0.026 0.029 0.032 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069 0.072 0.075 0.078
+  @X = 1.25e-11 2.73e-11 4.46e-11 6.48e-11 8.78e-11 1.14e-10 1.43e-10 1.76e-10 2.11e-10 2.50e-10 2.93e-10 3.38e-10 3.87e-10 4.40e-10 4.96e-10 5.56e-10 6.20e-10 6.88e-10 7.61e-10 8.38e-10
+  @Y = -4.10e+00 -1.96e+00 2.75e-01 2.54e+00 4.81e+00 7.06e+00 9.28e+00 1.15e+01 1.36e+01 1.57e+01 1.77e+01 1.97e+01 2.17e+01 2.36e+01 2.55e+01 2.73e+01 2.91e+01 3.09e+01 3.27e+01 3.45e+01 
+  @Z = -1.39e+02 -1.47e+02 -1.54e+02 -1.61e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.41e+02 -2.47e+02 -2.54e+02 -2.61e+02 -2.67e+02 
+
+
+CO2(V2) + @A + @H_eV => CO2(V3) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @E = -2.24e+02 -2.63e+02 -3.01e+02 -3.39e+02 -3.76e+02 -4.13e+02 -4.50e+02 -4.87e+02 -5.24e+02 -5.60e+02 -5.96e+02 -6.31e+02 -6.67e+02 -7.02e+02 -7.37e+02 -7.71e+02 -8.06e+02 -8.40e+02 -8.74e+02 -9.07e+02
+  @H = 0.019 0.023 0.026 0.029 0.032 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069 0.072 0.075 0.078
+  @X = 1.25e-11 2.73e-11 4.46e-11 6.48e-11 8.78e-11 1.14e-10 1.43e-10 1.76e-10 2.11e-10 2.50e-10 2.93e-10 3.38e-10 3.87e-10 4.40e-10 4.96e-10 5.56e-10 6.20e-10 6.88e-10 7.61e-10 8.38e-10
+  @Y = -4.10e+00 -1.96e+00 2.75e-01 2.54e+00 4.81e+00 7.06e+00 9.28e+00 1.15e+01 1.36e+01 1.57e+01 1.77e+01 1.97e+01 2.17e+01 2.36e+01 2.55e+01 2.73e+01 2.91e+01 3.09e+01 3.27e+01 3.45e+01 
+  @Z = -1.39e+02 -1.47e+02 -1.54e+02 -1.61e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.41e+02 -2.47e+02 -2.54e+02 -2.61e+02 -2.67e+02 
+
+CO2(V4) + @A => CO2(V3) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.016 0.020 0.023 0.026 0.029 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069 0.072 0.075 
+  @X = 1.57e-11 3.40e-11 5.55e-11 8.06e-11 1.10e-10 1.43e-10 1.80e-10 2.21e-10 2.67e-10 3.17e-10 3.72e-10 4.31e-10 4.94e-10 5.62e-10 6.35e-10 7.13e-10 7.96e-10 8.85e-10 9.79e-10 1.08e-09 
+  @Y = -5.96e+00 -3.97e+00 -1.83e+00 3.90e-01 2.64e+00 4.90e+00 7.13e+00 9.33e+00 1.15e+01 1.36e+01 1.57e+01 1.77e+01 1.97e+01 2.16e+01 2.35e+01 2.54e+01 2.72e+01 2.90e+01 3.08e+01 3.26e+01
+  @Z = -1.31e+02 -1.39e+02 -1.47e+02 -1.54e+02 -1.61e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.40e+02 -2.47e+02 -2.54e+02 -2.60e+02
+
+
+CO2(V3) + @A + @H_eV => CO2(V4) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)  
+  @E = -1.88e+02 -2.27e+02 -2.65e+02 -3.03e+02 -3.40e+02 -3.77e+02 -4.14e+02 -4.51e+02 -4.88e+02 -5.24e+02 -5.60e+02 -5.96e+02 -6.31e+02 -6.66e+02 -7.01e+02 -7.36e+02 -7.70e+02 -8.04e+02 -8.38e+02 -8.71e+02 
+  @H = 0.016 0.020 0.023 0.026 0.029 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069 0.072 0.075 
+  @X = 1.57e-11 3.40e-11 5.55e-11 8.06e-11 1.10e-10 1.43e-10 1.80e-10 2.21e-10 2.67e-10 3.17e-10 3.72e-10 4.31e-10 4.94e-10 5.62e-10 6.35e-10 7.13e-10 7.96e-10 8.85e-10 9.79e-10 1.08e-09 
+  @Y = -5.96e+00 -3.97e+00 -1.83e+00 3.90e-01 2.64e+00 4.90e+00 7.13e+00 9.33e+00 1.15e+01 1.36e+01 1.57e+01 1.77e+01 1.97e+01 2.16e+01 2.35e+01 2.54e+01 2.72e+01 2.90e+01 3.08e+01 3.26e+01
+  @Z = -1.31e+02 -1.39e+02 -1.47e+02 -1.54e+02 -1.61e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.14e+02 -2.20e+02 -2.27e+02 -2.34e+02 -2.40e+02 -2.47e+02 -2.54e+02 -2.60e+02
+
+CO2(V5) + @A => CO2(V4) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.013 0.016 0.020 0.023 0.026 0.029 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069 0.072 
+  @X = 1.85e-11 3.98e-11 6.48e-11 9.40e-11 1.28e-10 1.67e-10 2.11e-10 2.60e-10 3.15e-10 3.75e-10 4.41e-10 5.13e-10 5.90e-10 6.73e-10 7.61e-10 8.56e-10 9.57e-10 1.06e-09 1.18e-09 1.30e-09 
+  @Y = -7.61e+00 -5.84e+00 -3.85e+00 -1.72e+00 4.85e-01 2.72e+00 4.96e+00 7.18e+00 9.37e+00 1.15e+01 1.36e+01 1.57e+01 1.77e+01 1.96e+01 2.16e+01 2.35e+01 2.53e+01 2.71e+01 2.89e+01 3.07e+01 
+  @Z = -1.22e+02 -1.31e+02 -1.40e+02 -1.47e+02 -1.55e+02 -1.61e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.13e+02 -2.20e+02 -2.27e+02 -2.33e+02 -2.40e+02 -2.47e+02 -2.53e+02 
+
+
+CO2(V4) + @A + @H_eV => CO2(V5) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @E = -1.53e+02 -1.91e+02 -2.29e+02 -2.67e+02 -3.04e+02 -3.42e+02 -3.79e+02 -4.15e+02 -4.52e+02 -4.88e+02 -5.24e+02 -5.60e+02 -5.95e+02 -6.30e+02 -6.65e+02 -7.00e+02 -7.34e+02 -7.68e+02 -8.02e+02 -8.35e+02
+  @H = 0.013 0.016 0.020 0.023 0.026 0.029 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069 0.072 
+  @X = 1.85e-11 3.98e-11 6.48e-11 9.40e-11 1.28e-10 1.67e-10 2.11e-10 2.60e-10 3.15e-10 3.75e-10 4.41e-10 5.13e-10 5.90e-10 6.73e-10 7.61e-10 8.56e-10 9.57e-10 1.06e-09 1.18e-09 1.30e-09 
+  @Y = -7.61e+00 -5.84e+00 -3.85e+00 -1.72e+00 4.85e-01 2.72e+00 4.96e+00 7.18e+00 9.37e+00 1.15e+01 1.36e+01 1.57e+01 1.77e+01 1.96e+01 2.16e+01 2.35e+01 2.53e+01 2.71e+01 2.89e+01 3.07e+01 
+  @Z = -1.22e+02 -1.31e+02 -1.40e+02 -1.47e+02 -1.55e+02 -1.61e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.13e+02 -2.20e+02 -2.27e+02 -2.33e+02 -2.40e+02 -2.47e+02 -2.53e+02 
+
+CO2(V6) + @A => CO2(V5) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @H = 0.010 0.013 0.017 0.020 0.023 0.026 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069
+  @X = 2.12e-11 4.51e-11 7.29e-11 1.05e-10 1.43e-10 1.87e-10 2.37e-10 2.93e-10 3.56e-10 4.25e-10 5.02e-10 5.84e-10 6.74e-10 7.71e-10 8.74e-10 9.85e-10 1.10e-09 1.23e-09 1.36e-09 1.50e-09  
+  @Y = -8.98e+00 -7.51e+00 -5.73e+00 -3.74e+00 -1.62e+00 5.69e-01 2.79e+00 5.01e+00 7.22e+00 9.39e+00 1.15e+01 1.36e+01 1.56e+01 1.76e+01 1.96e+01 2.15e+01 2.34e+01 2.52e+01 2.70e+01 2.88e+01 
+  @Z = -1.13e+02 -1.23e+02 -1.32e+02 -1.40e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.13e+02 -2.20e+02 -2.26e+02 -2.33e+02 -2.39e+02 -2.46e+02
+
+CO2(V5) + @A + @H_eV => CO2(V6) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)  
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @E = -1.17e+02 -1.55e+02 -1.93e+02 -2.31e+02 -2.68e+02 -3.06e+02 -3.43e+02 -3.79e+02 -4.16e+02 -4.52e+02 -4.88e+02 -5.24e+02 -5.59e+02 -5.94e+02 -6.29e+02 -6.64e+02 -6.98e+02 -7.32e+02 -7.66e+02 -8.00e+02 
+  @H = 0.010 0.013 0.017 0.020 0.023 0.026 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066 0.069
+  @X = 2.12e-11 4.51e-11 7.29e-11 1.05e-10 1.43e-10 1.87e-10 2.37e-10 2.93e-10 3.56e-10 4.25e-10 5.02e-10 5.84e-10 6.74e-10 7.71e-10 8.74e-10 9.85e-10 1.10e-09 1.23e-09 1.36e-09 1.50e-09  
+  @Y = -8.98e+00 -7.51e+00 -5.73e+00 -3.74e+00 -1.62e+00 5.69e-01 2.79e+00 5.01e+00 7.22e+00 9.39e+00 1.15e+01 1.36e+01 1.56e+01 1.76e+01 1.96e+01 2.15e+01 2.34e+01 2.52e+01 2.70e+01 2.88e+01 
+  @Z = -1.13e+02 -1.23e+02 -1.32e+02 -1.40e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.13e+02 -2.20e+02 -2.26e+02 -2.33e+02 -2.39e+02 -2.46e+02
+CO2(V7) + @A => CO2(V6) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @H = 0.007 0.010 0.014 0.017 0.020 0.023 0.026 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066  
+  @X = 2.40e-11 5.02e-11 8.01e-11 1.15e-10 1.56e-10 2.03e-10 2.58e-10 3.20e-10 3.90e-10 4.67e-10 5.53e-10 6.46e-10 7.47e-10 8.56e-10 9.74e-10 1.10e-09 1.23e-09 1.38e-09 1.53e-09 1.69e-09 
+  @Y = -9.98e+00 -8.89e+00 -7.41e+00 -5.63e+00 -3.65e+00 -1.54e+00 6.37e-01 2.85e+00 5.05e+00 7.24e+00 9.39e+00 1.15e+01 1.36e+01 1.56e+01 1.76e+01 1.95e+01 2.14e+01 2.33e+01 2.51e+01 2.69e+01 
+  @Z = -1.02e+02 -1.13e+02 -1.23e+02 -1.32e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.13e+02 -2.19e+02 -2.26e+02 -2.33e+02 -2.39e+02
+
+CO2(V6) + @A + @H_eV => CO2(V7) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @E = -8.08e+01 -1.19e+02 -1.57e+02 -1.95e+02 -2.33e+02 -2.70e+02 -3.07e+02 -3.44e+02 -3.80e+02 -4.16e+02 -4.52e+02 -4.88e+02 -5.23e+02 -5.58e+02 -5.93e+02 -6.28e+02 -6.62e+02 -6.96e+02 -7.30e+02 -7.64e+02 
+  @H = 0.007 0.010 0.014 0.017 0.020 0.023 0.026 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 0.066  
+  @X = 2.40e-11 5.02e-11 8.01e-11 1.15e-10 1.56e-10 2.03e-10 2.58e-10 3.20e-10 3.90e-10 4.67e-10 5.53e-10 6.46e-10 7.47e-10 8.56e-10 9.74e-10 1.10e-09 1.23e-09 1.38e-09 1.53e-09 1.69e-09 
+  @Y = -9.98e+00 -8.89e+00 -7.41e+00 -5.63e+00 -3.65e+00 -1.54e+00 6.37e-01 2.85e+00 5.05e+00 7.24e+00 9.39e+00 1.15e+01 1.36e+01 1.56e+01 1.76e+01 1.95e+01 2.14e+01 2.33e+01 2.51e+01 2.69e+01 
+  @Z = -1.02e+02 -1.13e+02 -1.23e+02 -1.32e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.07e+02 -2.13e+02 -2.19e+02 -2.26e+02 -2.33e+02 -2.39e+02
+
+CO2(V8) + @A => CO2(V7) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.004 0.007 0.010 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 
+  @X = 2.71e-11 5.55e-11 8.73e-11 1.24e-10 1.67e-10 2.17e-10 2.75e-10 3.42e-10 4.17e-10 5.01e-10 5.95e-10 6.97e-10 8.09e-10 9.30e-10 1.06e-09 1.20e-09 1.35e-09 1.51e-09 1.68e-09 1.86e-09 
+  @Y = -1.06e+01 -9.92e+00 -8.82e+00 -7.33e+00 -5.55e+00 -3.57e+00 -1.48e+00 6.90e-01 2.88e+00 5.07e+00 7.24e+00 9.38e+00 1.15e+01 1.35e+01 1.55e+01 1.75e+01 1.94e+01 2.13e+01 2.32e+01 2.50e+01 
+  @Z = -9.12e+01 -1.03e+02 -1.14e+02 -1.24e+02 -1.33e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.06e+02 -2.13e+02 -2.19e+02 -2.26e+02 -2.32e+02 
+
+CO2(V7) + @A + @H_eV => CO2(V8) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @E = -4.50e+01 -8.33e+01 -1.21e+02 -1.59e+02 -1.97e+02 -2.34e+02 -2.71e+02 -3.08e+02 -3.44e+02 -3.80e+02 -4.16e+02 -4.52e+02 -4.87e+02 -5.23e+02 -5.57e+02 -5.92e+02 -6.26e+02 -6.60e+02 -6.94e+02 -7.28e+02
+  @H = 0.004 0.007 0.010 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 0.063 
+  @X = 2.71e-11 5.55e-11 8.73e-11 1.24e-10 1.67e-10 2.17e-10 2.75e-10 3.42e-10 4.17e-10 5.01e-10 5.95e-10 6.97e-10 8.09e-10 9.30e-10 1.06e-09 1.20e-09 1.35e-09 1.51e-09 1.68e-09 1.86e-09 
+  @Y = -1.06e+01 -9.92e+00 -8.82e+00 -7.33e+00 -5.55e+00 -3.57e+00 -1.48e+00 6.90e-01 2.88e+00 5.07e+00 7.24e+00 9.38e+00 1.15e+01 1.35e+01 1.55e+01 1.75e+01 1.94e+01 2.13e+01 2.32e+01 2.50e+01 
+  @Z = -9.12e+01 -1.03e+02 -1.14e+02 -1.24e+02 -1.33e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.94e+02 -2.00e+02 -2.06e+02 -2.13e+02 -2.19e+02 -2.26e+02 -2.32e+02 
+CO2(V9) + @A => CO2(V8) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.001 0.004 0.007 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 
+  @X = 3.06e-11 6.17e-11 9.50e-11 1.33e-10 1.77e-10 2.29e-10 2.89e-10 3.59e-10 4.38e-10 5.28e-10 6.28e-10 7.39e-10 8.60e-10 9.91e-10 1.13e-09 1.29e-09 1.45e-09 1.62e-09 1.81e-09 2.00e-09 
+  @Y = -1.10e+01 -1.06e+01 -9.87e+00 -8.75e+00 -7.25e+00 -5.48e+00 -3.51e+00 -1.42e+00 7.26e-01 2.90e+00 5.08e+00 7.23e+00 9.35e+00 1.14e+01 1.35e+01 1.55e+01 1.74e+01 1.93e+01 2.12e+01 2.30e+01 
+  @Z = -8.21e+01 -9.19e+01 -1.04e+02 -1.14e+02 -1.24e+02 -1.33e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.93e+02 -2.00e+02 -2.06e+02 -2.12e+02 -2.19e+02 -2.25e+02 
+
+
+CO2(V8) + @A + @H_eV => CO2(V9) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @E = -9.09e+00 -4.74e+01 -8.55e+01 -1.23e+02 -1.61e+02 -1.98e+02 -2.35e+02 -2.72e+02 -3.08e+02 -3.45e+02 -3.80e+02 -4.16e+02 -4.52e+02 -4.87e+02 -5.22e+02 -5.56e+02 -5.91e+02 -6.25e+02 -6.58e+02 -6.92e+02
+  @H = 0.001 0.004 0.007 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057 0.060 
+  @X = 3.06e-11 6.17e-11 9.50e-11 1.33e-10 1.77e-10 2.29e-10 2.89e-10 3.59e-10 4.38e-10 5.28e-10 6.28e-10 7.39e-10 8.60e-10 9.91e-10 1.13e-09 1.29e-09 1.45e-09 1.62e-09 1.81e-09 2.00e-09 
+  @Y = -1.10e+01 -1.06e+01 -9.87e+00 -8.75e+00 -7.25e+00 -5.48e+00 -3.51e+00 -1.42e+00 7.26e-01 2.90e+00 5.08e+00 7.23e+00 9.35e+00 1.14e+01 1.35e+01 1.55e+01 1.74e+01 1.93e+01 2.12e+01 2.30e+01 
+  @Z = -8.21e+01 -9.19e+01 -1.04e+02 -1.14e+02 -1.24e+02 -1.33e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.93e+02 -2.00e+02 -2.06e+02 -2.12e+02 -2.19e+02 -2.25e+02
+
+CO2(V10) + @A + @H_eV => CO2(V9) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO 
+  @C = CO(V1) 
+  @H = 0.002 
+  @X = 3.42e-11 
+  @Y = -1.08e+01 
+  @Z = -8.61e+01 
+
+CO2(V10) + @A => CO2(V9) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @C = CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.001 0.004 0.008 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057
+  @X = 6.87e-11 1.04e-10 1.43e-10 1.87e-10 2.39e-10 3.01e-10 3.72e-10 4.54e-10 5.48e-10 6.53e-10 7.70e-10 8.99e-10 1.04e-09 1.19e-09 1.36e-09 1.53e-09 1.72e-09 1.92e-09 2.13e-09
+  @Y = -1.10e+01 -1.05e+01 -9.83e+00 -8.69e+00 -7.20e+00 -5.42e+00 -3.47e+00 -1.40e+00 7.40e-01 2.90e+00 5.06e+00 7.20e+00 9.30e+00 1.14e+01 1.34e+01 1.54e+01 1.73e+01 1.92e+01 2.11e+01
+  @Z = -8.25e+01 -9.26e+01 -1.04e+02 -1.15e+02 -1.25e+02 -1.33e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.93e+02 -1.99e+02 -2.06e+02 -2.12e+02 -2.18e+02  
+
+
+CO2(V9) + @A => CO2(V10) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) 
+  @C = CO 
+  @E = 2.69e+01 
+  @H = 0.002 
+  @X = 3.42e-11 
+  @Y = -1.08e+01 
+  @Z = -8.61e+01 
+
+CO2(V9) + @A + @H_eV => CO2(V10) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @E = -1.15e+01 -4.95e+01 -8.73e+01 -1.25e+02 -1.62e+02 -1.99e+02 -2.36e+02 -2.72e+02 -3.09e+02 -3.44e+02 -3.80e+02 -4.16e+02 -4.51e+02 -4.86e+02 -5.20e+02 -5.55e+02 -5.89e+02 -6.22e+02 -6.56e+02 
+  @H = 0.001 0.004 0.008 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.054 0.057
+  @X = 6.87e-11 1.04e-10 1.43e-10 1.87e-10 2.39e-10 3.01e-10 3.72e-10 4.54e-10 5.48e-10 6.53e-10 7.70e-10 8.99e-10 1.04e-09 1.19e-09 1.36e-09 1.53e-09 1.72e-09 1.92e-09 2.13e-09
+  @Y = -1.10e+01 -1.05e+01 -9.83e+00 -8.69e+00 -7.20e+00 -5.42e+00 -3.47e+00 -1.40e+00 7.40e-01 2.90e+00 5.06e+00 7.20e+00 9.30e+00 1.14e+01 1.34e+01 1.54e+01 1.73e+01 1.92e+01 2.11e+01
+  @Z = -8.25e+01 -9.26e+01 -1.04e+02 -1.15e+02 -1.25e+02 -1.33e+02 -1.41e+02 -1.48e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.75e+02 -1.81e+02 -1.87e+02 -1.93e+02 -1.99e+02 -2.06e+02 -2.12e+02 -2.18e+02
+
+CO2(V11) + @A + @H_eV => CO2(V10) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) 
+  @C = CO(V1) CO(V2) 
+  @H = 0.005 0.002 
+  @X = 3.81e-11 7.61e-11 
+  @Y = -1.03e+01 -1.08e+01 
+  @Z = -9.66e+01 -8.54e+01 
+
+CO2(V11) + @A => CO2(V10) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+  @H = 0.001 0.004 0.008 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.053
+  @X = 1.15e-10 1.55e-10 1.99e-10 2.50e-10 3.11e-10 3.83e-10 4.67e-10 5.62e-10 6.71e-10 7.93e-10 9.28e-10 1.08e-09 1.24e-09 1.41e-09 1.60e-09 1.80e-09 2.02e-09 2.25e-09 
+  @Y = -1.09e+01 -1.05e+01 -9.78e+00 -8.64e+00 -7.14e+00 -5.38e+00 -3.43e+00 -1.38e+00 7.45e-01 2.89e+00 5.03e+00 7.16e+00 9.25e+00 1.13e+01 1.33e+01 1.53e+01 1.72e+01 1.91e+01 
+  @Z = -8.29e+01 -9.32e+01 -1.05e+02 -1.15e+02 -1.25e+02 -1.34e+02 -1.41e+02 -1.49e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.93e+02 -1.99e+02 -2.05e+02 -2.12e+02 
+
+CO2(V10) + @A => CO2(V11) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) 
+  @C = CO CO(V1) 
+  @E = 6.27e+01 2.44e+01 
+  @H = 0.005 0.002 
+  @X = 3.81e-11 7.61e-11 
+  @Y = -1.03e+01 -1.08e+01 
+  @Z = -9.66e+01 -8.54e+01 
+
+CO2(V10) + @A + @H_eV => CO2(V11) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @E = -1.37e+01 -5.15e+01 -8.90e+01 -1.26e+02 -1.63e+02 -2.00e+02 -2.36e+02 -2.73e+02 -3.09e+02 -3.44e+02 -3.80e+02 -4.15e+02 -4.50e+02 -4.84e+02 -5.19e+02 -5.53e+02 -5.87e+02 -6.20e+02  
+  @H = 0.001 0.004 0.008 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.048 0.051 0.053
+  @X = 1.15e-10 1.55e-10 1.99e-10 2.50e-10 3.11e-10 3.83e-10 4.67e-10 5.62e-10 6.71e-10 7.93e-10 9.28e-10 1.08e-09 1.24e-09 1.41e-09 1.60e-09 1.80e-09 2.02e-09 2.25e-09 
+  @Y = -1.09e+01 -1.05e+01 -9.78e+00 -8.64e+00 -7.14e+00 -5.38e+00 -3.43e+00 -1.38e+00 7.45e-01 2.89e+00 5.03e+00 7.16e+00 9.25e+00 1.13e+01 1.33e+01 1.53e+01 1.72e+01 1.91e+01 
+  @Z = -8.29e+01 -9.32e+01 -1.05e+02 -1.15e+02 -1.25e+02 -1.34e+02 -1.41e+02 -1.49e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.74e+02 -1.81e+02 -1.87e+02 -1.93e+02 -1.99e+02 -2.05e+02 -2.12e+02 
+
+CO2(V12) + @A + @H_eV => CO2(V11) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) 
+  @C = CO(V1) CO(V2) CO(V3) 
+  @H = 0.008 0.005 0.002 
+  @X = 4.29e-11 8.40e-11 1.26e-10 
+  @Y = -9.53e+00 -1.04e+01 -1.08e+01 
+  @Z = -1.07e+02 -9.58e+01 -8.49e+01 
+
+CO2(V12) + @A => CO2(V11) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) 
+  @C = CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.001 0.005 0.008 0.011 0.014 0.017 0.020 0.024 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.047 0.050  
+  @X = 1.69e-10 2.13e-10 2.64e-10 3.23e-10 3.94e-10 4.76e-10 5.73e-10 6.83e-10 8.08e-10 9.48e-10 1.10e-09 1.27e-09 1.46e-09 1.65e-09 1.87e-09 2.10e-09 2.34e-09 
+  @Y = -1.09e+01 -1.05e+01 -9.75e+00 -8.60e+00 -7.10e+00 -5.35e+00 -3.42e+00 -1.37e+00 7.34e-01 2.86e+00 4.99e+00 7.10e+00 9.17e+00 1.12e+01 1.32e+01 1.52e+01 1.71e+01 
+  @Z = -8.34e+01 -9.37e+01 -1.05e+02 -1.16e+02 -1.25e+02 -1.34e+02 -1.41e+02 -1.49e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.74e+02 -1.80e+02 -1.86e+02 -1.93e+02 -1.99e+02 -2.05e+02  
+
+
+CO2(V11) + @A => CO2(V12) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) 
+  @C = CO CO(V1) CO(V2) 
+  @E = 9.86e+01 6.03e+01 2.22e+01 
+  @H = 0.008 0.005 0.002 
+  @X = 4.29e-11 8.40e-11 1.26e-10 
+  @Y = -9.53e+00 -1.04e+01 -1.08e+01 
+  @Z = -1.07e+02 -9.58e+01 -8.49e+01 
+
+CO2(V11) + @A + @H_eV => CO2(V12) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)  
+  @E = -1.56e+01 -5.31e+01 -9.04e+01 -1.27e+02 -1.64e+02 -2.01e+02 -2.37e+02 -2.73e+02 -3.08e+02 -3.44e+02 -3.79e+02 -4.14e+02 -4.48e+02 -4.83e+02 -5.17e+02 -5.51e+02 -5.84e+02
+  @H = 0.001 0.005 0.008 0.011 0.014 0.017 0.020 0.024 0.027 0.030 0.033 0.036 0.039 0.042 0.045 0.047 0.050  
+  @X = 1.69e-10 2.13e-10 2.64e-10 3.23e-10 3.94e-10 4.76e-10 5.73e-10 6.83e-10 8.08e-10 9.48e-10 1.10e-09 1.27e-09 1.46e-09 1.65e-09 1.87e-09 2.10e-09 2.34e-09 
+  @Y = -1.09e+01 -1.05e+01 -9.75e+00 -8.60e+00 -7.10e+00 -5.35e+00 -3.42e+00 -1.37e+00 7.34e-01 2.86e+00 4.99e+00 7.10e+00 9.17e+00 1.12e+01 1.32e+01 1.52e+01 1.71e+01 
+  @Z = -8.34e+01 -9.37e+01 -1.05e+02 -1.16e+02 -1.25e+02 -1.34e+02 -1.41e+02 -1.49e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.74e+02 -1.80e+02 -1.86e+02 -1.93e+02 -1.99e+02 -2.05e+02  
+CO2(V13) + @A + @H_eV => CO2(V12) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) 
+  @H = 0.012 0.008 0.005 0.002 
+  @X = 4.89e-11 9.38e-11 1.38e-10 1.84e-10 
+  @Y = -8.34e+00 -9.60e+00 -1.04e+01 -1.09e+01 
+  @Z = -1.17e+02 -1.07e+02 -9.52e+01 -8.44e+01 
+
+CO2(V13) + @A => CO2(V12) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @C = CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @H = 0.001 0.005 0.008 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.041 0.044 0.047
+  @X = 2.32e-10 2.81e-10 3.38e-10 4.05e-10 4.86e-10 5.81e-10 6.91e-10 8.17e-10 9.60e-10 1.12e-09 1.29e-09 1.48e-09 1.69e-09 1.92e-09 2.16e-09 2.41e-09
+  @Y = -1.09e+01 -1.05e+01 -9.72e+00 -8.57e+00 -7.08e+00 -5.33e+00 -3.41e+00 -1.38e+00 7.07e-01 2.82e+00 4.93e+00 7.02e+00 9.08e+00 1.11e+01 1.31e+01 1.50e+01
+  @Z = -8.37e+01 -9.41e+01 -1.05e+02 -1.16e+02 -1.25e+02 -1.34e+02 -1.41e+02 -1.49e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.74e+02 -1.80e+02 -1.86e+02 -1.92e+02 -1.98e+02
+
+
+CO2(V12) + @A => CO2(V13) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) 
+  @C = CO CO(V1) CO(V2) CO(V3) 
+  @E = 1.34e+02 9.61e+01 5.81e+01 2.03e+01 
+  @H = 0.012 0.008 0.005 0.002 
+  @X = 4.89e-11 9.38e-11 1.38e-10 1.84e-10 
+  @Y = -8.34e+00 -9.60e+00 -1.04e+01 -1.09e+01 
+  @Z = -1.17e+02 -1.07e+02 -9.52e+01 -8.44e+01 
+
+CO2(V12) + @A + @H_eV => CO2(V13) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20) 
+  @C = CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+  @E = -1.73e+01 -5.46e+01 -9.16e+01 -1.28e+02 -1.65e+02 -2.01e+02 -2.37e+02 -2.73e+02 -3.08e+02 -3.43e+02 -3.78e+02 -4.13e+02 -4.47e+02 -4.81e+02 -5.15e+02 -5.48e+02 
+  @H = 0.001 0.005 0.008 0.011 0.014 0.017 0.020 0.023 0.027 0.030 0.033 0.036 0.039 0.041 0.044 0.047
+  @X = 2.32e-10 2.81e-10 3.38e-10 4.05e-10 4.86e-10 5.81e-10 6.91e-10 8.17e-10 9.60e-10 1.12e-09 1.29e-09 1.48e-09 1.69e-09 1.92e-09 2.16e-09 2.41e-09
+  @Y = -1.09e+01 -1.05e+01 -9.72e+00 -8.57e+00 -7.08e+00 -5.33e+00 -3.41e+00 -1.38e+00 7.07e-01 2.82e+00 4.93e+00 7.02e+00 9.08e+00 1.11e+01 1.31e+01 1.50e+01
+  @Z = -8.37e+01 -9.41e+01 -1.05e+02 -1.16e+02 -1.25e+02 -1.34e+02 -1.41e+02 -1.49e+02 -1.55e+02 -1.62e+02 -1.68e+02 -1.74e+02 -1.80e+02 -1.86e+02 -1.92e+02 -1.98e+02
+
+CO2(V14) + @A + @H_eV => CO2(V13) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @H = 0.015 0.011 0.008 0.005 0.002 
+  @X = 5.61e-11 1.06e-10 1.53e-10 2.00e-10 2.51e-10 
+  @Y = -6.82e+00 -8.43e+00 -9.65e+00 -1.04e+01 -1.09e+01 
+  @Z = -1.27e+02 -1.17e+02 -1.06e+02 -9.46e+01 -8.41e+01 
+
+CO2(V14) + @A => CO2(V13) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+@A = CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@C = CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035 0.038 0.041 0.044
+@X = 3.03E-10 3.57E-10 4.21E-10 4.97E-10 5.89E-10 6.97E-10 8.22E-10 9.64E-10 1.12E-09 1.30E-09 1.50E-09 1.71E-09 1.95E-09 2.20E-09 2.46E-09
+@Y = -1.09E+01 -1.04E+01 -9.70E+00 -8.55E+00 -7.07E+00 -5.33E+00 -3.43E+00 -1.41E+00 6.57E-01 2.75E+00 4.85E+00 6.92E+00 8.97E+00 1.10E+01 1.29E+01
+@Z = -8.40E+01 -9.44E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.34E+02 -1.41E+02 -1.48E+02 -1.55E+02 -1.61E+02 -1.68E+02 -1.74E+02 -1.80E+02 -1.86E+02 -1.92E+02
+
+
+CO2(V13) + @A => CO2(V14) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) 
+  @E = 1.70e+02 1.32e+02 9.40e+01 5.62e+01 1.87e+01 
+  @H = 0.015 0.011 0.008 0.005 0.002 
+  @X = 5.61e-11 1.06e-10 1.53e-10 2.00e-10 2.51e-10 
+  @Y = -6.82e+00 -8.43e+00 -9.65e+00 -1.04e+01 -1.09e+01 
+  @Z = -1.27e+02 -1.17e+02 -1.06e+02 -9.46e+01 -8.41e+01 
+
+CO2(V13) + @A + @H_eV => CO2(V14) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -1.86E+01 -5.56E+01 -9.23E+01 -1.29E+02 -1.65E+02 -2.01E+02 -2.37E+02 -2.72E+02 -3.07E+02 -3.42E+02 -3.77E+02 -4.11E+02 -4.45E+02 -4.79E+02 -5.12E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035 0.038 0.041 0.044
+@X = 3.03E-10 3.57E-10 4.21E-10 4.97E-10 5.89E-10 6.97E-10 8.22E-10 9.64E-10 1.12E-09 1.30E-09 1.50E-09 1.71E-09 1.95E-09 2.20E-09 2.46E-09
+@Y = -1.09E+01 -1.04E+01 -9.70E+00 -8.55E+00 -7.07E+00 -5.33E+00 -3.43E+00 -1.41E+00 6.57E-01 2.75E+00 4.85E+00 6.92E+00 8.97E+00 1.10E+01 1.29E+01
+@Z = -8.40E+01 -9.44E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.34E+02 -1.41E+02 -1.48E+02 -1.55E+02 -1.61E+02 -1.68E+02 -1.74E+02 -1.80E+02 -1.86E+02 -1.92E+02
+
+
+CO2(V15) + @A + @H_eV => CO2(V14) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @H = 0.018 0.014 0.011 0.008 0.005 0.001 
+  @X = 6.47e-11 1.21e-10 1.72e-10 2.21e-10 2.72e-10 3.26e-10 
+  @Y = -5.06e+00 -6.93e+00 -8.51e+00 -9.71e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.35e+02 -1.26e+02 -1.16e+02 -1.06e+02 -9.41e+01 -8.37e+01 
+
+CO2(V15) + @A => CO2(V14) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+@A = CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@C = CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035 0.038 0.041
+@X = 3.83E-10 4.43E-10 5.14E-10 6.00E-10 7.03E-10 8.24E-10 9.65E-10 1.12E-09 1.30E-09 1.50E-09 1.72E-09 1.96E-09 2.22E-09 2.50E-09
+@Y = -1.09E+01 -1.04E+01 -9.68E+00 -8.54E+00 -7.06E+00 -5.34E+00 -3.45E+00 -1.46E+00 5.99E-01 2.68E+00 4.76E+00 6.82E+00 8.85E+00 1.08E+01
+@Z = -8.43E+01 -9.47E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.34E+02 -1.41E+02 -1.48E+02 -1.55E+02 -1.61E+02 -1.67E+02 -1.73E+02 -1.79E+02 -1.85E+02
+
+CO2(V14) + @A => CO2(V15) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) 
+  @E = 2.06e+02 1.68e+02 1.30e+02 9.21e+01 5.46e+01 1.73e+01 
+  @H = 0.018 0.014 0.011 0.008 0.005 0.001 
+  @X = 6.47e-11 1.21e-10 1.72e-10 2.21e-10 2.72e-10 3.26e-10 
+  @Y = -5.06e+00 -6.93e+00 -8.51e+00 -9.71e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.35e+02 -1.26e+02 -1.16e+02 -1.06e+02 -9.41e+01 -8.37e+01 
+
+CO2(V14) + @A + @H_eV => CO2(V15) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -1.97E+01 -5.65E+01 -9.29E+01 -1.29E+02 -1.65E+02 -2.01E+02 -2.36E+02 -2.71E+02 -3.06E+02 -3.41E+02 -3.75E+02 -4.09E+02 -4.43E+02 -4.77E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035 0.038 0.041
+@X = 3.83E-10 4.43E-10 5.14E-10 6.00E-10 7.03E-10 8.24E-10 9.65E-10 1.12E-09 1.30E-09 1.50E-09 1.72E-09 1.96E-09 2.22E-09 2.50E-09
+@Y = -1.09E+01 -1.04E+01 -9.68E+00 -8.54E+00 -7.06E+00 -5.34E+00 -3.45E+00 -1.46E+00 5.99E-01 2.68E+00 4.76E+00 6.82E+00 8.85E+00 1.08E+01
+@Z = -8.43E+01 -9.47E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.34E+02 -1.41E+02 -1.48E+02 -1.55E+02 -1.61E+02 -1.67E+02 -1.73E+02 -1.79E+02 -1.85E+02
+
+
+CO2(V16) + @A + @H_eV => CO2(V15) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @H = 0.021 0.018 0.014 0.011 0.008 0.005 0.001 
+  @X = 7.46e-11 1.39e-10 1.95e-10 2.47e-10 2.98e-10 3.52e-10 4.11e-10 
+  @Y = -3.12e+00 -5.18e+00 -7.03e+00 -8.58e+00 -9.75e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.42e+02 -1.34e+02 -1.25e+02 -1.16e+02 -1.05e+02 -9.37e+01 -8.35e+01 
+
+CO2(V16) + @A => CO2(V15) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+@A = CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@C = CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035 0.038
+@X = 4.73E-10 5.39E-10 6.17E-10 7.13E-10 8.28E-10 9.63E-10 1.12E-09 1.30E-09 1.50E-09 1.72E-09 1.97E-09 2.23E-09 2.52E-09
+@Y = -1.09E+01 -1.04E+01 -9.67E+00 -8.54E+00 -7.07E+00 -5.36E+00 -3.49E+00 -1.51E+00 5.25E-01 2.59E+00 4.65E+00 6.69E+00 8.71E+00
+@Z = -8.45E+01 -9.49E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.34E+02 -1.41E+02 -1.48E+02 -1.55E+02 -1.61E+02 -1.67E+02 -1.73E+02 -1.79E+02
+
+CO2(V15) + @A => CO2(V16) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) 
+  @E = 2.42e+02 2.04e+02 1.66e+02 1.28e+02 9.04e+01 5.31e+01 1.61e+01 
+  @H = 0.021 0.018 0.014 0.011 0.008 0.005 0.001 
+  @X = 7.46e-11 1.39e-10 1.95e-10 2.47e-10 2.98e-10 3.52e-10 4.11e-10 
+  @Y = -3.12e+00 -5.18e+00 -7.03e+00 -8.58e+00 -9.75e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.42e+02 -1.34e+02 -1.25e+02 -1.16e+02 -1.05e+02 -9.37e+01 -8.35e+01 
+
+CO2(V15) + @A + @H_eV => CO2(V16) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -2.06E+01 -5.71E+01 -9.33E+01 -1.29E+02 -1.65E+02 -2.00E+02 -2.35E+02 -2.70E+02 -3.05E+02 -3.39E+02 -3.73E+02 -4.07E+02 -4.41E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035 0.038
+@X = 4.73E-10 5.39E-10 6.17E-10 7.13E-10 8.28E-10 9.63E-10 1.12E-09 1.30E-09 1.50E-09 1.72E-09 1.97E-09 2.23E-09 2.52E-09
+@Y = -1.09E+01 -1.04E+01 -9.67E+00 -8.54E+00 -7.07E+00 -5.36E+00 -3.49E+00 -1.51E+00 5.25E-01 2.59E+00 4.65E+00 6.69E+00 8.71E+00
+@Z = -8.45E+01 -9.49E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.34E+02 -1.41E+02 -1.48E+02 -1.55E+02 -1.61E+02 -1.67E+02 -1.73E+02 -1.79E+02
+
+
+CO2(V17) + @A + @H_eV => CO2(V16) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @H = 0.024 0.021 0.017 0.014 0.011 0.008 0.004 0.001 
+  @X = 8.58e-11 1.60e-10 2.23e-10 2.79e-10 3.31e-10 3.84e-10 4.41e-10 5.05e-10 
+  @Y = -1.07e+00 -3.26e+00 -5.30e+00 -7.12e+00 -8.64e+00 -9.78e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.50e+02 -1.42e+02 -1.34e+02 -1.25e+02 -1.15e+02 -1.05e+02 -9.33e+01 -8.33e+01 
+
+CO2(V17) + @A => CO2(V16) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+@A = CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@C = CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035
+@X = 5.72E-10 6.44E-10 7.30E-10 8.36E-10 9.64E-10 1.11E-09 1.29E-09 1.49E-09 1.71E-09 1.95E-09 2.22E-09 2.52E-09
+@Y = -1.09E+01 -1.04E+01 -9.67E+00 -8.54E+00 -7.09E+00 -5.40E+00 -3.55E+00 -1.59E+00 4.34E-01 2.48E+00 4.52E+00 6.55E+00
+@Z = -8.47E+01 -9.50E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.33E+02 -1.41E+02 -1.48E+02 -1.54E+02 -1.61E+02 -1.67E+02 -1.73E+02
+
+CO2(V16) + @A => CO2(V17) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) 
+  @E = 2.78e+02 2.40e+02 2.02e+02 1.64e+02 1.26e+02 8.90e+01 5.20e+01 1.53e+01 
+  @H = 0.024 0.021 0.017 0.014 0.011 0.008 0.004 0.001 
+  @X = 8.58e-11 1.60e-10 2.23e-10 2.79e-10 3.31e-10 3.84e-10 4.41e-10 5.05e-10 
+  @Y = -1.07e+00 -3.26e+00 -5.30e+00 -7.12e+00 -8.64e+00 -9.78e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.50e+02 -1.42e+02 -1.34e+02 -1.25e+02 -1.15e+02 -1.05e+02 -9.33e+01 -8.33e+01 
+
+CO2(V16) + @A + @H_eV => CO2(V17) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -2.12E+01 -5.74E+01 -9.34E+01 -1.29E+02 -1.64E+02 -2.00E+02 -2.34E+02 -2.69E+02 -3.03E+02 -3.37E+02 -3.71E+02 -4.05E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032 0.035
+@X = 5.72E-10 6.44E-10 7.30E-10 8.36E-10 9.64E-10 1.11E-09 1.29E-09 1.49E-09 1.71E-09 1.95E-09 2.22E-09 2.52E-09
+@Y = -1.09E+01 -1.04E+01 -9.67E+00 -8.54E+00 -7.09E+00 -5.40E+00 -3.55E+00 -1.59E+00 4.34E-01 2.48E+00 4.52E+00 6.55E+00
+@Z = -8.47E+01 -9.50E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.33E+02 -1.41E+02 -1.48E+02 -1.54E+02 -1.61E+02 -1.67E+02 -1.73E+02
+
+
+CO2(V18) + @A + @H_eV => CO2(V17) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @H = 0.027 0.024 0.020 0.017 0.014 0.011 0.008 0.004 0.001 
+  @X = 9.85e-11 1.83e-10 2.55e-10 3.18e-10 3.73e-10 4.26e-10 4.79e-10 5.40e-10 6.09e-10 
+  @Y = 1.06e+00 -1.20e+00 -3.37e+00 -5.39e+00 -7.19e+00 -8.69e+00 -9.81e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.56e+02 -1.49e+02 -1.42e+02 -1.33e+02 -1.25e+02 -1.15e+02 -1.04e+02 -9.31e+01 -8.32e+01 
+
+CO2(V18) + @A => CO2(V17) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+@A = CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@C = CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032
+@X = 6.82E-10 7.59E-10 8.53E-10 9.70E-10 1.11E-09 1.28E-09 1.47E-09 1.69E-09 1.93E-09 2.20E-09 2.50E-09
+@Y = -1.08E+01 -1.04E+01 -9.68E+00 -8.56E+00 -7.13E+00 -5.46E+00 -3.62E+00 -1.68E+00 3.22E-01 2.35E+00 4.38E+00
+@Z = -8.47E+01 -9.50E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.33E+02 -1.41E+02 -1.48E+02 -1.54E+02 -1.60E+02 -1.66E+02
+
+
+CO2(V17) + @A => CO2(V18) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) 
+  @E = 3.14e+02 2.76e+02 2.38e+02 2.00e+02 1.62e+02 1.25e+02 8.80e+01 5.12e+01 1.48e+01 
+  @H = 0.027 0.024 0.020 0.017 0.014 0.011 0.008 0.004 0.001 
+  @X = 9.85e-11 1.83e-10 2.55e-10 3.18e-10 3.73e-10 4.26e-10 4.79e-10 5.40e-10 6.09e-10 
+  @Y = 1.06e+00 -1.20e+00 -3.37e+00 -5.39e+00 -7.19e+00 -8.69e+00 -9.81e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.56e+02 -1.49e+02 -1.42e+02 -1.33e+02 -1.25e+02 -1.15e+02 -1.04e+02 -9.31e+01 -8.32e+01 
+
+CO2(V17) + @A + @H_eV => CO2(V18) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V9) CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -2.14E+01 -5.74E+01 -9.31E+01 -1.28E+02 -1.64E+02 -1.98E+02 -2.33E+02 -2.67E+02 -3.02E+02 -3.35E+02 -3.69E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029 0.032
+@X = 6.82E-10 7.59E-10 8.53E-10 9.70E-10 1.11E-09 1.28E-09 1.47E-09 1.69E-09 1.93E-09 2.20E-09 2.50E-09
+@Y = -1.08E+01 -1.04E+01 -9.68E+00 -8.56E+00 -7.13E+00 -5.46E+00 -3.62E+00 -1.68E+00 3.22E-01 2.35E+00 4.38E+00
+@Z = -8.47E+01 -9.50E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.33E+02 -1.41E+02 -1.48E+02 -1.54E+02 -1.60E+02 -1.66E+02
+
+CO2(V19) + @A + @H_eV => CO2(V18) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @H = 0.030 0.027 0.024 0.020 0.017 0.014 0.011 0.007 0.004 0.001 
+  @X = 1.13e-10 2.09e-10 2.92e-10 3.62e-10 4.23e-10 4.77e-10 5.30e-10 5.85e-10 6.49e-10 7.24e-10 
+  @Y = 3.22e+00 9.10e-01 -1.34e+00 -3.49e+00 -5.48e+00 -7.26e+00 -8.73e+00 -9.83e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.63e+02 -1.56e+02 -1.49e+02 -1.41e+02 -1.33e+02 -1.24e+02 -1.15e+02 -1.04e+02 -9.29e+01 -8.31e+01 
+
+CO2(V19) + @A => CO2(V18) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+@A = CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@C = CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029
+@X = 8.02E-10 8.85E-10 9.88E-10 1.12E-09 1.27E-09 1.45E-09 1.67E-09 1.90E-09 2.17E-09 2.47E-09
+@Y = -1.08E+01 -1.04E+01 -9.69E+00 -8.59E+00 -7.17E+00 -5.51E+00 -3.70E+00 -1.78E+00 2.07E-01 2.22E+00
+@Z = -8.48E+01 -9.49E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.33E+02 -1.40E+02 -1.47E+02 -1.54E+02 -1.60E+02
+
+CO2(V18) + @A => CO2(V19) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) 
+  @E = 3.50e+02 3.11e+02 2.73e+02 2.36e+02 1.98e+02 1.61e+02 1.24e+02 8.70e+01 5.05e+01 1.43e+01 
+  @H = 0.030 0.027 0.024 0.020 0.017 0.014 0.011 0.007 0.004 0.001 
+  @X = 1.13e-10 2.09e-10 2.92e-10 3.62e-10 4.23e-10 4.77e-10 5.30e-10 5.85e-10 6.49e-10 7.24e-10 
+  @Y = 3.22e+00 9.10e-01 -1.34e+00 -3.49e+00 -5.48e+00 -7.26e+00 -8.73e+00 -9.83e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.63e+02 -1.56e+02 -1.49e+02 -1.41e+02 -1.33e+02 -1.24e+02 -1.15e+02 -1.04e+02 -9.29e+01 -8.31e+01 
+
+CO2(V18) + @A + @H_eV => CO2(V19) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V10) CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -2.16E+01 -5.73E+01 -9.27E+01 -1.28E+02 -1.63E+02 -1.97E+02 -2.32E+02 -2.66E+02 -3.00E+02 -3.33E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026 0.029
+@X = 8.02E-10 8.85E-10 9.88E-10 1.12E-09 1.27E-09 1.45E-09 1.67E-09 1.90E-09 2.17E-09 2.47E-09
+@Y = -1.08E+01 -1.04E+01 -9.69E+00 -8.59E+00 -7.17E+00 -5.51E+00 -3.70E+00 -1.78E+00 2.07E-01 2.22E+00
+@Z = -8.48E+01 -9.49E+01 -1.06E+02 -1.16E+02 -1.25E+02 -1.33E+02 -1.40E+02 -1.47E+02 -1.54E+02 -1.60E+02
+
+
+CO2(V20) + @A + @H_eV => CO2(V19) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @H = 0.033 0.030 0.027 0.023 0.020 0.017 0.014 0.011 0.007 0.004 0.001 
+  @X = 1.28e-10 2.39e-10 3.33e-10 4.13e-10 4.81e-10 5.39e-10 5.92e-10 6.44e-10 7.01e-10 7.69e-10 8.48e-10 
+  @Y = 5.39e+00 3.07e+00 7.85e-01 -1.45e+00 -3.57e+00 -5.55e+00 -7.30e+00 -8.76e+00 -9.85e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.69e+02 -1.62e+02 -1.55e+02 -1.48e+02 -1.41e+02 -1.33e+02 -1.24e+02 -1.14e+02 -1.04e+02 -9.28e+01 -8.31e+01 
+
+CO2(V20) + @A => CO2(V19) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+@A = CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@C = CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026
+@X = 9.32E-10 1.02E-09 1.13E-09 1.27E-09 1.44E-09 1.64E-09 1.87E-09 2.13E-09 2.43E-09
+@Y = -1.08E+01 -1.04E+01 -9.71E+00 -8.63E+00 -7.23E+00 -5.60E+00 -3.80E+00 -1.90E+00 6.29E-02
+@Z = -8.47E+01 -9.48E+01 -1.05E+02 -1.15E+02 -1.24E+02 -1.33E+02 -1.40E+02 -1.47E+02 -1.53E+02
+
+
+CO2(V19) + @A => CO2(V20) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) 
+  @E = 3.86e+02 3.47e+02 3.09e+02 2.71e+02 2.34e+02 1.97e+02 1.60e+02 1.23e+02 8.65e+01 5.03e+01 1.43e+01 
+  @H = 0.033 0.030 0.027 0.023 0.020 0.017 0.014 0.011 0.007 0.004 0.001 
+  @X = 1.28e-10 2.39e-10 3.33e-10 4.13e-10 4.81e-10 5.39e-10 5.92e-10 6.44e-10 7.01e-10 7.69e-10 8.48e-10 
+  @Y = 5.39e+00 3.07e+00 7.85e-01 -1.45e+00 -3.57e+00 -5.55e+00 -7.30e+00 -8.76e+00 -9.85e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.69e+02 -1.62e+02 -1.55e+02 -1.48e+02 -1.41e+02 -1.33e+02 -1.24e+02 -1.14e+02 -1.04e+02 -9.28e+01 -8.31e+01 
+
+CO2(V19) + @A + @H_eV => CO2(V20) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V11) CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -2.13E+01 -5.68E+01 -9.19E+01 -1.27E+02 -1.61E+02 -1.96E+02 -2.30E+02 -2.64E+02 -2.97E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023 0.026
+@X = 9.32E-10 1.02E-09 1.13E-09 1.27E-09 1.44E-09 1.64E-09 1.87E-09 2.13E-09 2.43E-09
+@Y = -1.08E+01 -1.04E+01 -9.71E+00 -8.63E+00 -7.23E+00 -5.60E+00 -3.80E+00 -1.90E+00 6.29E-02
+@Z = -8.47E+01 -9.48E+01 -1.05E+02 -1.15E+02 -1.24E+02 -1.33E+02 -1.40E+02 -1.47E+02 -1.53E+02
+
+
+CO2(V21) + @A + @H_eV => CO2(V20) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+  @A = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @C = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) 
+  @H = 0.036 0.033 0.030 0.026 0.023 0.020 0.017 0.014 0.011 0.007 0.004 0.001 
+  @X = 1.45e-10 2.71e-10 3.79e-10 4.70e-10 5.47e-10 6.12e-10 6.68e-10 7.19e-10 7.70e-10 8.28e-10 8.99e-10 9.84e-10 
+  @Y = 7.56e+00 5.25e+00 2.94e+00 6.69e-01 -1.54e+00 -3.65e+00 -5.61e+00 -7.34e+00 -8.78e+00 -9.85e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.76e+02 -1.69e+02 -1.62e+02 -1.55e+02 -1.48e+02 -1.41e+02 -1.33e+02 -1.24e+02 -1.14e+02 -1.04e+02 -9.28e+01 -8.31e+01 
+
+CO2(V21) + @A => CO2(V20) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))
+ @A = CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+ @C = CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+ @H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023
+ @X = 1.07E-09 1.17E-09 1.29E-09 1.44E-09 1.63E-09 1.84E-09 2.09E-09 2.38E-09
+ @Y = -1.09E+01 -1.04E+01 -9.74E+00 -8.67E+00 -7.29E+00 -5.69E+00 -3.91E+00 -2.03E+00
+ @Z = -8.46E+01 -9.46E+01 -1.05E+02 -1.15E+02 -1.24E+02 -1.32E+02 -1.40E+02 -1.46E+02
+
+CO2(V20) + @A => CO2(V21) + @C + @H_eV   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+  @A = CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) CO(V12) 
+  @C = CO CO(V1) CO(V2) CO(V3) CO(V4) CO(V5) CO(V6) CO(V7) CO(V8) CO(V9) CO(V10) CO(V11) 
+  @E = 4.22e+02 3.83e+02 3.45e+02 3.07e+02 2.70e+02 2.33e+02 1.96e+02 1.59e+02 1.22e+02 8.61e+01 5.02e+01 1.45e+01 
+  @H = 0.036 0.033 0.030 0.026 0.023 0.020 0.017 0.014 0.011 0.007 0.004 0.001 
+  @X = 1.45e-10 2.71e-10 3.79e-10 4.70e-10 5.47e-10 6.12e-10 6.68e-10 7.19e-10 7.70e-10 8.28e-10 8.99e-10 9.84e-10 
+  @Y = 7.56e+00 5.25e+00 2.94e+00 6.69e-01 -1.54e+00 -3.65e+00 -5.61e+00 -7.34e+00 -8.78e+00 -9.85e+00 -1.05e+01 -1.09e+01 
+  @Z = -1.76e+02 -1.69e+02 -1.62e+02 -1.55e+02 -1.48e+02 -1.41e+02 -1.33e+02 -1.24e+02 -1.14e+02 -1.04e+02 -9.28e+01 -8.31e+01 
+
+CO2(V20) + @A + @H_eV => CO2(V21) + @C   ! @X*exp(-@Y*Tgas**(-0.33333)+@Z*Tgas**(-0.66667))*exp(@E/Tgas)
+@A = CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19) CO(V20)
+@C = CO(V12) CO(V13) CO(V14) CO(V15) CO(V16) CO(V17) CO(V18) CO(V19)
+@E = -2.09E+01 -5.60E+01 -9.09E+01 -1.26E+02 -1.60E+02 -1.94E+02 -2.28E+02 -2.61E+02
+@H = 0.002 0.005 0.008 0.011 0.014 0.017 0.02 0.023
+@X = 1.07E-09 1.17E-09 1.29E-09 1.44E-09 1.63E-09 1.84E-09 2.09E-09 2.38E-09
+@Y = -1.09E+01 -1.04E+01 -9.74E+00 -8.67E+00 -7.29E+00 -5.69E+00 -3.91E+00 -2.03E+00
+@Z = -8.46E+01 -9.46E+01 -1.05E+02 -1.15E+02 -1.24E+02 -1.32E+02 -1.40E+02 -1.46E+02
+
+# ------------------------------------------------------
+# Emission
+# ------------------------------------------------------
+
+O2(E1) => O2     ! 2.6e-4
+O2(E2) => O2     ! 1.1e1
+
+# ------------------------------------------------------
+# heavy particle reactions: relaxation of excited states
+# ------------------------------------------------------
+CO2(E1) + ANY_NEUTRAL => CO2 + ANY_NEUTRAL  ! 1.0e-11 
+CO2(E2) + ANY_NEUTRAL => CO2 + ANY_NEUTRAL  ! 1.0e-11 
+
+CO(E1) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11
+CO(E2) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11 
+CO(E3) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11 
+CO(E4) + ANY_NEUTRAL => CO + ANY_NEUTRAL  ! 1.2e-11  
+
+O2(E1) + ANY_NEUTRAL => O2 + ANY_NEUTRAL    ! 3.8e-18*exp(-205.0/Tgas)
+O2(E2) + ANY_NEUTRAL => O2 + ANY_NEUTRAL    ! 3.0e-13 
+
+
+
+
+END
